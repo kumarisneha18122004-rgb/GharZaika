@@ -1,4 +1,4 @@
-
+import os
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -13,6 +13,11 @@ app = FastAPI(title="GharZaika")
 # =========================================================
 
 def get_db_connection():
+    database_url = os.getenv("DATABASE_URL")
+
+    if database_url:
+        return psycopg2.connect(database_url)
+
     return psycopg2.connect(
         host="localhost",
         port=5432,
