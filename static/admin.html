@@ -1,0 +1,3375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GharZaika Admin Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+            color: #222;
+        }
+
+        /* ==============================
+           LAYOUT
+        ============================== */
+
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ==============================
+           SIDEBAR
+        ============================== */
+
+        .sidebar {
+            width: 250px;
+            background: #222831;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .sidebar-logo {
+            padding: 25px 20px;
+            background: #ff6b35;
+            text-align: center;
+        }
+
+        .sidebar-logo h2 {
+            font-size: 22px;
+        }
+
+        .sidebar-logo p {
+            margin-top: 5px;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .sidebar-menu {
+            padding: 20px 12px;
+        }
+
+        .menu-title {
+            color: #aaa;
+            font-size: 12px;
+            margin: 15px 10px 8px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-btn {
+            width: 100%;
+            background: transparent;
+            color: #ddd;
+            border: none;
+            text-align: left;
+            padding: 13px 14px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .sidebar-btn:hover {
+            background: #393e46;
+            color: white;
+        }
+
+        .sidebar-btn.active {
+            background: #ff6b35;
+            color: white;
+        }
+
+        /* ==============================
+           MAIN
+        ============================== */
+
+        .main-content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 500;
+        }
+
+        .topbar h1 {
+            font-size: 22px;
+        }
+
+        .customer-link {
+            color: white;
+            background: #ff6b35;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .page-content {
+            padding: 30px;
+        }
+
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        .page-title {
+            margin-bottom: 8px;
+            font-size: 26px;
+        }
+
+        .page-subtitle {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        /* ==============================
+           DASHBOARD CARDS
+        ============================== */
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 30px;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .dashboard-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* ==============================
+           SECTIONS
+        ============================== */
+
+        .section-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .section-box h2 {
+            margin-bottom: 20px;
+        }
+
+        /* ==============================
+           FORM
+        ============================== */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        /* ==============================
+           BUTTONS
+        ============================== */
+
+        button {
+            border: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .add-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .update-btn {
+            background: #007bff;
+            color: white;
+        }
+
+        .cancel-btn {
+            background: #6c757d;
+            color: white;
+        }
+
+        .edit-btn {
+            background: #007bff;
+            color: white;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .availability-btn {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .refresh-btn {
+            background: #343a40;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .details-btn {
+            background: #6f42c1;
+            color: white;
+        }
+
+        .action-btn {
+            background: #343a40;
+            color: white;
+        }
+
+        /* ==============================
+           CUSTOMER STATS
+        ============================== */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-icon {
+            font-size: 32px;
+        }
+
+        .stat-card h3 {
+            font-size: 25px;
+            color: #ff6b35;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .table-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .table-header h2 {
+            font-size: 20px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        /* ==============================
+           TABLE
+        ============================== */
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th,
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f8f9fa;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .available {
+            color: green;
+            font-weight: bold;
+        }
+
+        .unavailable {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* ==============================
+           MESSAGE
+        ============================== */
+
+        #message,
+        #addMessage {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* ==============================
+           ORDERS
+        ============================== */
+
+        .order-summary {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fff7f2;
+            border-left: 5px solid #ff6b35;
+            border-radius: 8px;
+        }
+
+        .order-summary strong {
+            color: #ff6b35;
+        }
+
+        .no-orders {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+
+        .customer-info {
+            line-height: 1.6;
+        }
+
+        .payment-cash {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .payment-qr {
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .order-status-select {
+            min-width: 140px;
+            padding: 8px;
+            font-size: 13px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-preparing {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status-ready {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-delivered {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* ==============================
+           ORDER DETAILS
+        ============================== */
+
+        #orderDetailsBox {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        #orderDetailsBox h3 {
+            margin-bottom: 15px;
+        }
+
+        .detail-row {
+            margin-bottom: 8px;
+        }
+
+        .detail-label {
+            font-weight: bold;
+        }
+
+        .order-items-table {
+            width: 100%;
+            min-width: 500px;
+            margin-top: 15px;
+            background: white;
+        }
+
+        .order-items-table th,
+        .order-items-table td {
+            padding: 10px;
+        }
+
+        .close-details-btn {
+            background: #6c757d;
+            color: white;
+            margin-top: 15px;
+        }
+
+        /* ==============================
+           COMING SOON
+        ============================== */
+
+        .coming-soon {
+            background: white;
+            padding: 50px 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .coming-soon-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .coming-soon h2 {
+            margin-bottom: 10px;
+        }
+
+        .coming-soon p {
+            color: #777;
+            max-width: 600px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 1100px) {
+
+            .dashboard-cards,
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            .sidebar {
+                width: 210px;
+            }
+
+            .main-content {
+                margin-left: 210px;
+                width: calc(100% - 210px);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-content {
+                padding: 20px;
+            }
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .topbar h1 {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .sidebar {
+                width: 70px;
+            }
+
+            .sidebar-logo h2 {
+                font-size: 0;
+            }
+
+            .sidebar-logo h2::after {
+                content: "🍛";
+                font-size: 25px;
+            }
+
+            .sidebar-logo p,
+            .menu-title {
+                display: none;
+            }
+
+            .sidebar-btn {
+                text-align: center;
+                padding: 13px 5px;
+                font-size: 0;
+            }
+
+            .sidebar-btn span {
+                font-size: 20px;
+            }
+
+            .main-content {
+                margin-left: 70px;
+                width: calc(100% - 70px);
+            }
+
+            .dashboard-cards,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .customer-link {
+                font-size: 11px;
+                padding: 8px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- ==============================
+         SIDEBAR
+    ============================== -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <h2>🍛 GharZaika</h2>
+            <p>Admin Panel</p>
+        </div>
+
+        <div class="sidebar-menu">
+
+            <div class="menu-title">Main</div>
+
+            <button class="sidebar-btn active"
+                    onclick="showSection('dashboard', this)">
+                <span>🏠</span> Dashboard
+            </button>
+
+            <button class="sidebar-btn"
+                    onclick="showSection('menu', this)">
+                <span>🍴</span> Menu Management
+            </button>
+
+            <button class="sidebar-btn"
+                    onclick="showSection('addFood', this)">
+                <span>➕</span> Add Food
+            </button>
+
+            <div class="menu-title">Business</div>
+
+            <button class="sidebar-btn"
+                    onclick="showSection('orders', this)">
+                <span>📦</span> Orders
+            </button>
+
+            <button class="sidebar-btn"
+                    onclick="showSection('customers', this)">
+                <span>👥</span> Customers
+            </button>
+
+            <button class="sidebar-btn"
+                    onclick="showSection('discount', this)">
+                <span>💰</span> Discount & Offers
+            </button>
+
+            <button class="sidebar-btn"
+                    onclick="showSection('reports', this)">
+                <span>📊</span> Reports
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    ============================== -->
+
+    <main class="main-content">
+
+        <div class="topbar">
+
+            <h1 id="pageHeading">
+                🏠 Dashboard
+            </h1>
+
+            <a href="/" class="customer-link">
+                ← Customer Website
+            </a>
+
+        </div>
+
+
+        <div class="page-content">
+
+
+            <!-- ==============================
+                 DASHBOARD
+            ============================== -->
+
+            <section id="dashboard"
+                     class="page-section active">
+
+                <h1 class="page-title">
+                    Dashboard
+                </h1>
+
+                <p class="page-subtitle">
+                    Welcome to GharZaika Admin Panel.
+                    Manage your food, orders and business from here.
+                </p>
+
+                <div class="dashboard-cards">
+
+                    <div class="card">
+                        <h3>Total Food Items</h3>
+                        <p id="totalFoods">0</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Available Items</h3>
+                        <p id="availableFoods">0</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Unavailable Items</h3>
+                        <p id="unavailableFoods">0</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Total Orders</h3>
+                        <p id="totalOrders">0</p>
+                    </div>
+
+                </div>
+
+
+                <div class="dashboard-info">
+
+                    <div class="section-box">
+
+                        <h2>🍴 Menu Summary</h2>
+
+                        <p>
+                            Use <strong>Menu Management</strong>
+                            to edit, disable or delete existing food items.
+                        </p>
+
+                        <br>
+
+                        <button class="add-btn"
+                                onclick="openMenu()">
+                            🍴 Open Menu Management
+                        </button>
+
+                    </div>
+
+
+                    <div class="section-box">
+
+                        <h2>📦 Order Summary</h2>
+
+                        <p>
+                            Manage customer orders and update
+                            their status from Pending to Delivered.
+                        </p>
+
+                        <br>
+
+                        <button class="details-btn"
+                                onclick="openOrders()">
+                            📦 Open Orders
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 MENU MANAGEMENT
+            ============================== -->
+
+            <section id="menu"
+                     class="page-section">
+
+                <h1 class="page-title">
+                    🍴 Menu Management
+                </h1>
+
+                <p class="page-subtitle">
+                    View and manage all GharZaika food items.
+                </p>
+
+                <div class="section-box">
+
+                    <div id="message"></div>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="foodTableBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 ADD FOOD
+            ============================== -->
+
+            <section id="addFood"
+                     class="page-section">
+
+                <h1 class="page-title">
+                    ➕ Add Food
+                </h1>
+
+                <p class="page-subtitle">
+                    Add a new food item to today's menu.
+                </p>
+
+                <div class="section-box">
+
+                    <h2 id="formTitle">
+                        ➕ Add New Food
+                    </h2>
+
+                    <div id="addMessage"></div>
+
+                    <div class="form-grid">
+
+                        <input
+                            type="text"
+                            id="foodName"
+                            placeholder="Food Name"
+                        >
+
+                        <input
+                            type="number"
+                            id="foodPrice"
+                            placeholder="Price"
+                            min="0"
+                            step="0.01"
+                        >
+
+                        <select id="foodCategory">
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                            <option value="Main Course">
+                                Main Course
+                            </option>
+
+                            <option value="Snacks">
+                                Snacks
+                            </option>
+
+                            <option value="Chinese">
+                                Chinese
+                            </option>
+
+                            <option value="Dessert">
+                                Dessert
+                            </option>
+
+                            <option value="Beverages">
+                                Beverages
+                            </option>
+
+                        </select>
+
+                        <select id="foodAvailable">
+
+                            <option value="true">
+                                Available
+                            </option>
+
+                            <option value="false">
+                                Unavailable
+                            </option>
+
+                        </select>
+
+                        <textarea
+                            id="foodDescription"
+                            class="full"
+                            placeholder="Food Description"
+                        ></textarea>
+
+                        <div class="full">
+
+                            <button
+                                id="saveBtn"
+                                class="add-btn"
+                                onclick="saveFood()">
+                                ➕ Add Food
+                            </button>
+
+                            <button
+                                id="cancelEditBtn"
+                                class="cancel-btn"
+                                onclick="cancelEdit()"
+                                style="display:none;">
+                                Cancel Edit
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 ORDERS
+            ============================== -->
+
+            <section id="orders"
+                     class="page-section">
+
+                <h1 class="page-title">
+                    📦 Orders Management
+                </h1>
+
+                <p class="page-subtitle">
+                    Manage customer orders, payment and order status.
+                </p>
+
+                <div class="section-box">
+
+                    <div class="order-summary">
+
+                        <strong>Order Management:</strong>
+
+                        Customer ke orders,
+                        payment method,
+                        address aur current order status
+                        yahan manage kar sakte hain.
+
+                    </div>
+
+                    <button
+                        class="refresh-btn"
+                        onclick="loadOrders()">
+                        🔄 Refresh Orders
+                    </button>
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Amount</th>
+                                    <th>Payment</th>
+                                    <th>Status</th>
+                                    <th>Date & Time</th>
+                                    <th>Actions</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="orderTableBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                    <div id="orderDetailsBox">
+
+                        <h3>📋 Order Details</h3>
+
+                        <div id="orderDetailsContent"></div>
+
+                        <button
+                            class="close-details-btn"
+                            onclick="closeOrderDetails()">
+                            ✖ Close Details
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 CUSTOMERS
+            ============================== -->
+
+            <section id="customers"
+                     class="page-section">
+
+                <h1 class="page-title">
+                    👥 Customers
+                </h1>
+
+                <p class="page-subtitle">
+                    View customers, their orders and total spending.
+                </p>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            👥
+                        </div>
+
+                        <div>
+
+                            <h3 id="customerCount">
+                                0
+                            </h3>
+
+                            <p>
+                                Total Customers
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            🔁
+                        </div>
+
+                        <div>
+
+                            <h3 id="repeatCustomerCount">
+                                0
+                            </h3>
+
+                            <p>
+                                Repeat Customers
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            📦
+                        </div>
+
+                        <div>
+
+                            <h3 id="customerOrderCount">
+                                0
+                            </h3>
+
+                            <p>
+                                Total Orders
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon">
+                            💰
+                        </div>
+
+                        <div>
+
+                            <h3 id="customerRevenue">
+                                ₹0
+                            </h3>
+
+                            <p>
+                                Total Customer Spending
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-header">
+
+                        <h2>
+                            👥 Customer List
+                        </h2>
+
+                        <button
+                            onclick="loadCustomers()"
+                            class="action-btn">
+                            🔄 Refresh
+                        </button>
+
+                    </div>
+
+
+                    <div class="table-responsive">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Customer</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Total Orders</th>
+                                    <th>Total Spending</th>
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="customersTableBody">
+
+                                <tr>
+
+                                    <td
+                                        colspan="7"
+                                        style="text-align:center;">
+                                        Loading customers...
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 DISCOUNT
+            ============================== -->
+
+            <section id="discount"
+                     class="page-section">
+
+                <h1 class="page-title">
+                    💰 Discount & Offers
+                </h1>
+
+                <p class="page-subtitle">
+                    Manage repeat-customer discounts and special offers.
+                </p>
+
+                <div class="coming-soon">
+
+                    <div class="coming-soon-icon">
+                        💰
+                    </div>
+
+                    <h2>
+                        Smart Discount System
+                    </h2>
+
+                    <p>
+                        Yahan repeat customers ke liye
+                        profit-safe discounts aur daily offers
+                        manage kiye jayenge.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 REPORTS
+            ============================== -->
+
+            <section id="reports"
+                     class="page-section">
+
+                <h1 class="page-title">
+                    📊 Reports
+                </h1>
+
+                <p class="page-subtitle">
+                    Business and order reports.
+                </p>
+
+                <div class="coming-soon">
+
+                    <div class="coming-soon-icon">
+                        📊
+                    </div>
+
+                    <h2>
+                        Reports & Analytics
+                    </h2>
+
+                    <p>
+                        Sales, orders, popular food items,
+                        customer activity and profit analytics
+                        yahan add kiye jayenge.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+    let foods = [];
+    let editingFoodId = null;
+    let orders = [];
+    let customers = [];
+
+
+    /* ==============================
+       SECTION NAVIGATION
+    ============================== */
+
+    function showSection(sectionId, button) {
+
+        document.querySelectorAll(".page-section")
+            .forEach(function(section) {
+
+                section.classList.remove("active");
+
+            });
+
+
+        const selectedSection =
+            document.getElementById(sectionId);
+
+
+        if (selectedSection) {
+
+            selectedSection.classList.add("active");
+
+        }
+
+
+        document.querySelectorAll(".sidebar-btn")
+            .forEach(function(btn) {
+
+                btn.classList.remove("active");
+
+            });
+
+
+        if (button) {
+
+            button.classList.add("active");
+
+        }
+
+
+        const titles = {
+
+            dashboard: "🏠 Dashboard",
+            menu: "🍴 Menu Management",
+            addFood: "➕ Add Food",
+            orders: "📦 Orders Management",
+            customers: "👥 Customers",
+            discount: "💰 Discount & Offers",
+            reports: "📊 Reports"
+
+        };
+
+
+        document.getElementById("pageHeading")
+            .textContent =
+            titles[sectionId] ||
+            "GharZaika Admin";
+
+
+        if (sectionId === "customers") {
+
+            loadCustomers();
+
+        }
+
+        if (sectionId === "orders") {
+
+            loadOrders();
+
+        }
+
+        if (sectionId === "menu") {
+
+            loadFoods();
+
+        }
+
+    }
+
+
+    function openMenu() {
+
+        const button =
+            document.querySelectorAll(".sidebar-btn")[1];
+
+        showSection(
+            "menu",
+            button
+        );
+
+    }
+
+
+    function openOrders() {
+
+        const button =
+            document.querySelectorAll(".sidebar-btn")[3];
+
+        showSection(
+            "orders",
+            button
+        );
+
+        loadOrders();
+
+    }
+
+
+    /* ==============================
+       LOAD FOODS
+    ============================== */
+
+    async function loadFoods() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/foods/all"
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.detail ||
+                    "Could not load foods."
+                );
+
+            }
+
+
+            foods = data;
+
+
+            displayFoods();
+
+            updateDashboard();
+
+
+        } catch (error) {
+
+            showMessage(
+                error.message,
+                "error"
+            );
+
+        }
+
+    }
+
+
+    /* ==============================
+       DISPLAY FOODS
+    ============================== */
+
+    function displayFoods() {
+
+        const tbody =
+            document.getElementById(
+                "foodTableBody"
+            );
+
+
+        if (!tbody) {
+
+            return;
+
+        }
+
+
+        tbody.innerHTML = "";
+
+
+        if (foods.length === 0) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7">
+                        No food items found.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        foods.forEach(function(food) {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${food.id}
+                </td>
+
+                <td>
+                    ${escapeHTML(food.name)}
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        food.description || ""
+                    )}
+                </td>
+
+                <td>
+                    ₹${Number(
+                        food.price
+                    ).toFixed(2)}
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        food.category || ""
+                    )}
+                </td>
+
+                <td>
+
+                    ${
+                        food.available
+
+                        ? '<span class="available">Available</span>'
+
+                        : '<span class="unavailable">Unavailable</span>'
+                    }
+
+                </td>
+
+                <td>
+
+                    <div class="actions">
+
+                        <button
+                            class="edit-btn"
+                            onclick="editFood(${food.id})">
+                            ✏️ Edit
+                        </button>
+
+
+                        <button
+                            class="availability-btn"
+                            onclick="toggleAvailability(${food.id})">
+
+                            ${
+                                food.available
+                                ? "❌ Disable"
+                                : "✅ Enable"
+                            }
+
+                        </button>
+
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteFood(${food.id})">
+                            🗑️ Delete
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(row);
+
+        });
+
+    }
+
+
+    /* ==============================
+       UPDATE DASHBOARD
+    ============================== */
+
+    function updateDashboard() {
+
+        const total =
+            foods.length;
+
+
+        const available =
+            foods.filter(
+                food => food.available
+            ).length;
+
+
+        const unavailable =
+            total - available;
+
+
+        const totalFoods =
+            document.getElementById(
+                "totalFoods"
+            );
+
+
+        const availableFoods =
+            document.getElementById(
+                "availableFoods"
+            );
+
+
+        const unavailableFoods =
+            document.getElementById(
+                "unavailableFoods"
+            );
+
+
+        const totalOrders =
+            document.getElementById(
+                "totalOrders"
+            );
+
+
+        if (totalFoods) {
+
+            totalFoods.textContent =
+                total;
+
+        }
+
+
+        if (availableFoods) {
+
+            availableFoods.textContent =
+                available;
+
+        }
+
+
+        if (unavailableFoods) {
+
+            unavailableFoods.textContent =
+                unavailable;
+
+        }
+
+
+        if (totalOrders) {
+
+            totalOrders.textContent =
+                orders.length;
+
+        }
+
+    }
+
+
+    /* ==============================
+       SAVE FOOD
+    ============================== */
+
+    async function saveFood() {
+
+        const name =
+            document.getElementById(
+                "foodName"
+            ).value.trim();
+
+
+        const price =
+            Number(
+                document.getElementById(
+                    "foodPrice"
+                ).value
+            );
+
+
+        const category =
+            document.getElementById(
+                "foodCategory"
+            ).value;
+
+
+        const available =
+            document.getElementById(
+                "foodAvailable"
+            ).value === "true";
+
+
+        const description =
+            document.getElementById(
+                "foodDescription"
+            ).value.trim();
+
+
+        if (!name) {
+
+            showAddMessage(
+                "Please enter food name.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (!price || price <= 0) {
+
+            showAddMessage(
+                "Please enter a valid price.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (!category) {
+
+            showAddMessage(
+                "Please select a category.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const foodData = {
+
+            name: name,
+            description: description,
+            price: price,
+            category: category,
+            available: available
+
+        };
+
+
+        try {
+
+            let url =
+                "/api/admin/foods";
+
+
+            let method =
+                "POST";
+
+
+            if (editingFoodId !== null) {
+
+                url =
+                    "/api/admin/foods/" +
+                    editingFoodId;
+
+
+                method =
+                    "PUT";
+
+            }
+
+
+            const response =
+                await fetch(
+                    url,
+                    {
+                        method: method,
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(
+                                foodData
+                            )
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.detail ||
+                    "Could not save food."
+                );
+
+            }
+
+
+            showAddMessage(
+                result.message ||
+                "Food saved successfully.",
+                "success"
+            );
+
+
+            clearForm();
+
+
+            await loadFoods();
+
+
+        } catch (error) {
+
+            showAddMessage(
+                error.message,
+                "error"
+            );
+
+        }
+
+    }
+
+
+    /* ==============================
+       EDIT FOOD
+    ============================== */
+
+    function editFood(id) {
+
+        const food =
+            foods.find(
+                item => item.id === id
+            );
+
+
+        if (!food) {
+
+            return;
+
+        }
+
+
+        editingFoodId = id;
+
+
+        document.getElementById(
+            "foodName"
+        ).value =
+            food.name;
+
+
+        document.getElementById(
+            "foodPrice"
+        ).value =
+            food.price;
+
+
+        document.getElementById(
+            "foodCategory"
+        ).value =
+            food.category;
+
+
+        document.getElementById(
+            "foodAvailable"
+        ).value =
+            food.available
+            ? "true"
+            : "false";
+
+
+        document.getElementById(
+            "foodDescription"
+        ).value =
+            food.description || "";
+
+
+        document.getElementById(
+            "formTitle"
+        ).textContent =
+            "✏️ Edit Food";
+
+
+        document.getElementById(
+            "saveBtn"
+        ).textContent =
+            "💾 Update Food";
+
+
+        document.getElementById(
+            "saveBtn"
+        ).className =
+            "update-btn";
+
+
+        document.getElementById(
+            "cancelEditBtn"
+        ).style.display =
+            "inline-block";
+
+
+        const addButton =
+            document.querySelectorAll(
+                ".sidebar-btn"
+            )[2];
+
+
+        showSection(
+            "addFood",
+            addButton
+        );
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* ==============================
+       CANCEL EDIT
+    ============================== */
+
+    function cancelEdit() {
+
+        editingFoodId = null;
+
+        clearForm();
+
+    }
+
+
+    /* ==============================
+       CLEAR FORM
+    ============================== */
+
+    function clearForm() {
+
+        document.getElementById(
+            "foodName"
+        ).value = "";
+
+
+        document.getElementById(
+            "foodPrice"
+        ).value = "";
+
+
+        document.getElementById(
+            "foodCategory"
+        ).value = "";
+
+
+        document.getElementById(
+            "foodAvailable"
+        ).value = "true";
+
+
+        document.getElementById(
+            "foodDescription"
+        ).value = "";
+
+
+        document.getElementById(
+            "formTitle"
+        ).textContent =
+            "➕ Add New Food";
+
+
+        document.getElementById(
+            "saveBtn"
+        ).textContent =
+            "➕ Add Food";
+
+
+        document.getElementById(
+            "saveBtn"
+        ).className =
+            "add-btn";
+
+
+        document.getElementById(
+            "cancelEditBtn"
+        ).style.display =
+            "none";
+
+
+        editingFoodId = null;
+
+    }
+
+
+    /* ==============================
+       TOGGLE AVAILABILITY
+    ============================== */
+
+    async function toggleAvailability(id) {
+
+        const food =
+            foods.find(
+                item => item.id === id
+            );
+
+
+        if (!food) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/admin/foods/" +
+                    id +
+                    "/availability",
+                    {
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                available:
+                                    !food.available
+                            })
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.detail ||
+                    "Could not update availability."
+                );
+
+            }
+
+
+            showMessage(
+                result.message ||
+                "Availability updated.",
+                "success"
+            );
+
+
+            await loadFoods();
+
+
+        } catch (error) {
+
+            showMessage(
+                error.message,
+                "error"
+            );
+
+        }
+
+    }
+
+
+    /* ==============================
+       DELETE FOOD
+    ============================== */
+
+    async function deleteFood(id) {
+
+        const food =
+            foods.find(
+                item => item.id === id
+            );
+
+
+        if (!food) {
+
+            return;
+
+        }
+
+
+        const confirmed =
+            confirm(
+                "Are you sure you want to delete " +
+                food.name +
+                "?"
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/admin/foods/" +
+                    id,
+                    {
+                        method: "DELETE"
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.detail ||
+                    "Could not delete food."
+                );
+
+            }
+
+
+            showMessage(
+                result.message ||
+                "Food deleted successfully.",
+                "success"
+            );
+
+
+            await loadFoods();
+
+
+        } catch (error) {
+
+            showMessage(
+                error.message,
+                "error"
+            );
+
+        }
+
+    }
+
+
+    /* ==============================
+       LOAD ORDERS
+    ============================== */
+
+    async function loadOrders() {
+
+        const tbody =
+            document.getElementById(
+                "orderTableBody"
+            );
+
+
+        if (!tbody) {
+
+            return;
+
+        }
+
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="9" class="no-orders">
+                    🔄 Loading orders...
+                </td>
+            </tr>
+        `;
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/admin/orders"
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.detail ||
+                    "Could not load orders."
+                );
+
+            }
+
+
+            orders = data;
+
+
+            displayOrders();
+
+            updateDashboard();
+
+
+        } catch (error) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="9" class="no-orders">
+                        ❌ ${escapeHTML(
+                            error.message
+                        )}
+                    </td>
+                </tr>
+            `;
+
+        }
+
+    }
+
+
+    /* ==============================
+       DISPLAY ORDERS
+    ============================== */
+
+    function displayOrders() {
+
+        const tbody =
+            document.getElementById(
+                "orderTableBody"
+            );
+
+
+        if (!tbody) {
+
+            return;
+
+        }
+
+
+        tbody.innerHTML = "";
+
+
+        if (orders.length === 0) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="9"
+                        class="no-orders">
+                        📭 No orders found.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        orders.forEach(function(order) {
+
+            const row =
+                document.createElement("tr");
+
+
+            const status =
+                String(
+                    order.order_status ||
+                    "pending"
+                ).toLowerCase();
+
+
+            const statusClass =
+                getStatusClass(status);
+
+
+            const payment =
+                String(
+                    order.payment_method ||
+                    ""
+                );
+
+
+            const paymentClass =
+                payment.toLowerCase() === "qr"
+                ? "payment-qr"
+                : "payment-cash";
+
+
+            const dateTime =
+                formatDateTime(
+                    order.created_at
+                );
+
+
+            row.innerHTML = `
+
+                <td>
+                    <strong>
+                        #${order.id}
+                    </strong>
+                </td>
+
+
+                <td>
+                    <div class="customer-info">
+                        ${escapeHTML(
+                            order.customer_name ||
+                            "N/A"
+                        )}
+                    </div>
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        order.customer_phone ||
+                        "N/A"
+                    )}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(
+                        order.customer_address ||
+                        "N/A"
+                    )}
+                </td>
+
+
+                <td>
+                    <strong>
+                        ₹${Number(
+                            order.total_amount || 0
+                        ).toFixed(2)}
+                    </strong>
+                </td>
+
+
+                <td>
+                    <span class="${paymentClass}">
+                        ${escapeHTML(payment)}
+                    </span>
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="status-badge ${statusClass}">
+                        ${capitalizeStatus(status)}
+                    </span>
+
+                </td>
+
+
+                <td>
+                    ${escapeHTML(dateTime)}
+                </td>
+
+
+                <td>
+
+                    <div class="actions">
+
+                        <select
+                            class="order-status-select"
+                            onchange="changeOrderStatus(
+                                ${order.id},
+                                this.value
+                            )">
+
+                            <option
+                                value="pending"
+                                ${status === "pending"
+                                ? "selected"
+                                : ""}>
+                                Pending
+                            </option>
+
+
+                            <option
+                                value="preparing"
+                                ${status === "preparing"
+                                ? "selected"
+                                : ""}>
+                                Preparing
+                            </option>
+
+
+                            <option
+                                value="ready"
+                                ${status === "ready"
+                                ? "selected"
+                                : ""}>
+                                Ready
+                            </option>
+
+
+                            <option
+                                value="delivered"
+                                ${status === "delivered"
+                                ? "selected"
+                                : ""}>
+                                Delivered
+                            </option>
+
+
+                            <option
+                                value="cancelled"
+                                ${status === "cancelled"
+                                ? "selected"
+                                : ""}>
+                                Cancelled
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            class="details-btn"
+                            onclick="viewOrderDetails(
+                                ${order.id}
+                            )">
+                            👁️ Details
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(row);
+
+        });
+
+    }
+
+
+    /* ==============================
+       CHANGE ORDER STATUS
+    ============================== */
+
+    async function changeOrderStatus(
+        orderId,
+        newStatus
+    ) {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/admin/orders/" +
+                    orderId +
+                    "/status",
+                    {
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                order_status:
+                                    newStatus
+                            })
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.detail ||
+                    "Could not update order status."
+                );
+
+            }
+
+
+            showMessage(
+                result.message ||
+                "Order status updated successfully.",
+                "success"
+            );
+
+
+            await loadOrders();
+
+
+        } catch (error) {
+
+            showMessage(
+                error.message,
+                "error"
+            );
+
+
+            await loadOrders();
+
+        }
+
+    }
+
+
+    /* ==============================
+       ORDER DETAILS
+    ============================== */
+
+    async function viewOrderDetails(orderId) {
+
+        const box =
+            document.getElementById(
+                "orderDetailsBox"
+            );
+
+
+        const content =
+            document.getElementById(
+                "orderDetailsContent"
+            );
+
+
+        box.style.display =
+            "block";
+
+
+        content.innerHTML =
+            "🔄 Loading order details...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/admin/orders/" +
+                    orderId
+                );
+
+
+            const order =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    order.detail ||
+                    "Could not load order details."
+                );
+
+            }
+
+
+            let itemsHTML = "";
+
+
+            if (
+                order.items &&
+                order.items.length > 0
+            ) {
+
+                itemsHTML = `
+
+                    <div class="table-container">
+
+                        <table class="order-items-table">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Food</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Total</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                ${order.items.map(
+                                    function(item) {
+
+                                        const quantity =
+                                            Number(
+                                                item.quantity || 0
+                                            );
+
+
+                                        const price =
+                                            Number(
+                                                item.price || 0
+                                            );
+
+
+                                        const itemTotal =
+                                            quantity * price;
+
+
+                                        return `
+
+                                            <tr>
+
+                                                <td>
+                                                    ${escapeHTML(
+                                                        item.food_name ||
+                                                        "Food"
+                                                    )}
+                                                </td>
+
+                                                <td>
+                                                    ${quantity}
+                                                </td>
+
+                                                <td>
+                                                    ₹${price.toFixed(2)}
+                                                </td>
+
+                                                <td>
+                                                    ₹${itemTotal.toFixed(2)}
+                                                </td>
+
+                                            </tr>
+
+                                        `;
+
+                                    }
+                                ).join("")}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                `;
+
+            } else {
+
+                itemsHTML =
+                    "<p>No items found for this order.</p>";
+
+            }
+
+
+            const status =
+                String(
+                    order.order_status ||
+                    "pending"
+                ).toLowerCase();
+
+
+            content.innerHTML = `
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Order ID:
+                    </span>
+
+                    #${order.id}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Customer:
+                    </span>
+
+                    ${escapeHTML(
+                        order.customer_name ||
+                        "N/A"
+                    )}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Phone:
+                    </span>
+
+                    ${escapeHTML(
+                        order.customer_phone ||
+                        "N/A"
+                    )}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Email:
+                    </span>
+
+                    ${escapeHTML(
+                        order.customer_email ||
+                        "N/A"
+                    )}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Address:
+                    </span>
+
+                    ${escapeHTML(
+                        order.customer_address ||
+                        "N/A"
+                    )}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Payment:
+                    </span>
+
+                    ${escapeHTML(
+                        order.payment_method ||
+                        "N/A"
+                    )}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Status:
+                    </span>
+
+                    ${capitalizeStatus(status)}
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <span class="detail-label">
+                        Total Amount:
+                    </span>
+
+                    ₹${Number(
+                        order.total_amount || 0
+                    ).toFixed(2)}
+
+                </div>
+
+
+                <h4 style="margin-top:20px;">
+                    🍴 Ordered Items
+                </h4>
+
+
+                ${itemsHTML}
+
+            `;
+
+
+            box.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+
+        } catch (error) {
+
+            content.innerHTML = `
+                <p style="color:red;">
+                    ❌ ${escapeHTML(
+                        error.message
+                    )}
+                </p>
+            `;
+
+        }
+
+    }
+
+
+    function closeOrderDetails() {
+
+        document.getElementById(
+            "orderDetailsBox"
+        ).style.display =
+            "none";
+
+    }
+
+
+    /* ==============================
+       LOAD CUSTOMERS
+    ============================== */
+
+    async function loadCustomers() {
+
+        const tbody =
+            document.getElementById(
+                "customersTableBody"
+            );
+
+
+        if (!tbody) {
+
+            return;
+
+        }
+
+
+        tbody.innerHTML = `
+            <tr>
+                <td
+                    colspan="7"
+                    style="text-align:center;">
+                    🔄 Loading customers...
+                </td>
+            </tr>
+        `;
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/admin/customers"
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.detail ||
+                    "Could not load customers."
+                );
+
+            }
+
+
+            customers = data;
+
+
+            displayCustomers();
+
+
+            updateCustomerStats();
+
+
+        } catch (error) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td
+                        colspan="7"
+                        style="text-align:center; color:red;">
+                        ❌ ${escapeHTML(
+                            error.message
+                        )}
+                    </td>
+                </tr>
+            `;
+
+
+            updateCustomerStats();
+
+        }
+
+    }
+
+
+    /* ==============================
+       DISPLAY CUSTOMERS
+    ============================== */
+
+    function displayCustomers() {
+
+        const tbody =
+            document.getElementById(
+                "customersTableBody"
+            );
+
+
+        if (!tbody) {
+
+            return;
+
+        }
+
+
+        tbody.innerHTML = "";
+
+
+        if (customers.length === 0) {
+
+            tbody.innerHTML = `
+                <tr>
+                    <td
+                        colspan="7"
+                        style="text-align:center;">
+                        📭 No customers found.
+                    </td>
+                </tr>
+            `;
+
+            return;
+
+        }
+
+
+        customers.forEach(
+            function(customer) {
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${customer.id}
+                    </td>
+
+
+                    <td>
+                        <strong>
+                            ${escapeHTML(
+                                customer.name ||
+                                "N/A"
+                            )}
+                        </strong>
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            customer.phone ||
+                            "N/A"
+                        )}
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            customer.email ||
+                            "N/A"
+                        )}
+                    </td>
+
+
+                    <td>
+                        ${escapeHTML(
+                            customer.address ||
+                            "N/A"
+                        )}
+                    </td>
+
+
+                    <td>
+                        ${Number(
+                            customer.total_orders || 0
+                        )}
+                    </td>
+
+
+                    <td>
+                        <strong>
+                            ₹${Number(
+                                customer.total_spending || 0
+                            ).toFixed(2)}
+                        </strong>
+                    </td>
+
+                `;
+
+
+                tbody.appendChild(row);
+
+            }
+        );
+
+    }
+
+
+    /* ==============================
+       CUSTOMER STATISTICS
+    ============================== */
+
+    function updateCustomerStats() {
+
+        const totalCustomers =
+            customers.length;
+
+
+        const repeatCustomers =
+            customers.filter(
+                function(customer) {
+
+                    return Number(
+                        customer.total_orders || 0
+                    ) >= 2;
+
+                }
+            ).length;
+
+
+        const totalOrders =
+            customers.reduce(
+                function(total, customer) {
+
+                    return total +
+                        Number(
+                            customer.total_orders || 0
+                        );
+
+                },
+                0
+            );
+
+
+        const totalSpending =
+            customers.reduce(
+                function(total, customer) {
+
+                    return total +
+                        Number(
+                            customer.total_spending || 0
+                        );
+
+                },
+                0
+            );
+
+
+        const customerCount =
+            document.getElementById(
+                "customerCount"
+            );
+
+
+        const repeatCustomerCount =
+            document.getElementById(
+                "repeatCustomerCount"
+            );
+
+
+        const customerOrderCount =
+            document.getElementById(
+                "customerOrderCount"
+            );
+
+
+        const customerRevenue =
+            document.getElementById(
+                "customerRevenue"
+            );
+
+
+        if (customerCount) {
+
+            customerCount.textContent =
+                totalCustomers;
+
+        }
+
+
+        if (repeatCustomerCount) {
+
+            repeatCustomerCount.textContent =
+                repeatCustomers;
+
+        }
+
+
+        if (customerOrderCount) {
+
+            customerOrderCount.textContent =
+                totalOrders;
+
+        }
+
+
+        if (customerRevenue) {
+
+            customerRevenue.textContent =
+                "₹" +
+                totalSpending.toFixed(2);
+
+        }
+
+    }
+
+
+    /* ==============================
+       STATUS
+    ============================== */
+
+    function getStatusClass(status) {
+
+        switch (status) {
+
+            case "pending":
+                return "status-pending";
+
+            case "preparing":
+                return "status-preparing";
+
+            case "ready":
+                return "status-ready";
+
+            case "delivered":
+                return "status-delivered";
+
+            case "cancelled":
+                return "status-cancelled";
+
+            default:
+                return "status-pending";
+
+        }
+
+    }
+
+
+    function capitalizeStatus(status) {
+
+        if (!status) {
+
+            return "Pending";
+
+        }
+
+
+        return status.charAt(0).toUpperCase() +
+               status.slice(1);
+
+    }
+
+
+    /* ==============================
+       DATE & TIME
+    ============================== */
+
+    function formatDateTime(value) {
+
+        if (!value) {
+
+            return "N/A";
+
+        }
+
+
+        try {
+
+            const date =
+                new Date(value);
+
+
+            if (isNaN(date.getTime())) {
+
+                return String(value);
+
+            }
+
+
+            return date.toLocaleString(
+                "en-IN",
+                {
+                    dateStyle: "medium",
+                    timeStyle: "short"
+                }
+            );
+
+
+        } catch (error) {
+
+            return String(value);
+
+        }
+
+    }
+
+
+    /* ==============================
+       MESSAGE
+    ============================== */
+
+    function showMessage(
+        message,
+        type
+    ) {
+
+        const box =
+            document.getElementById(
+                "message"
+            );
+
+
+        if (!box) {
+
+            return;
+
+        }
+
+
+        box.textContent =
+            message;
+
+
+        box.className =
+            type;
+
+
+        box.style.display =
+            "block";
+
+
+        setTimeout(
+            function() {
+
+                box.style.display =
+                    "none";
+
+            },
+            3000
+        );
+
+    }
+
+
+    function showAddMessage(
+        message,
+        type
+    ) {
+
+        const box =
+            document.getElementById(
+                "addMessage"
+            );
+
+
+        if (!box) {
+
+            return;
+
+        }
+
+
+        box.textContent =
+            message;
+
+
+        box.className =
+            type;
+
+
+        box.style.display =
+            "block";
+
+
+        setTimeout(
+            function() {
+
+                box.style.display =
+                    "none";
+
+            },
+            3000
+        );
+
+    }
+
+
+    /* ==============================
+       ESCAPE HTML
+    ============================== */
+
+    function escapeHTML(value) {
+
+        return String(value)
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* ==============================
+       START
+    ============================== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            loadFoods();
+
+            loadOrders();
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
