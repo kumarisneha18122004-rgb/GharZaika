@@ -942,25 +942,94 @@
                                 checked
                             >
 
-                            💵 Cash
+                           <div class="payment-options">
 
-                        </label>
+    <label class="payment-option">
+
+        <input
+            type="radio"
+            name="paymentMethod"
+            value="Cash"
+            checked
+            onchange="handlePaymentMethod()"
+        >
+
+        💵 Cash
+
+    </label>
 
 
-                        <label class="payment-option">
+    <label class="payment-option">
 
-                            <input
-                                type="radio"
-                                name="paymentMethod"
-                                value="UPI"
-                            >
+        <input
+            type="radio"
+            name="paymentMethod"
+            value="UPI"
+            onchange="handlePaymentMethod()"
+        >
 
-                            📱 UPI
+        📱 UPI
 
-                        </label>
+    </label>
 
-                    </div>
+</div>
 
+
+<!-- UPI QR PAYMENT -->
+
+<div
+    id="upiPaymentBox"
+    style="
+        display:none;
+        margin-top:20px;
+        padding:20px;
+        background:#f8f9fa;
+        border:1px solid #ddd;
+        border-radius:10px;
+        text-align:center;
+    "
+>
+
+    <h3 style="margin-bottom:10px;">
+        📱 Scan & Pay using UPI
+    </h3>
+
+    <p style="margin-bottom:15px;">
+        QR code scan karke payment karein.
+    </p>
+
+    <div
+        id="upiQRCode"
+        style="
+            width:220px;
+            height:220px;
+            margin:15px auto;
+            background:white;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border:1px solid #ddd;
+            border-radius:8px;
+        "
+    >
+        <img
+    id="upiQRImage"
+    src=""
+    alt="GharZaika UPI QR Code"
+    style="
+        width:200px;
+        height:200px;
+        object-fit:contain;
+    "
+>
+    </div>
+
+    <p style="font-size:14px;color:#666;">
+        Payment complete karne ke baad
+        <strong>Confirm Order</strong> par click karein.
+    </p>
+
+</div>
                 </div>
 
 
@@ -973,9 +1042,8 @@
                         color:#8a4b00;
                     "
                 >
-                    💡 Payment can be completed according to
-                    the selected method. Online payment integration
-                    can be added in the future.
+                    💡 Payment can be completed using the selected payment method.
+UPI users can scan the QR code and complete the payment securely.
                 </div>
 
 
@@ -1208,8 +1276,209 @@
             </p>
 
         </div>
+        <!-- ================= DEVELOPER PROFILE ================= -->
+
+        <div
+            style="
+                max-width:900px;
+                margin:50px auto 0;
+                padding:35px;
+                background:#fff8f0;
+                border-radius:18px;
+                text-align:center;
+                box-shadow:0 8px 25px rgba(0,0,0,0.08);
+            "
+        >
+
+            <h2
+                style="
+                    font-size:28px;
+                    margin-bottom:10px;
+                "
+            >
+                👩‍💻 About the Developer
+            </h2>
+
+            <h3
+                style="
+                    font-size:24px;
+                    margin:10px 0;
+                "
+            >
+                Sneha Kumari
+            </h3>
+
+            <p
+                style="
+                    color:#666;
+                    font-size:16px;
+                    margin-bottom:25px;
+                "
+            >
+                MCA Student • Web Developer
+            </p>
+
+
+            <p
+                style="
+                    color:#555;
+                    line-height:1.8;
+                    max-width:750px;
+                    margin:0 auto 25px;
+                "
+            >
+                I design and develop modern websites, online ordering
+                systems, admin dashboards and database-based applications.
+                GharZaika is one of my projects focused on creating a
+                simple, smart and user-friendly food ordering experience.
+            </p>
+
+
+            <h3
+                style="
+                    margin:25px 0 15px;
+                "
+            >
+                🚀 What I Can Build
+            </h3>
+
+            <p
+                style="
+                    color:#555;
+                    line-height:2;
+                "
+            >
+                🌐 Modern Websites &nbsp; • &nbsp;
+                🛒 Online Ordering Systems &nbsp; • &nbsp;
+                📊 Admin Dashboards
+                <br>
+                🗄️ Database Applications &nbsp; • &nbsp;
+                🤖 Smart / AI-Based Projects
+            </p>
+
+
+            <h3
+                style="
+                    margin:30px 0 15px;
+                "
+            >
+                📞 Contact Me
+            </h3>
+
+
+            <div
+                style="
+                    display:flex;
+                    flex-wrap:wrap;
+                    justify-content:center;
+                    gap:12px;
+                "
+            >
+
+                <a
+                    href="mailto:kumarisneha18122004@gmail.com"
+                    style="
+                        text-decoration:none;
+                        padding:12px 18px;
+                        border-radius:8px;
+                        background:#ffffff;
+                        color:#333;
+                        border:1px solid #ddd;
+                    "
+                >
+                    📧 Email
+                </a>
+
+
+                <a
+                    href="https://wa.me/917050752309"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="
+                        text-decoration:none;
+                        padding:12px 18px;
+                        border-radius:8px;
+                        background:#ffffff;
+                        color:#333;
+                        border:1px solid #ddd;
+                    "
+                >
+                    📱 WhatsApp
+                </a>
+
+
+                <a
+                    href="https://www.linkedin.com/in/sneha-kumari-680195402"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="
+                        text-decoration:none;
+                        padding:12px 18px;
+                        border-radius:8px;
+                        background:#ffffff;
+                        color:#333;
+                        border:1px solid #ddd;
+                    "
+                >
+                    💼 LinkedIn
+                </a>
+
+
+                <a
+                    href="https://github.com/kumarisneha18122004-rgb"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="
+                        text-decoration:none;
+                        padding:12px 18px;
+                        border-radius:8px;
+                        background:#ffffff;
+                        color:#333;
+                        border:1px solid #ddd;
+                    "
+                >
+                    🐙 GitHub
+                </a>
+
+
+                <a
+                    href="https://www.instagram.com/sneha_18kumari"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="
+                        text-decoration:none;
+                        padding:12px 18px;
+                        border-radius:8px;
+                        background:#ffffff;
+                        color:#333;
+                        border:1px solid #ddd;
+                    "
+                >
+                    📸 Instagram
+                </a>
+
+            </div>
+
+
+            <div
+                style="
+                    margin-top:30px;
+                    padding:15px;
+                    background:#ffffff;
+                    border-radius:10px;
+                    border:1px solid #eee;
+                "
+            >
+                💬 <strong>Need a Website or Management System?</strong>
+                <br>
+                Feel free to contact me for project discussions and
+                web development work.
+            </div>
+
+        </div>
 
     </section>
+    
 
 
     <!-- ================= FOOTER ================= -->
@@ -1925,7 +2194,61 @@ function hideDiscountBox() {
                 "none";
         }
 
+      // ==========================================
+// PAYMENT METHOD HANDLER
+// ==========================================
 
+function handlePaymentMethod() {
+
+    const selectedPayment =
+        document.querySelector(
+            'input[name="paymentMethod"]:checked'
+        );
+
+    const upiBox =
+        document.getElementById("upiPaymentBox");
+
+    const qrImage =
+        document.getElementById("upiQRImage");
+
+    if (!selectedPayment || !upiBox || !qrImage) {
+        return;
+    }
+
+    if (selectedPayment.value === "UPI") {
+let totalAmount = 0;
+
+cart.forEach(function(item) {
+    totalAmount +=
+        Number(item.price) *
+        Number(item.quantity);
+});
+        upiBox.style.display = "block";
+
+        const upiId = "7050752309@ybl";
+
+        const upiLink =
+    "upi://pay?pa=" +
+    encodeURIComponent(upiId) +
+    "&pn=" +
+    encodeURIComponent("GharZaika") +
+    "&am=" +
+    encodeURIComponent(totalAmount.toFixed(2)) +
+    "&cu=INR";
+
+        qrImage.src =
+            "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
+            encodeURIComponent(upiLink);
+
+    } else {
+
+        upiBox.style.display = "none";
+
+        qrImage.src = "";
+
+    }
+
+}
         // ==========================================
         // SUBMIT ORDER
         // ==========================================

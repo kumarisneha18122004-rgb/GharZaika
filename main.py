@@ -1285,7 +1285,113 @@ def get_all_customers():
         if conn:
             conn.close()
 
+# =========================================================
+# ADMIN - REPORTS & ANALYTICS
+# =========================================================
 
+@app.get("/api/admin/reports")
+def get_admin_reports():
+
+    conn = None
+    cursor = None
+
+    try:
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Total Orders
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM orders;
+        """)
+        total_orders = cursor.fetchone()[0]
+
+        # Total Sales
+        cursor.execute("""
+            SELECT COALESCE(SUM(total_amount), 0)
+            FROM orders
+            WHERE order_status != 'cancelled';
+        """)
+        total_sales = float(cursor.fetchone()[0])
+
+        # Order Status Counts
+        cursor.execute("""
+            SELECT
+                COUNT(*) FILTER (WHERE order_status = 'pending'),
+                COUNT(*) FILTER (WHERE order_status = 'preparing'),
+                COUNT(*) FILTER (WHERE order_status = 'ready'),
+                COUNT(*) FILTER (WHERE order_status = 'delivered'),
+                COUNT(*) FILTER (WHERE order_status = 'cancelled')
+            FROM orders;
+        """)
+
+        status_row = cursor.fetchone()
+
+        pending_orders = status_row[0]
+        preparing_orders = status_row[1]
+        ready_orders = status_row[2]
+        delivered_orders = status_row[3]
+        cancelled_orders = status_row[4]
+        # Popular Food Items
+        cursor.execute("""
+            SELECT
+                f.name,
+                COALESCE(SUM(oi.quantity), 0) AS total_quantity
+            FROM order_items oi
+            JOIN food_items f
+                ON oi.food_id = f.id
+            JOIN orders o
+                ON oi.order_id = o.id
+            WHERE o.order_status != 'cancelled'
+            GROUP BY f.id, f.name
+            ORDER BY total_quantity DESC;
+        """)
+
+        popular_food_rows = cursor.fetchall()
+
+        popular_foods = []
+
+        for row in popular_food_rows:
+
+            popular_foods.append({
+                "name": row[0],
+                "total_quantity": int(row[1])
+            })
+        # Total Customers
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM customers;
+        """)
+        total_customers = cursor.fetchone()[0]
+
+        return {
+            "total_orders": total_orders,
+            "total_sales": total_sales,
+            "delivered_orders": delivered_orders,
+            "total_customers": total_customers,
+
+            "pending_orders": pending_orders,
+            "preparing_orders": preparing_orders,
+            "ready_orders": ready_orders,
+            "cancelled_orders": cancelled_orders,
+            "popular_foods": popular_foods
+        }
+
+    except Exception as e:
+
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to load reports: {str(e)}"
+        )
+
+    finally:
+
+        if cursor:
+            cursor.close()
+
+        if conn:
+            conn.close()
 # =========================================================
 # SERVE WEBSITE
 # =========================================================
