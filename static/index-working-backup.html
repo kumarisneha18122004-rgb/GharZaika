@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GharZaika - Homemade Food</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #fffaf5;
+            color: #333;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            width: 100%;
+            background: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 7%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e85d04;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #e85d04;
+        }
+
+        .cart {
+            background: #e85d04;
+            color: white !important;
+            padding: 10px 16px;
+            border-radius: 20px;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #fff0df, #fffaf5);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            color: #d94801;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            font-size: 28px;
+            color: #444;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: #e85d04;
+            color: white;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: #c94d00;
+            transform: translateY(-2px);
+        }
+
+        /* ================= COMMON ================= */
+
+        .section {
+            padding: 70px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: #d94801;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 40px;
+            font-size: 17px;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+        }
+
+        .feature-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        .feature-card p {
+            color: #777;
+            line-height: 1.6;
+        }
+
+        /* ================= MENU ================= */
+
+        #menu {
+            background: #fff;
+        }
+
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .food-image {
+            height: 170px;
+            background: linear-gradient(135deg, #ffe0c2, #fff3e6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 65px;
+        }
+
+        .food-info {
+            padding: 20px;
+        }
+
+        .food-info h3 {
+            font-size: 21px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .food-info p {
+            color: #777;
+            line-height: 1.5;
+            min-height: 45px;
+            margin-bottom: 15px;
+        }
+
+        .food-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #e85d04;
+        }
+
+        .food-bottom button {
+            border: none;
+            background: #e85d04;
+            color: white;
+            padding: 10px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .food-bottom button:hover {
+            background: #c94d00;
+        }
+
+        .loading {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: #777;
+            font-size: 18px;
+        }
+
+        .error-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 30px;
+            color: #c0392b;
+            background: #fff0f0;
+            border-radius: 10px;
+        }
+
+        /* ================= CART ================= */
+
+        #cart {
+            background: #fff7ef;
+        }
+
+        .cart-box {
+            max-width: 950px;
+            margin: auto;
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px 20px;
+            color: #777;
+            font-size: 18px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-info h3 {
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .cart-item-info p {
+            color: #777;
+        }
+
+        .cart-item-price {
+            font-weight: bold;
+            color: #e85d04;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-control button {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            background: #e85d04;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .quantity-control span {
+            min-width: 25px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .remove-btn {
+            border: none;
+            background: #f1f1f1;
+            color: #c0392b;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+            background: #ffe4e4;
+        }
+
+        .cart-summary {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+            text-align: right;
+        }
+
+        .cart-summary h3 {
+            font-size: 24px;
+            color: #d94801;
+            margin-bottom: 15px;
+        }
+
+        .clear-cart-btn {
+            border: none;
+            background: #555;
+            color: white;
+            padding: 11px 18px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .clear-cart-btn:hover {
+            background: #333;
+        }
+
+        /* ================= AI ================= */
+
+        .ai-section {
+            background: linear-gradient(135deg, #fff0df, #fffaf5);
+        }
+
+        .ai-box {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .ai-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .ai-box h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #d94801;
+        }
+
+        .ai-box p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* ================= ABOUT ================= */
+
+        .about-box {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .about-box p {
+            color: #666;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #2b2118;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer h3 {
+            color: #ff9f43;
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #ddd;
+            margin: 7px 0;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .menu-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            .nav-links {
+                gap: 10px;
+                font-size: 13px;
+            }
+
+            .nav-links a:not(.cart) {
+                display: none;
+            }
+
+            .menu-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 35px;
+            }
+
+            .hero h2 {
+                font-size: 22px;
+            }
+
+            .section {
+                padding: 50px 5%;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cart-summary {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            🍛 GharZaika
+        </div>
+
+        <div class="nav-links">
+
+            <a href="#home">Home</a>
+
+            <a href="#menu">Menu</a>
+
+            <a href="#about">About</a>
+
+            <a href="#ai">AI Assistant</a>
+
+            <a href="#cart" class="cart">
+                🛒 Cart (<span id="cartCount">0</span>)
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <h1>
+                Taste the Love of Ghar Ka Khana
+            </h1>
+
+            <h2>
+                Fresh • Homemade • Hygienic
+            </h2>
+
+            <p>
+                Enjoy delicious homemade food prepared with fresh
+                ingredients and lots of care. Order your favourite
+                food easily with GharZaika.
+            </p>
+
+            <a href="#menu" class="hero-btn">
+                Explore Menu
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            Why Choose GharZaika?
+        </h2>
+
+        <p class="section-subtitle">
+            Good food, easy ordering and quality you can trust.
+        </p>
+
+        <div class="features">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🍱
+                </div>
+
+                <h3>
+                    Fresh Homemade Food
+                </h3>
+
+                <p>
+                    Food is prepared using fresh ingredients
+                    for better taste and quality.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📱
+                </div>
+
+                <h3>
+                    Easy Ordering
+                </h3>
+
+                <p>
+                    Browse the menu, add your favourite food
+                    to cart and place your order easily.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    ❤️
+                </div>
+
+                <h3>
+                    Made With Care
+                </h3>
+
+                <p>
+                    Every food item is prepared with cleanliness
+                    and care.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MENU ================= -->
+
+    <section class="section" id="menu">
+
+        <h2 class="section-title">
+            Our Menu
+        </h2>
+
+        <p class="section-subtitle">
+            Choose your favourite food from our menu.
+        </p>
+
+        <div class="menu-container">
+
+            <div class="loading">
+                🍽️ Loading menu...
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CART ================= -->
+
+    <section class="section" id="cart">
+
+        <h2 class="section-title">
+            Your Cart
+        </h2>
+
+        <p class="section-subtitle">
+            Review your selected food items.
+        </p>
+
+        <div class="cart-box">
+
+            <div id="cartItems">
+
+                <div class="empty-cart">
+                    🛒 Your cart is empty.
+                </div>
+
+            </div>
+
+
+            <div class="cart-summary">
+
+                <h3>
+                    Total: ₹<span id="cartTotal">0</span>
+                </h3>
+
+                <button
+                    class="clear-cart-btn"
+                    onclick="clearCart()"
+                >
+                    Clear Cart
+                </button>
+<button
+    onclick="openOrderForm()"
+    class="place-order-btn"
+>
+    🛍️ Place Order
+</button>
+
+<div id="orderForm" class="order-form" style="display:none;">
+
+    <h3>📝 Customer Details</h3>
+
+    <input
+        type="text"
+        id="customerName"
+        placeholder="Enter your name"
+    >
+
+    <input
+        type="text"
+        id="customerPhone"
+        placeholder="Enter mobile number"
+    >
+
+    <textarea
+        id="customerAddress"
+        placeholder="Enter delivery address"
+    ></textarea>
+
+    <h3>💳 Payment Method</h3>
+
+    <label>
+        <input
+            type="radio"
+            name="paymentMethod"
+            value="Cash"
+            checked
+        >
+        💵 Cash
+    </label>
+
+    <label>
+        <input
+            type="radio"
+            name="paymentMethod"
+            value="QR"
+        >
+        📱 QR Payment
+    </label>
+
+    <br><br>
+
+    <button
+        onclick="submitOrder()"
+        class="place-order-btn"
+    >
+        ✅ Confirm Order
+    </button>
+
+</div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= AI ASSISTANT ================= -->
+
+    <section class="section ai-section" id="ai">
+
+        <h2 class="section-title">
+            AI Food Assistant
+        </h2>
+
+        <p class="section-subtitle">
+            Smart food recommendations for every customer.
+        </p>
+
+        <div class="ai-box">
+
+            <div class="ai-icon">
+                🤖
+            </div>
+
+            <h3>
+                Smart Recommendations
+            </h3>
+
+            <p>
+                GharZaika will use AI to understand customer
+                preferences and order history. Based on this
+                information, the system can recommend food
+                items that the customer may like.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="section" id="about">
+
+        <h2 class="section-title">
+            About GharZaika
+        </h2>
+
+        <div class="about-box">
+
+            <p>
+                GharZaika is a smart food ordering management
+                system designed to make food ordering simple
+                and convenient. Customers can explore food items,
+                check prices, add items to their cart and place
+                orders. The system uses PostgreSQL database
+                technology to manage food and order information.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h3>
+            🍛 GharZaika
+        </h3>
+
+        <p>
+            Taste the love of homemade food.
+        </p>
+
+        <p>
+            © 2026 GharZaika. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        // ==========================================
+        // CART DATA
+        // ==========================================
+
+        let cart = [];
+
+
+        // ==========================================
+        // LOAD FOOD FROM POSTGRESQL
+        // ==========================================
+
+        async function loadFoods() {
+
+            const menuContainer =
+                document.querySelector(".menu-container");
+
+            try {
+
+                const response =
+                    await fetch("/api/foods");
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load food items"
+                    );
+
+                }
+
+
+                const foods =
+                    await response.json();
+
+
+                menuContainer.innerHTML = "";
+
+
+                if (foods.length === 0) {
+
+                    menuContainer.innerHTML = `
+                        <div class="loading">
+                            😔 No food items available right now.
+                        </div>
+                    `;
+
+                    return;
+                }
+
+
+                foods.forEach(function(food) {
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className = "food-card";
+
+
+                    card.innerHTML = `
+
+                        <div class="food-image">
+                            🍽️
+                        </div>
+
+                        <div class="food-info">
+
+                            <h3>
+                                ${escapeHTML(food.name)}
+                            </h3>
+
+                            <p>
+                                ${escapeHTML(
+                                    food.description || ""
+                                )}
+                            </p>
+
+                            <div class="food-bottom">
+
+                                <span class="price">
+                                    ₹${Number(food.price).toFixed(0)}
+                                </span>
+
+                                <button>
+                                    Add to Cart
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+
+                    const button =
+                        card.querySelector("button");
+
+
+                    button.addEventListener(
+                        "click",
+                        function() {
+
+                            addToCart(food);
+
+                        }
+                    );
+
+
+                    menuContainer.appendChild(card);
+
+                });
+
+
+            } catch (error) {
+
+                console.error(
+                    "Food loading error:",
+                    error
+                );
+
+
+                menuContainer.innerHTML = `
+
+                    <div class="error-message">
+
+                        ❌ Unable to load menu.
+
+                        <br><br>
+
+                        Please make sure the FastAPI
+                        server is running.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        // ==========================================
+        // ADD FOOD TO CART
+        // ==========================================
+
+        function addToCart(food) {
+
+            const existingItem =
+                cart.find(
+                    item => item.id === food.id
+                );
+
+
+            if (existingItem) {
+
+                existingItem.quantity++;
+
+            } else {
+
+                cart.push({
+
+                    id: food.id,
+
+                    name: food.name,
+
+                    price: Number(food.price),
+
+                    quantity: 1
+
+                });
+
+            }
+
+
+            updateCart();
+
+
+            // Automatically move to cart
+            document
+                .getElementById("cart")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        // ==========================================
+        // INCREASE QUANTITY
+        // ==========================================
+
+        function increaseQuantity(id) {
+
+            const item =
+                cart.find(
+                    item => item.id === id
+                );
+
+
+            if (item) {
+
+                item.quantity++;
+
+            }
+
+
+            updateCart();
+
+        }
+
+
+        // ==========================================
+        // DECREASE QUANTITY
+        // ==========================================
+
+        function decreaseQuantity(id) {
+
+            const item =
+                cart.find(
+                    item => item.id === id
+                );
+
+
+            if (!item) {
+
+                return;
+
+            }
+
+
+            if (item.quantity > 1) {
+
+                item.quantity--;
+
+            } else {
+
+                cart =
+                    cart.filter(
+                        item => item.id !== id
+                    );
+
+            }
+
+
+            updateCart();
+
+        }
+
+
+        // ==========================================
+        // REMOVE ITEM
+        // ==========================================
+
+        function removeFromCart(id) {
+
+            cart =
+                cart.filter(
+                    item => item.id !== id
+                );
+
+
+            updateCart();
+
+        }
+
+
+        // ==========================================
+        // CLEAR CART
+        // ==========================================
+
+        function clearCart() {
+
+            cart = [];
+
+            updateCart();
+
+        }
+
+
+        // ==========================================
+        // UPDATE CART UI
+        // ==========================================
+
+        function updateCart() {
+
+            const cartItems =
+                document.getElementById(
+                    "cartItems"
+                );
+
+
+            const cartCount =
+                document.getElementById(
+                    "cartCount"
+                );
+
+
+            const cartTotal =
+                document.getElementById(
+                    "cartTotal"
+                );
+
+
+            // Total quantity
+            let totalQuantity = 0;
+
+
+            // Total price
+            let totalPrice = 0;
+
+
+            cart.forEach(function(item) {
+
+                totalQuantity +=
+                    item.quantity;
+
+
+                totalPrice +=
+                    item.price *
+                    item.quantity;
+
+            });
+
+
+            // Update navbar count
+            cartCount.innerText =
+                totalQuantity;
+
+
+            // Update total
+            cartTotal.innerText =
+                totalPrice.toFixed(0);
+
+
+            // Empty cart
+            if (cart.length === 0) {
+
+                cartItems.innerHTML = `
+
+                    <div class="empty-cart">
+
+                        🛒 Your cart is empty.
+
+                        <br><br>
+
+                        Add some delicious food
+                        from our menu.
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+            // Clear old cart HTML
+            cartItems.innerHTML = "";
+
+
+            // Create cart items
+            cart.forEach(function(item) {
+
+                const itemTotal =
+                    item.price *
+                    item.quantity;
+
+
+                const cartItem =
+                    document.createElement("div");
+
+
+                cartItem.className =
+                    "cart-item";
+
+
+                cartItem.innerHTML = `
+
+                    <div class="cart-item-info">
+
+                        <h3>
+                            ${escapeHTML(item.name)}
+                        </h3>
+
+                        <p>
+                            ₹${item.price} ×
+                            ${item.quantity}
+                        </p>
+
+                    </div>
+
+
+                    <div class="quantity-control">
+
+                        <button>
+                            −
+                        </button>
+
+                        <span>
+                            ${item.quantity}
+                        </span>
+
+                        <button>
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <div class="cart-item-price">
+
+                        ₹${itemTotal.toFixed(0)}
+
+                    </div>
+
+
+                    <button class="remove-btn">
+
+                        Remove
+
+                    </button>
+
+                `;
+
+
+                const buttons =
+                    cartItem.querySelectorAll(
+                        ".quantity-control button"
+                    );
+
+
+                // Minus
+                buttons[0].addEventListener(
+                    "click",
+                    function() {
+
+                        decreaseQuantity(
+                            item.id
+                        );
+
+                    }
+                );
+
+
+                // Plus
+                buttons[1].addEventListener(
+                    "click",
+                    function() {
+
+                        increaseQuantity(
+                            item.id
+                        );
+
+                    }
+                );
+
+
+                // Remove
+                cartItem
+                    .querySelector(".remove-btn")
+                    .addEventListener(
+                        "click",
+                        function() {
+
+                            removeFromCart(
+                                item.id
+                            );
+
+                        }
+                    );
+
+
+                cartItems.appendChild(
+                    cartItem
+                );
+
+            });
+
+        }
+
+
+        // ==========================================
+        // SECURITY HELPER
+        // ==========================================
+
+        function escapeHTML(value) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent =
+                value;
+
+            return div.innerHTML;
+
+        }
+
+
+        // ==========================================
+        // PAGE LOAD
+        // ==========================================
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                loadFoods();
+
+                updateCart();
+
+            }
+        );
+// ==========================================
+// OPEN ORDER FORM
+// ==========================================
+
+function openOrderForm() {
+
+    if (cart.length === 0) {
+
+        alert("Please add food to cart first.");
+
+        return;
+
+    }
+
+    const orderForm =
+        document.getElementById("orderForm");
+
+    orderForm.style.display = "block";
+}
+// ==========================================
+// SUBMIT ORDER
+// ==========================================
+
+async function submitOrder() {
+
+    if (cart.length === 0) {
+
+        alert("Please add food to cart first.");
+
+        return;
+
+    }
+
+    const name =
+        document.getElementById("customerName").value.trim();
+
+    const phone =
+        document.getElementById("customerPhone").value.trim();
+
+    const address =
+        document.getElementById("customerAddress").value.trim();
+
+    const paymentMethod =
+        document.querySelector(
+            'input[name="paymentMethod"]:checked'
+        ).value;
+
+
+    // ==========================================
+    // VALIDATION
+    // ==========================================
+
+    if (name === "") {
+
+        alert("Please enter your name.");
+
+        return;
+
+    }
+
+    if (phone === "") {
+
+        alert("Please enter your mobile number.");
+
+        return;
+
+    }
+
+    if (address === "") {
+
+        alert("Please enter your delivery address.");
+
+        return;
+
+    }
+
+
+    // ==========================================
+    // CALCULATE TOTAL
+    // ==========================================
+
+    let totalAmount = 0;
+
+    cart.forEach(function(item) {
+
+        totalAmount +=
+            Number(item.price) * Number(item.quantity);
+
+    });
+
+
+    // ==========================================
+    // PREPARE ORDER ITEMS
+    // ==========================================
+
+    const items = cart.map(function(item) {
+
+        return {
+
+            food_id: Number(item.id),
+
+            quantity: Number(item.quantity),
+
+            price: Number(item.price)
+
+        };
+
+    });
+
+
+    // ==========================================
+    // SEND ORDER TO FASTAPI
+    // ==========================================
+
+    try {
+
+        const response = await fetch(
+            "/api/orders",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    name: name,
+
+                    phone: phone,
+
+                    email: "",
+
+                    address: address,
+
+                    total_amount: totalAmount,
+
+                    payment_method: paymentMethod,
+
+                    items: items
+
+                })
+
+            }
+        );
+
+
+        const result =
+            await response.json();
+
+
+        // ==========================================
+        // CHECK RESPONSE
+        // ==========================================
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.detail ||
+                "Order could not be placed."
+            );
+
+        }
+
+
+        // ==========================================
+        // ORDER SUCCESS
+        // ==========================================
+
+        alert(
+            "🎉 Order placed successfully!\n\n" +
+            "Order ID: " +
+            result.order_id
+        );
+
+
+        // Clear cart
+
+        cart = [];
+
+        updateCart();
+
+
+        // Hide order form
+
+        document.getElementById(
+            "orderForm"
+        ).style.display = "none";
+
+
+        // Clear customer fields
+
+        document.getElementById(
+            "customerName"
+        ).value = "";
+
+        document.getElementById(
+            "customerPhone"
+        ).value = "";
+
+        document.getElementById(
+            "customerAddress"
+        ).value = "";
+
+
+    } catch (error) {
+
+        console.error(
+            "Order Error:",
+            error
+        );
+
+        alert(
+            "❌ Order failed.\n\n" +
+            error.message
+        );
+
+    }
+
+}
+    </script>
+
+</body>
+</html>
