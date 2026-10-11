@@ -18,31 +18,48 @@
             scroll-behavior: smooth;
         }
 
-        body {
-            background: #fffaf5;
-            color: #333;
-        }
+      
+body {
+    background: linear-gradient(
+        180deg,
+        #fff0df 0%,
+        #fffaf5 45%,
+        #ffe8d6 100%
+    );
+    color: #35251f;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
 
         /* ================= NAVBAR ================= */
 
-        nav {
-            width: 100%;
-            background: #ffffff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 7%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-        }
+        
+nav {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 7%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 22px rgba(100, 55, 25, 0.10);
+    border-bottom: 1px solid rgba(232, 93, 4, 0.10);
+}
 
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #e85d04;
-        }
+
+        
+.logo {
+    font-size: 30px;
+    font-weight: 800;
+    color: #e85d04;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(232, 93, 4, 0.12);
+}
+
 
         .nav-links {
             display: flex;
@@ -50,11 +67,21 @@
             gap: 28px;
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
-        }
+       
+.nav-links a {
+    display: inline-block;
+    text-decoration: none;
+    color: #9a3412;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: #fff0df;
+    border: 1px solid #ffdfc2;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
 
         .nav-links a:hover {
             color: #e85d04;
@@ -66,28 +93,50 @@
             padding: 10px 16px;
             border-radius: 20px;
         }
-
+.nav-links a.cart {
+    display: inline-block;
+    background: linear-gradient(135deg, #f97316, #c2410c);
+    color: #ffffff !important;
+    border: 1px solid #c2410c;
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(194, 65, 12, 0.2);
+}
         /* ================= HERO ================= */
 
-        .hero {
-            min-height: 500px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #fff0df, #fffaf5);
-        }
+        
+.hero {
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 70px 20px;
+    background:
+        radial-gradient(ellipse at top left, #ffd7b5 0%, transparent 48%),
+        linear-gradient(135deg, #fff0df 0%, #fffaf5 55%, #ffe4cc 100%);
+    position: relative;
+    overflow: hidden;
+}
+
 
         .hero-content {
             max-width: 850px;
         }
 
-        .hero h1 {
-            font-size: 52px;
-            color: #d94801;
-            margin-bottom: 20px;
-        }
+       
+.hero h1 {
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #c2410c;
+    margin-bottom: 22px;
+    letter-spacing: -1px;
+    text-shadow: 0 3px 12px rgba(194, 65, 12, 0.10);
+}
+
+        
 
         .hero h2 {
             font-size: 28px;
@@ -95,12 +144,19 @@
             margin-bottom: 18px;
         }
 
-        .hero p {
-            font-size: 18px;
-            line-height: 1.7;
-            color: #666;
-            margin-bottom: 30px;
-        }
+        
+.hero p {
+    font-size: 19px;
+    line-height: 1.9;
+    color: #6b5145;
+    margin-bottom: 32px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+}
+
 
         .hero-btn {
             display: inline-block;
@@ -181,28 +237,55 @@
             gap: 25px;
         }
 
-        .food-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: 0.3s;
-            border: 1px solid #eee;
-        }
+       
+.food-card {
+    background: linear-gradient(180deg, #ffffff 0%, #fffaf5 100%);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 8px 26px rgba(100, 55, 25, 0.10);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f7dfce;
+}
+.food-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 16px 34px rgba(100, 55, 25, 0.17);
+    border-color: #f4b183;
+}
+.food-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 16px 34px rgba(100, 55, 25, 0.17);
+}
+
 
         .food-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.12);
         }
 
-        .food-image {
-            height: 170px;
-            background: linear-gradient(135deg, #ffe0c2, #fff3e6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 65px;
-        }
+       
+.food-image {
+    height: 210px;
+    background: linear-gradient(135deg, #ffe0c2, #fff3e6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 65px;
+    overflow: hidden;
+    position: relative;
+}
+
+.food-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.food-card:hover .food-image img {
+    transform: scale(1.06);
+}
+
 
         .food-info {
             padding: 20px;
@@ -244,15 +327,24 @@
             color: #e85d04;
         }
 
-        .food-bottom button {
-            border: none;
-            background: #e85d04;
-            color: white;
-            padding: 10px 13px;
-            border-radius: 7px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+        
+.food-bottom button {
+    border: none;
+    background: linear-gradient(135deg, #f97316, #e85d04);
+    color: #ffffff;
+    padding: 11px 17px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 5px 12px rgba(232, 93, 4, 0.22);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.food-bottom button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(232, 93, 4, 0.30);
+}
 
         .food-bottom button:hover {
             background: #c94d00;
@@ -616,6 +708,92 @@
                 padding: 25px;
             }
         }
+        
+/* GharZaika Home Page Upgrade */
+.hero {
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    padding: 65px 8%;
+    background:
+        radial-gradient(circle at 85% 20%, #ffd4ad 0%, transparent 32%),
+        linear-gradient(135deg, #fff4e8, #fffaf5 55%, #ffe1c5);
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.hero h2 {
+    color: #477348;
+    font-size: 25px;
+    margin-bottom: 18px;
+}
+
+.hero p {
+    max-width: 650px;
+}
+
+.hero-btn {
+    border-radius: 14px;
+    box-shadow: 0 7px 18px rgba(232, 93, 4, 0.25);
+}
+
+.hero-btn:hover {
+    box-shadow: 0 10px 22px rgba(232, 93, 4, 0.32);
+}
+
+.hero-content h1::before {
+    content: "🏡 HOMEMADE WITH LOVE";
+    display: block;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: #477348;
+    margin-bottom: 16px;
+}
+/* Discount page spacing improvement */
+main {
+    padding: 30px;
+}
+
+main h1,
+main h2,
+main h3 {
+    margin-bottom: 18px;
+    line-height: 1.4;
+}
+
+main p {
+    margin-bottom: 18px;
+    line-height: 1.9;
+}
+
+main section {
+    margin-bottom: 28px;
+}
+
+main .card,
+main .stat-card,
+main .info-card {
+    margin-bottom: 24px;
+    padding: 24px;
+    border-radius: 16px;
+}
+
+main ul,
+main ol {
+    padding-left: 24px;
+    margin-bottom: 20px;
+}
+
+main li {
+    margin-bottom: 10px;
+}
     </style>
 </head>
 
@@ -1621,192 +1799,237 @@ function hideDiscountBox() {
         }
 
 
+       
         // ==========================================
-        // LOAD FOOD FROM FASTAPI
+        // LOAD FOOD FROM FASTAPI - CATEGORY WISE
         // ==========================================
 
         async function loadFoods() {
-
-            const menuContainer =
-                document.getElementById("menuContainer");
+            const menuContainer = document.getElementById("menuContainer");
 
             try {
-
                 menuContainer.innerHTML = `
                     <div class="loading">
                         🔄 Loading delicious food...
                     </div>
                 `;
 
-
-                const response =
-                    await fetch("/api/foods");
-
+                const response = await fetch("/api/foods");
 
                 if (!response.ok) {
-
-                    throw new Error(
-                        "Failed to load food items."
-                    );
+                    throw new Error("Failed to load food items.");
                 }
 
-
-                const foods =
-                    await response.json();
-
-
+                const foods = await response.json();
                 menuContainer.innerHTML = "";
 
-
                 if (!Array.isArray(foods) || foods.length === 0) {
-
                     menuContainer.innerHTML = `
                         <div class="loading">
                             😔 No food items available right now.
                         </div>
                     `;
-
                     return;
                 }
 
+                const categories = [
+                    { name: "Main Course", title: "🍛 Main Course", description: "Delicious meals for every appetite" },
+                    { name: "Chinese", title: "🍜 Chinese", description: "Tasty Chinese favourites" },
+                    { name: "Snacks", title: "🥪 Snacks", description: "Perfect bites for any time" },
+                    { name: "Dessert", title: "🍰 Desserts", description: "Something sweet to enjoy" },
+                    { name: "Beverages", title: "☕ Beverages", description: "Refreshing drinks and tea" }
+                ];
 
-                foods.forEach(function(food) {
+                categories.forEach(function(categoryInfo) {
+                    const categoryFoods = foods.filter(function(food) {
+                        return (food.category || "Food").trim().toLowerCase()
+                            === categoryInfo.name.toLowerCase();
+                    });
 
-                    const card =
-                        document.createElement("div");
+                    if (categoryFoods.length === 0) {
+                        return;
+                    }
 
-                    card.className =
-                        "food-card";
+                    const section = document.createElement("div");
+                    section.className = "menu-category-section";
 
-
-                    const category =
-                        food.category || "Food";
-
-
-                    const description =
-                        food.description ||
-                        "Delicious food item from GharZaika.";
-
-
-                    const available =
-                        food.available === true;
-
-
-                    card.innerHTML = `
-
-                        <div class="food-image">
-                            🍽️
-                        </div>
-
-                        <div class="food-info">
-
-                            <span class="food-category">
-                                ${escapeHTML(category)}
-                            </span>
-
-                            <h3>
-                                ${escapeHTML(food.name)}
+                    section.innerHTML = `
+                        <div style="margin: 28px 0 16px;">
+                            <h3 style="font-size: 24px; color: #d94801; margin-bottom: 6px;">
+                                ${categoryInfo.title}
                             </h3>
-
-                            <p>
-                                ${escapeHTML(description)}
+                            <p style="color: #777; margin: 0;">
+                                ${categoryInfo.description}
                             </p>
-
-                            <div class="food-bottom">
-
-                                <span class="price">
-                                    ₹${Number(food.price).toFixed(0)}
-                                </span>
-
-                                ${
-                                    available
-                                    ?
-                                    `
-                                    <button
-                                        type="button"
-                                        class="add-food-btn"
-                                    >
-                                        Add to Cart
-                                    </button>
-                                    `
-                                    :
-                                    `
-                                    <button
-                                        type="button"
-                                        disabled
-                                        style="
-                                            border:none;
-                                            background:#aaa;
-                                            color:white;
-                                            padding:10px 13px;
-                                            border-radius:7px;
-                                            font-weight:bold;
-                                            cursor:not-allowed;
-                                        "
-                                    >
-                                        Unavailable
-                                    </button>
-                                    `
-                                }
-
-                            </div>
-
+                        </div>
+                        <div class="menu-category-grid"
+                             style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;">
                         </div>
                     `;
 
+                    const grid = section.querySelector(".menu-category-grid");
 
-                    if (available) {
+                    categoryFoods.forEach(function(food) {
+                        const card = document.createElement("div");
+                        card.className = "food-card";
 
-                        const button =
-                            card.querySelector(
-                                ".add-food-btn"
-                            );
+                      const category = food.category || "Food";
+const description = food.description || "Delicious food from GharZaika.";
+const available = food.available === true;
+const foodName = String(food.name || "");
+
+const foodImages = {
+    "aloo gobi": "aloo_gobi.jpg",
+    "banana shake": "banana_shake.jpg",
+    "beetroot halwa": "beetroot_halwa.jpg",
+    "butter naan": "butter_naan.jpg",
+    "cheese garlic bread": "cheese_garlic bread.jpg",
+    "chocolate brownie": "chocolate_brownie.jpg",
+    "chocolate milkshake": "chocolate_milkshake.jpg",
+    "chole masala": "chole_masala.jpg",
+    "cold coffee": "cold_coffee.jpg",
+    "fresh lime soda": "fresh_lime soda.jpg",
+    "gajar halwa": "gajar_halwa.jpg",
+    "gulab jamun": "gulab_jamun.jpg",
+    "honey chilli potato": "honey_chilli potato.jpg",
+    "hot coffee": "hot_coffee.jpg",
+    "mango shake": "mango_shake.jpg",
+    "masala chaas": "masala_chaas.jpg",
+    "paneer tikka sandwich": "paneer_tikka sandwich.jpg",
+    "rasmalai": "rasmalai.jpg",
+    "schezwan noodles": "schezwan_noodles.jpg",
+    "sweet lassi": "sweet_lassi.jpg",
+    "tawa roti": "tawa_roti.jpg",
+    "vanilla ice cream": "vanillaice cream.jpg",
+    "veg biryani": "veg_biryani.jpg",
+    "veg manchurian": "veg_manchurian.jpg",
+    "veg spring roll": "veg_spring roll.jpg",
+    "veg thali": "veg_thali.jpg",
+"bread pakora": "bread_pakora.jpg",
+"butter roti": "butter_roti.jpg",
+"cheese sandwich": "cheese_sandwich.jpg",
+"chilli paneer": "chilli_paneer.jpg",
+"dal makhani": "dal_makhani.jpg",
+"dal tadka": "dal_tadka.jpg",
+"french fries": "french_fries.jpg",
+"jeera rice": "jeera_rice.jpg",
+"masala tea": "masala_tea.jpg",
+"mix veg": "mix_veg.jpg",
+"paneer butter masala": "paneer_butter masala.jpg",
+"pav bhaji": "pav_bhaji.jpg",
+"samosa": "samosa.jpg",
+"shahi paneer": "shahi_paneer.jpg",
+"veg burger": "veg_burger.jpg",
+"veg sandwich": "veg_sandwich.jpg",
+"veg cutlet": "veg_cutlet.jpg",
+"veg fried rice": "veg_fried rice.jpg",
+"veg momos": "veg_momos.jpg",
+"veg noodles": "veg_noodles.jpg",
+"vanilla ice cream": "vanilla_ice cream.jpg",
+"chocolate cake": "chocolate_cake.jpg",
+"plain rice": "plain_rice.jpg",
+"aloo tikki": "aloo_tikka.jpg",
+"veg noodles": "veg_noodles.jpg",
+};
+
+const normalizedFoodName = foodName.trim().toLowerCase().replace(/\s+/g, " ");
+const imageFile = foodImages[normalizedFoodName];
+const imageContent = imageFile
+    ? `<img src="/food_image/${imageFile}"
+            alt="${escapeHTML(foodName)}"
+            style="width:100%;height:100%;object-fit:cover;border-radius:12px;">`
+    : "🍽️";
 
 
-                        button.addEventListener(
-                            "click",
-                            function() {
+                        card.innerHTML = `
+                            <div class="food-image">${imageContent}</div>
 
+                            <div class="food-info">
+                                <span class="food-category">${escapeHTML(category)}</span>
+                                <h3>${escapeHTML(foodName)}</h3>
+                                <p>${escapeHTML(description)}</p>
+
+                                <div class="food-bottom">
+                                    <span class="price">₹${Number(food.price).toFixed(0)}</span>
+                                    ${
+                                        available
+                                        ? `<button type="button" class="add-food-btn">Add to Cart</button>`
+                                        : `<button type="button" disabled
+                                             style="border:none;background:#aaa;color:white;padding:10px 13px;border-radius:7px;font-weight:bold;cursor:not-allowed;">
+                                             Unavailable
+                                           </button>`
+                                    }
+                                </div>
+                            </div>
+                        `;
+
+                        if (available) {
+                            card.querySelector(".add-food-btn").addEventListener("click", function() {
                                 addToCart(food);
+                            });
+                        }
 
-                            }
-                        );
-                    }
+                        grid.appendChild(card);
+                    });
 
-
-                    menuContainer.appendChild(card);
-
+                    menuContainer.appendChild(section);
                 });
 
+                const uncategorizedFoods = foods.filter(function(food) {
+                    return !categories.some(function(categoryInfo) {
+                        return (food.category || "Food").trim().toLowerCase()
+                            === categoryInfo.name.toLowerCase();
+                    });
+                });
 
-            }
-            catch (error) {
+                if (uncategorizedFoods.length > 0) {
+                    const otherSection = document.createElement("div");
+                    otherSection.innerHTML = `
+                        <h3 style="margin:28px 0 16px;color:#d94801;">🍽️ More Food</h3>
+                    `;
+                    const otherGrid = document.createElement("div");
+                    otherGrid.style.cssText = "display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;";
 
-                console.error(
-                    "Food loading error:",
-                    error
-                );
+                    uncategorizedFoods.forEach(function(food) {
+                        const card = document.createElement("div");
+                        card.className = "food-card";
+                        card.innerHTML = `
+                            <div class="food-image">🍽️</div>
+                            <div class="food-info">
+                                <span class="food-category">${escapeHTML(food.category || "Food")}</span>
+                                <h3>${escapeHTML(food.name || "")}</h3>
+                                <p>${escapeHTML(food.description || "Delicious food from GharZaika.")}</p>
+                                <div class="food-bottom">
+                                    <span class="price">₹${Number(food.price).toFixed(0)}</span>
+                                    ${food.available === true
+                                        ? `<button type="button" class="add-food-btn">Add to Cart</button>`
+                                        : `<button type="button" disabled>Unavailable</button>`}
+                                </div>
+                            </div>
+                        `;
+                        if (food.available === true) {
+                            card.querySelector(".add-food-btn").addEventListener("click", function() {
+                                addToCart(food);
+                            });
+                        }
+                        otherGrid.appendChild(card);
+                    });
 
+                    otherSection.appendChild(otherGrid);
+                    menuContainer.appendChild(otherSection);
+                }
+
+            } catch (error) {
+                console.error("Food loading error:", error);
 
                 menuContainer.innerHTML = `
-
                     <div class="error-message">
-
                         ❌ Unable to load menu.
-
                         <br><br>
-
-                        Please make sure the FastAPI
-                        server is running.
-
+                        Please make sure the FastAPI server is running.
                         <br><br>
-
-                        <small>
-                            ${escapeHTML(error.message)}
-                        </small>
-
+                        <small>${escapeHTML(error.message)}</small>
                     </div>
-
                 `;
             }
         }
