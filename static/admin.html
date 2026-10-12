@@ -15,10 +15,17 @@
             font-family: Arial, sans-serif;
         }
 
-        body {
-            background: #f5f6fa;
-            color: #222;
-        }
+      
+body {
+    background: linear-gradient(
+        135deg,
+        #E8F5E9 0%,
+        #F7FAF5 50%,
+        #DCEFE0 100%
+    );
+    color: #222;
+}
+
 
         /* ==============================
            LAYOUT
@@ -35,7 +42,7 @@
 
         .sidebar {
             width: 250px;
-            background: #222831;
+           background: #24543D;
             color: white;
             position: fixed;
             left: 0;
@@ -47,7 +54,7 @@
 
         .sidebar-logo {
             padding: 25px 20px;
-            background: #ff6b35;
+          background: #ff6b35;
             text-align: center;
         }
 
@@ -123,7 +130,7 @@
 
         .customer-link {
             color: white;
-            background: #ff6b35;
+          background: #ff6b35;
             padding: 10px 16px;
             border-radius: 8px;
             text-decoration: none;
@@ -654,6 +661,198 @@
                 padding: 8px;
             }
         }
+/* Reports Dashboard - spacing only */
+
+#reports {
+    padding: 30px;
+}
+
+#reports .page-title {
+    margin-bottom: 14px;
+    line-height: 1.5;
+}
+
+#reports .page-subtitle {
+    margin-bottom: 30px;
+    line-height: 1.9;
+}
+
+#reports .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+    margin: 24px 0 32px;
+}
+
+#reports .stat-card {
+    padding: 24px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-radius: 16px;
+}
+
+#reports .stat-icon {
+    font-size: 30px;
+    flex-shrink: 0;
+}
+
+#reports .stat-card span,
+#reports .stat-card strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#reports .content-card {
+    padding: 28px;
+    margin: 0 0 28px;
+    border-radius: 18px;
+}
+
+#reports .content-card h2 {
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+#reports .content-card p {
+    margin-bottom: 24px;
+    line-height: 1.9;
+}
+
+#reports .discount-info {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+#reports .discount-info > div {
+    padding: 18px;
+    border-radius: 12px;
+    line-height: 1.8;
+}
+
+#reports .discount-info strong,
+#reports .discount-info span {
+    display: block;
+    margin-bottom: 6px;
+}
+
+@media (max-width: 800px) {
+    #reports .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #reports .discount-info {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #reports {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    #reports .stats-grid,
+    #reports .discount-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Discount & Offers - spacing improvement */
+
+#discount {
+    padding: 30px;
+}
+
+#discount .page-title {
+    margin-bottom: 14px;
+    line-height: 1.5;
+}
+
+#discount .page-subtitle {
+    margin-bottom: 30px;
+    line-height: 1.9;
+}
+
+#discount .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin: 24px 0 32px;
+}
+
+#discount .stat-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 24px;
+    min-height: 120px;
+    border-radius: 16px;
+}
+
+#discount .stat-icon {
+    font-size: 30px;
+    flex-shrink: 0;
+}
+
+#discount .stat-card span,
+#discount .stat-card strong {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#discount .content-card {
+    padding: 28px;
+    margin-bottom: 28px;
+    border-radius: 18px;
+}
+
+#discount .content-card h2 {
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+#discount .content-card p {
+    margin-bottom: 20px;
+    line-height: 1.9;
+}
+
+#discount .discount-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+#discount .discount-info > div {
+    padding: 18px;
+    border-radius: 12px;
+    line-height: 1.8;
+}
+
+#discount .discount-info strong,
+#discount .discount-info span {
+    display: block;
+    margin-bottom: 6px;
+}
+
+@media (max-width: 800px) {
+    #discount {
+        padding: 18px;
+    }
+
+    #discount .stats-grid,
+    #discount .discount-info {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    #discount .stats-grid,
+    #discount .discount-info {
+        grid-template-columns: 1fr;
+    }
+}
 
     </style>
 </head>
@@ -857,15 +1056,19 @@
 
                             <thead>
 
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Category</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
+                                
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Regular Price</th>
+    <th>Half Plate</th>
+    <th>Full Plate</th>
+    <th>Category</th>
+    <th>Status</th>
+    <th>Actions</th>
+</tr>
+
 
                             </thead>
 
@@ -911,13 +1114,31 @@
                             placeholder="Food Name"
                         >
 
-                        <input
-                            type="number"
-                            id="foodPrice"
-                            placeholder="Price"
-                            min="0"
-                            step="0.01"
-                        >
+                        
+<input
+    type="number"
+    id="foodPrice"
+    placeholder="Regular Price"
+    min="0"
+    step="0.01"
+>
+
+<input
+    type="number"
+    id="foodHalfPrice"
+    placeholder="Half Plate Price"
+    min="0"
+    step="0.01"
+>
+
+<input
+    type="number"
+    id="foodFullPrice"
+    placeholder="Full Plate Price"
+    min="0"
+    step="0.01"
+>
+
 
                         <select id="foodCategory">
 
@@ -1687,7 +1908,7 @@
 </section>
 
 <script>
-
+let editingFoodId = null;
     /* ==============================
        SECTION NAVIGATION
     ============================== */
@@ -1943,127 +2164,92 @@ async function loadReports() {
        DISPLAY FOODS
     ============================== */
 
-    function displayFoods() {
+   
+   
+function displayFoods() {
 
-        const tbody =
-            document.getElementById(
-                "foodTableBody"
-            );
+    const tbody = document.getElementById("foodTableBody");
 
-
-        if (!tbody) {
-
-            return;
-
-        }
-
-
-        tbody.innerHTML = "";
-
-
-        if (foods.length === 0) {
-
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="7">
-                        No food items found.
-                    </td>
-                </tr>
-            `;
-
-            return;
-
-        }
-
-
-        foods.forEach(function(food) {
-
-            const row =
-                document.createElement("tr");
-
-
-            row.innerHTML = `
-
-                <td>
-                    ${food.id}
-                </td>
-
-                <td>
-                    ${escapeHTML(food.name)}
-                </td>
-
-                <td>
-                    ${escapeHTML(
-                        food.description || ""
-                    )}
-                </td>
-
-                <td>
-                    ₹${Number(
-                        food.price
-                    ).toFixed(2)}
-                </td>
-
-                <td>
-                    ${escapeHTML(
-                        food.category || ""
-                    )}
-                </td>
-
-                <td>
-
-                    ${
-                        food.available
-
-                        ? '<span class="available">Available</span>'
-
-                        : '<span class="unavailable">Unavailable</span>'
-                    }
-
-                </td>
-
-                <td>
-
-                    <div class="actions">
-
-                        <button
-                            class="edit-btn"
-                            onclick="editFood(${food.id})">
-                            ✏️ Edit
-                        </button>
-
-
-                        <button
-                            class="availability-btn"
-                            onclick="toggleAvailability(${food.id})">
-
-                            ${
-                                food.available
-                                ? "❌ Disable"
-                                : "✅ Enable"
-                            }
-
-                        </button>
-
-
-                        <button
-                            class="delete-btn"
-                            onclick="deleteFood(${food.id})">
-                            🗑️ Delete
-                        </button>
-
-                    </div>
-
-                </td>
-
-            `;
-
-
-            tbody.appendChild(row);
-
-        });
-
+    if (!tbody) {
+        return;
     }
+
+    tbody.innerHTML = "";
+
+    if (foods.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="9">No food items found.</td>
+            </tr>
+        `;
+        return;
+    }
+
+    foods.forEach(function(food) {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${food.id}</td>
+
+            <td>${escapeHTML(food.name)}</td>
+
+            <td>${escapeHTML(food.description || "")}</td>
+
+            <td>₹${Number(food.price || 0).toFixed(2)}</td>
+
+            <td>
+                ${food.half_price != null
+                    ? "₹" + Number(food.half_price).toFixed(2)
+                    : "Not set"}
+            </td>
+
+            <td>
+                ${food.full_price != null
+                    ? "₹" + Number(food.full_price).toFixed(2)
+                    : "Not set"}
+            </td>
+
+            <td>${escapeHTML(food.category || "")}</td>
+
+            <td>
+                ${
+                    food.available
+                    ? '<span class="available">Available</span>'
+                    : '<span class="unavailable">Unavailable</span>'
+                }
+            </td>
+
+            <td>
+                <div class="actions">
+
+                    <button
+                        class="edit-btn"
+                        onclick="editFood(${food.id})">
+                        ✏️ Edit
+                    </button>
+
+                    <button
+                        class="availability-btn"
+                        onclick="toggleAvailability(${food.id})">
+                        ${food.available ? "❌ Disable" : "✅ Enable"}
+                    </button>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteFood(${food.id})">
+                        🗑️ Delete
+                    </button>
+
+                </div>
+            </td>
+        `;
+
+        tbody.appendChild(row);
+
+    });
+}
+ 
 
 
     /* ==============================
@@ -2200,337 +2386,218 @@ if (totalSales) {
        SAVE FOOD
     ============================== */
 
-    async function saveFood() {
+   
+async function saveFood() {
+    const name = document.getElementById("foodName").value.trim();
 
-        const name =
-            document.getElementById(
-                "foodName"
-            ).value.trim();
+    const price = Number(
+        document.getElementById("foodPrice").value
+    );
 
+    const halfPriceValue = document.getElementById("foodHalfPrice").value;
+    const fullPriceValue = document.getElementById("foodFullPrice").value;
 
-        const price =
-            Number(
-                document.getElementById(
-                    "foodPrice"
-                ).value
-            );
+    const half_price = halfPriceValue !== ""
+        ? Number(halfPriceValue)
+        : null;
 
+    const full_price = fullPriceValue !== ""
+        ? Number(fullPriceValue)
+        : null;
 
-        const category =
-            document.getElementById(
-                "foodCategory"
-            ).value;
+    const category = document.getElementById("foodCategory").value;
 
+    const available =
+        document.getElementById("foodAvailable").value === "true";
 
-        const available =
-            document.getElementById(
-                "foodAvailable"
-            ).value === "true";
+    const description =
+        document.getElementById("foodDescription").value.trim();
 
-
-        const description =
-            document.getElementById(
-                "foodDescription"
-            ).value.trim();
-
-
-        if (!name) {
-
-            showAddMessage(
-                "Please enter food name.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if (!price || price <= 0) {
-
-            showAddMessage(
-                "Please enter a valid price.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if (!category) {
-
-            showAddMessage(
-                "Please select a category.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        const foodData = {
-
-            name: name,
-            description: description,
-            price: price,
-            category: category,
-            available: available
-
-        };
-
-
-        try {
-
-            let url =
-                "/api/admin/foods";
-
-
-            let method =
-                "POST";
-
-
-            if (editingFoodId !== null) {
-
-                url =
-                    "/api/admin/foods/" +
-                    editingFoodId;
-
-
-                method =
-                    "PUT";
-
-            }
-
-
-            const response =
-                await fetch(
-                    url,
-                    {
-                        method: method,
-
-                        headers: {
-                            "Content-Type":
-                                "application/json"
-                        },
-
-                        body:
-                            JSON.stringify(
-                                foodData
-                            )
-                    }
-                );
-
-
-            const result =
-                await response.json();
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    result.detail ||
-                    "Could not save food."
-                );
-
-            }
-
-
-            showAddMessage(
-                result.message ||
-                "Food saved successfully.",
-                "success"
-            );
-
-
-            clearForm();
-
-
-            await loadFoods();
-
-
-        } catch (error) {
-
-            showAddMessage(
-                error.message,
-                "error"
-            );
-
-        }
-
+    if (!name) {
+        showAddMessage("Please enter food name.", "error");
+        return;
     }
+
+    if (!Number.isFinite(price) || price <= 0) {
+        showAddMessage("Please enter a valid regular price.", "error");
+        return;
+    }
+
+    if (
+        half_price !== null &&
+        (!Number.isFinite(half_price) || half_price <= 0)
+    ) {
+        showAddMessage("Please enter a valid half plate price.", "error");
+        return;
+    }
+
+    if (
+        full_price !== null &&
+        (!Number.isFinite(full_price) || full_price <= 0)
+    ) {
+        showAddMessage("Please enter a valid full plate price.", "error");
+        return;
+    }
+
+    if (!category) {
+        showAddMessage("Please select a category.", "error");
+        return;
+    }
+
+    const foodData = {
+        name: name,
+        description: description,
+        price: price,
+        half_price: half_price,
+        full_price: full_price,
+        category: category,
+        available: available
+    };
+
+    try {
+        let url = "/api/admin/foods";
+        let method = "POST";
+
+        if (editingFoodId !== null) {
+            url = "/api/admin/foods/" + editingFoodId;
+            method = "PUT";
+        }
+
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(foodData)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.detail || "Could not save food.");
+        }
+
+        showAddMessage(
+            result.message || "Food saved successfully.",
+            "success"
+        );
+
+        clearForm();
+        await loadFoods();
+
+    } catch (error) {
+        showAddMessage(error.message, "error");
+    }
+}
+
 
 
     /* ==============================
        EDIT FOOD
     ============================== */
 
-    function editFood(id) {
+    
+function editFood(id) {
+    const food = foods.find(
+        item => Number(item.id) === Number(id)
+    );
 
-        const food =
-            foods.find(
-                item => item.id === id
-            );
-
-
-        if (!food) {
-
-            return;
-
-        }
-
-
-        editingFoodId = id;
-
-
-        document.getElementById(
-            "foodName"
-        ).value =
-            food.name;
-
-
-        document.getElementById(
-            "foodPrice"
-        ).value =
-            food.price;
-
-
-        document.getElementById(
-            "foodCategory"
-        ).value =
-            food.category;
-
-
-        document.getElementById(
-            "foodAvailable"
-        ).value =
-            food.available
-            ? "true"
-            : "false";
-
-
-        document.getElementById(
-            "foodDescription"
-        ).value =
-            food.description || "";
-
-
-        document.getElementById(
-            "formTitle"
-        ).textContent =
-            "✏️ Edit Food";
-
-
-        document.getElementById(
-            "saveBtn"
-        ).textContent =
-            "💾 Update Food";
-
-
-        document.getElementById(
-            "saveBtn"
-        ).className =
-            "update-btn";
-
-
-        document.getElementById(
-            "cancelEditBtn"
-        ).style.display =
-            "inline-block";
-
-
-        const addButton =
-            document.querySelectorAll(
-                ".sidebar-btn"
-            )[2];
-
-
-        showSection(
-            "addFood",
-            addButton
-        );
-
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
+    if (!food) {
+        return;
     }
 
+    editingFoodId = id;
 
-    /* ==============================
-       CANCEL EDIT
-    ============================== */
+    document.getElementById("foodName").value =
+        food.name || "";
 
-    function cancelEdit() {
+    document.getElementById("foodPrice").value =
+        food.price ?? "";
 
-        editingFoodId = null;
+    document.getElementById("foodCategory").value =
+        food.category || "";
 
-        clearForm();
+    document.getElementById("foodAvailable").value =
+        food.available ? "true" : "false";
 
+    document.getElementById("foodDescription").value =
+        food.description || "";
+
+    // Half aur Full Plate ki prices
+    const halfPriceInput = document.getElementById("foodHalfPrice");
+    if (halfPriceInput) {
+        halfPriceInput.value = food.half_price ?? "";
     }
+
+    const fullPriceInput = document.getElementById("foodFullPrice");
+    if (fullPriceInput) {
+        fullPriceInput.value = food.full_price ?? "";
+    }
+
+    document.getElementById("formTitle").textContent =
+        "✏️ Edit Food";
+
+    document.getElementById("saveBtn").textContent =
+        "💾 Update Food";
+
+    document.getElementById("saveBtn").className =
+        "update-btn";
+
+    document.getElementById("cancelEditBtn").style.display =
+        "inline-block";
+
+    const addButton = document.querySelectorAll(".sidebar-btn")[2];
+
+    showSection("addFood", addButton);
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
 
 
     /* ==============================
        CLEAR FORM
     ============================== */
 
-    function clearForm() {
+    
+function clearForm() {
+    document.getElementById("foodName").value = "";
+    document.getElementById("foodPrice").value = "";
+    document.getElementById("foodCategory").value = "";
+    document.getElementById("foodAvailable").value = "true";
+    document.getElementById("foodDescription").value = "";
 
-        document.getElementById(
-            "foodName"
-        ).value = "";
-
-
-        document.getElementById(
-            "foodPrice"
-        ).value = "";
-
-
-        document.getElementById(
-            "foodCategory"
-        ).value = "";
-
-
-        document.getElementById(
-            "foodAvailable"
-        ).value = "true";
-
-
-        document.getElementById(
-            "foodDescription"
-        ).value = "";
-
-
-        document.getElementById(
-            "formTitle"
-        ).textContent =
-            "➕ Add New Food";
-
-
-        document.getElementById(
-            "saveBtn"
-        ).textContent =
-            "➕ Add Food";
-
-
-        document.getElementById(
-            "saveBtn"
-        ).className =
-            "add-btn";
-
-
-        document.getElementById(
-            "cancelEditBtn"
-        ).style.display =
-            "none";
-
-
-        editingFoodId = null;
-
+    // Half Plate aur Full Plate prices reset
+    const halfPriceInput = document.getElementById("foodHalfPrice");
+    if (halfPriceInput) {
+        halfPriceInput.value = "";
     }
+
+    const fullPriceInput = document.getElementById("foodFullPrice");
+    if (fullPriceInput) {
+        fullPriceInput.value = "";
+    }
+
+    document.getElementById("formTitle").textContent =
+        "➕ Add New Food";
+
+    document.getElementById("saveBtn").textContent =
+        "➕ Add Food";
+
+    document.getElementById("saveBtn").className =
+        "add-btn";
+
+    document.getElementById("cancelEditBtn").style.display =
+        "none";
+
+    editingFoodId = null;
+}
+function cancelEdit() {
+    clearForm();
+}
 
 
     /* ==============================
@@ -2560,7 +2627,7 @@ if (totalSales) {
                     id +
                     "/availability",
                     {
-                        method: "PUT",
+                       method: "PATCH",
 
                         headers: {
                             "Content-Type":
@@ -3006,7 +3073,7 @@ if (totalSales) {
                     orderId +
                     "/status",
                     {
-                        method: "PUT",
+                        method: "PATCH",
 
                         headers: {
                             "Content-Type":

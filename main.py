@@ -57,12 +57,16 @@ class OrderRequest(BaseModel):
     items: List[OrderItem]
 
 
+
 class FoodRequest(BaseModel):
     name: str
     description: Optional[str] = ""
     price: float
     category: str
     available: bool = True
+    half_price: Optional[float] = None
+    full_price: Optional[float] = None
+
 
 
 class AvailabilityRequest(BaseModel):
@@ -163,13 +167,13 @@ def calculate_customer_discount(
     }
 
 
+
 # =========================================================
 # CUSTOMER - AVAILABLE FOODS
 # =========================================================
 
 @app.get("/api/foods")
 def get_foods():
-
     conn = None
     cursor = None
 
@@ -178,30 +182,26 @@ def get_foods():
         cursor = conn.cursor()
 
         cursor.execute("""
-            SELECT
-                id,
-                name,
-                description,
-                price,
-                category,
-                available
+            SELECT id, name, description, price, category,
+                   available, half_price, full_price
             FROM food_items
             WHERE available = TRUE
             ORDER BY id ASC;
         """)
 
         rows = cursor.fetchall()
-
         foods = []
 
         for row in rows:
             foods.append({
                 "id": row[0],
                 "name": row[1],
-                "description": row[2],
+                "description": row[2] or "",
                 "price": float(row[3]),
                 "category": row[4],
-                "available": row[5]
+                "available": row[5],
+                "half_price": float(row[6]) if row[6] is not None else None,
+                "full_price": float(row[7]) if row[7] is not None else None
             })
 
         return foods
@@ -215,7 +215,6 @@ def get_foods():
     finally:
         if cursor:
             cursor.close()
-
         if conn:
             conn.close()
 
@@ -226,7 +225,6 @@ def get_foods():
 
 @app.get("/api/foods/all")
 def get_all_foods():
-
     conn = None
     cursor = None
 
@@ -235,29 +233,25 @@ def get_all_foods():
         cursor = conn.cursor()
 
         cursor.execute("""
-            SELECT
-                id,
-                name,
-                description,
-                price,
-                category,
-                available
+            SELECT id, name, description, price, category,
+                   available, half_price, full_price
             FROM food_items
             ORDER BY id ASC;
         """)
 
         rows = cursor.fetchall()
-
         foods = []
 
         for row in rows:
             foods.append({
                 "id": row[0],
                 "name": row[1],
-                "description": row[2],
+                "description": row[2] or "",
                 "price": float(row[3]),
                 "category": row[4],
-                "available": row[5]
+                "available": row[5],
+                "half_price": float(row[6]) if row[6] is not None else None,
+                "full_price": float(row[7]) if row[7] is not None else None
             })
 
         return foods
@@ -271,7 +265,6 @@ def get_all_foods():
     finally:
         if cursor:
             cursor.close()
-
         if conn:
             conn.close()
 
@@ -282,24 +275,20 @@ def get_all_foods():
 
 @app.post("/api/admin/foods")
 def add_food(food: FoodRequest):
-
     if not food.name.strip():
-        raise HTTPException(
-            status_code=400,
-            detail="Food name is required."
-        )
+        raise HTTPException(status_code=400, detail="Food name is required.")
 
     if food.price <= 0:
-        raise HTTPException(
-            status_code=400,
-            detail="Food price must be greater than 0."
-        )
+        raise HTTPException(status_code=400, detail="Food price must be greater than 0.")
+
+    if food.half_price is not None and food.half_price <= 0:
+        raise HTTPException(status_code=400, detail="Half plate price must be greater than 0.")
+
+    if food.full_price is not None and food.full_price <= 0:
+        raise HTTPException(status_code=400, detail="Full plate price must be greater than 0.")
 
     if not food.category.strip():
-        raise HTTPException(
-            status_code=400,
-            detail="Food category is required."
-        )
+        raise HTTPException(status_code=400, detail="Food category is required.")
 
     conn = None
     cursor = None
@@ -310,25 +299,20 @@ def add_food(food: FoodRequest):
 
         cursor.execute("""
             INSERT INTO food_items
-            (
-                name,
-                description,
-                price,
-                category,
-                available
-            )
-            VALUES (%s, %s, %s, %s, %s)
+            (name, description, price, category, available, half_price, full_price)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
             RETURNING id;
         """, (
             food.name.strip(),
             food.description.strip(),
             food.price,
             food.category.strip(),
-            food.available
+            food.available,
+            food.half_price,
+            food.full_price
         ))
 
         food_id = cursor.fetchone()[0]
-
         conn.commit()
 
         return {
@@ -338,19 +322,13 @@ def add_food(food: FoodRequest):
         }
 
     except Exception as e:
-
         if conn:
             conn.rollback()
-
-        raise HTTPException(
-            status_code=500,
-            detail=f"Unable to add food: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Unable to add food: {str(e)}")
 
     finally:
         if cursor:
             cursor.close()
-
         if conn:
             conn.close()
 
@@ -358,6 +336,8 @@ def add_food(food: FoodRequest):
 # =========================================================
 # ADMIN - UPDATE FOOD
 # =========================================================
+
+
 
 @app.put("/api/admin/foods/{food_id}")
 def update_food(food_id: int, food: FoodRequest):
@@ -372,6 +352,18 @@ def update_food(food_id: int, food: FoodRequest):
         raise HTTPException(
             status_code=400,
             detail="Food price must be greater than 0."
+        )
+
+    if food.half_price is not None and food.half_price <= 0:
+        raise HTTPException(
+            status_code=400,
+            detail="Half plate price must be greater than 0."
+        )
+
+    if food.full_price is not None and food.full_price <= 0:
+        raise HTTPException(
+            status_code=400,
+            detail="Full plate price must be greater than 0."
         )
 
     if not food.category.strip():
@@ -406,7 +398,9 @@ def update_food(food_id: int, food: FoodRequest):
                 description = %s,
                 price = %s,
                 category = %s,
-                available = %s
+                available = %s,
+                half_price = %s,
+                full_price = %s
             WHERE id = %s;
         """, (
             food.name.strip(),
@@ -414,6 +408,8 @@ def update_food(food_id: int, food: FoodRequest):
             food.price,
             food.category.strip(),
             food.available,
+            food.half_price,
+            food.full_price,
             food_id
         ))
 
@@ -430,7 +426,6 @@ def update_food(food_id: int, food: FoodRequest):
         raise
 
     except Exception as e:
-
         if conn:
             conn.rollback()
 
@@ -446,77 +441,6 @@ def update_food(food_id: int, food: FoodRequest):
         if conn:
             conn.close()
 
-
-# =========================================================
-# ADMIN - CHANGE FOOD AVAILABILITY
-# =========================================================
-
-@app.put("/api/admin/foods/{food_id}/availability")
-def change_food_availability(
-    food_id: int,
-    data: AvailabilityRequest
-):
-
-    conn = None
-    cursor = None
-
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-
-        cursor.execute("""
-            SELECT id
-            FROM food_items
-            WHERE id = %s;
-        """, (food_id,))
-
-        if not cursor.fetchone():
-            raise HTTPException(
-                status_code=404,
-                detail="Food item not found."
-            )
-
-        cursor.execute("""
-            UPDATE food_items
-            SET available = %s
-            WHERE id = %s;
-        """, (
-            data.available,
-            food_id
-        ))
-
-        conn.commit()
-
-        return {
-            "success": True,
-            "message": (
-                "Food is now available."
-                if data.available
-                else "Food is now unavailable."
-            )
-        }
-
-    except HTTPException:
-        if conn:
-            conn.rollback()
-        raise
-
-    except Exception as e:
-
-        if conn:
-            conn.rollback()
-
-        raise HTTPException(
-            status_code=500,
-            detail=f"Unable to change availability: {str(e)}"
-        )
-
-    finally:
-        if cursor:
-            cursor.close()
-
-        if conn:
-            conn.close()
 
 
 # =========================================================
@@ -593,6 +517,62 @@ def delete_food(food_id: int):
         if cursor:
             cursor.close()
 
+        if conn:
+            conn.close()
+
+# =========================================================
+# ADMIN - UPDATE FOOD AVAILABILITY
+# =========================================================
+
+@app.patch("/api/admin/foods/{food_id}/availability")
+def update_food_availability(food_id: int, request: AvailabilityRequest):
+
+    conn = None
+    cursor = None
+
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+            UPDATE food_items
+            SET available = %s
+            WHERE id = %s
+            RETURNING id;
+        """, (request.available, food_id))
+
+        result = cursor.fetchone()
+
+        if not result:
+            raise HTTPException(
+                status_code=404,
+                detail="Food item not found."
+            )
+
+        conn.commit()
+
+        return {
+            "success": True,
+            "message": "Food availability updated successfully!",
+            "available": request.available
+        }
+
+    except HTTPException:
+        if conn:
+            conn.rollback()
+        raise
+
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to update availability: {str(e)}"
+        )
+
+    finally:
+        if cursor:
+            cursor.close()
         if conn:
             conn.close()
 
