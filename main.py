@@ -1,5 +1,7 @@
 import os
+from pathlib import Path
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List, Optional
@@ -1372,14 +1374,303 @@ def get_admin_reports():
 
         if conn:
             conn.close()
+            
+# =========================================================
+# CATERING BOOKING API
+# =========================================================
+
+from datetime import date
+from pydantic import Field
+
+
+class CateringBookingRequest(BaseModel):
+    full_name: str = Field(min_length=2, max_length=150)
+    mobile: str = Field(min_length=10, max_length=20)
+    event_type: str = Field(min_length=2, max_length=80)
+    package_name: str = Field(min_length=2, max_length=100)
+    guest_count: int = Field(gt=0, le=100000)
+    event_date: date
+    event_location: str = Field(min_length=3, max_length=2000)
+    requirements: Optional[str] = Field(default=None, max_length=5000)
+
+   
+    estimated_amount: float = Field(ge=0, le=100000000)
+    payment_method: str = Field(default="Cash", min_length=3, max_length=4)
+    payment_percentage: int = Field(default=25, ge=25, le=100)
+
+
+class CateringBookingStatusRequest(BaseModel):
+    booking_status: str
+
+
+class CateringPaymentVerificationRequest(BaseModel):
+    payment_status: str
+
+
+
+
+@app.post("/api/catering/bookings")
+def create_catering_booking(booking: CateringBookingRequest):
+    conn = None
+    cur = None
+
+    try:
+        if booking.payment_method.strip() not in ("Cash", "UPI"):
+            raise HTTPException(
+                status_code=400,
+                detail="Payment method must be Cash or UPI."
+            )
+
+        if booking.event_date < date.today():
+            raise HTTPException(
+                status_code=400,
+                detail="Event date cannot be in the past."
+            )
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        total_amount = round(float(booking.estimated_amount), 2)
+        advance_amount = round(total_amount * booking.payment_percentage / 100, 2)
+        balance_amount = round(total_amount - advance_amount, 2)
+        cur.execute(
+            """
+            INSERT INTO catering_bookings (
+                full_name,
+                mobile,
+                event_type,
+                package_name,
+                guest_count,
+                event_date,
+                event_location,
+                requirements,
+                estimated_amount,
+                advance_amount,
+                balance_amount,
+                payment_status,
+                payment_method
+            )
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            RETURNING id;
+            """,
+            (
+                booking.full_name.strip(),
+                booking.mobile.strip(),
+                booking.event_type.strip(),
+                booking.package_name.strip(),
+                booking.guest_count,
+                booking.event_date,
+                booking.event_location.strip(),
+                booking.requirements,
+                total_amount,
+                advance_amount,
+                balance_amount,
+                "pending",
+                booking.payment_method.strip()
+            )
+        )
+
+        booking_id = cur.fetchone()[0]
+        conn.commit()
+
+        return {
+            "success": True,
+            "message": "Catering booking request submitted successfully.",
+            "booking_id": booking_id,
+            "booking_status": "pending"
+        }
+
+    except HTTPException:
+        raise
+
+    except Exception as e:
+        if conn:
+            conn.rollback()
+
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to save catering booking. Please try again."
+        )
+
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+
+@app.get("/api/admin/catering/bookings")
+def get_catering_bookings():
+    conn = None
+    cur = None
+
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        cur.execute(
+            """
+            SELECT
+                id,
+                full_name,
+                mobile,
+                event_type,
+                package_name,
+                guest_count,
+                event_date,
+                event_location,
+                requirements,
+               
+                estimated_amount,
+                booking_status,
+                created_at,
+                advance_amount,
+                balance_amount,
+                payment_status,
+                payment_id,
+                payment_method
+            FROM catering_bookings
+            ORDER BY created_at DESC, id DESC;
+            """
+        )
+
+        rows = cur.fetchall()
+
+        bookings = []
+        for row in rows:
+            bookings.append({
+                "id": row[0],
+                "full_name": row[1],
+                "mobile": row[2],
+                "event_type": row[3],
+                "package_name": row[4],
+                "guest_count": row[5],
+                "event_date": row[6].isoformat() if row[6] else None,
+                "event_location": row[7],
+                "requirements": row[8],
+               
+                "estimated_amount": float(row[9]),
+                "booking_status": row[10],
+                "created_at": row[11].isoformat() if row[11] else None,
+                "advance_amount": float(row[12]),
+                "balance_amount": float(row[13]),
+                "payment_status": row[14],
+                "payment_id": row[15],
+                "payment_method": row[16]
+            })
+
+        return {"bookings": bookings}
+
+    except Exception:
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to load catering bookings."
+        )
+
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
+
+@app.patch("/api/admin/catering/bookings/{booking_id}/status")
+def update_catering_booking_status(
+    booking_id: int,
+    request: CateringBookingStatusRequest
+):
+    allowed_statuses = {
+        "pending",
+        "confirmed",
+        "preparing",
+        "completed",
+        "cancelled"
+    }
+
+    status = request.booking_status.strip().lower()
+
+    if status not in allowed_statuses:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid catering booking status."
+        )
+
+    conn = None
+    cur = None
+
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+
+        cur.execute(
+            """
+            UPDATE catering_bookings
+            SET booking_status = %s
+            WHERE id = %s
+            RETURNING id;
+            """,
+            (status, booking_id)
+        )
+
+        updated = cur.fetchone()
+
+        if not updated:
+            conn.rollback()
+            raise HTTPException(
+                status_code=404,
+                detail="Catering booking not found."
+            )
+
+        conn.commit()
+
+        return {
+            "success": True,
+            "booking_id": booking_id,
+            "booking_status": status
+        }
+
+    except HTTPException:
+        raise
+
+    except Exception:
+        if conn:
+            conn.rollback()
+
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to update catering booking status."
+        )
+
+    finally:
+        if cur:
+            cur.close()
+        if conn:
+            conn.close()
+
 # =========================================================
 # SERVE WEBSITE
 # =========================================================
 
+@app.get("/")
+def serve_homepage():
+    return FileResponse(
+        str(Path(__file__).resolve().parent / "static" / "home.html")
+    )
+
+
+
+app.mount(
+    "/static",
+    StaticFiles(
+        directory=str(Path(__file__).resolve().parent / "static")
+    ),
+    name="static_files"
+)
+
 app.mount(
     "/",
     StaticFiles(
-        directory="static",
+        directory=str(Path(__file__).resolve().parent / "static"),
         html=True
     ),
     name="static"

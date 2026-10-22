@@ -1,0 +1,1567 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#174c3c">
+
+    <title>GharZaika | Food Ordering & Catering</title>
+
+    <meta name="description" content="GharZaika par food ordering aur catering services ke baare mein jaanein. Menu, order process, catering packages aur payment information ek jagah par.">
+
+    <style>
+        :root {
+            --green: #174c3c;
+            --green-light: #e7f0e9;
+            --green-dark: #10372c;
+            --orange: #e99546;
+            --cream: #fbf8f0;
+            --white: #ffffff;
+            --text: #26372f;
+            --muted: #66736b;
+            --border: #e5e8df;
+            --shadow: 0 14px 40px rgba(29, 61, 43, 0.09);
+            --radius: 22px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .container {
+            width: min(1120px, 92%);
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: rgba(251, 248, 240, 0.96);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 22px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            color: var(--green);
+            font-size: 25px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .brand-icon {
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            background: var(--green);
+            color: white;
+            border-radius: 15px;
+            font-size: 25px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+       .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #ffffff;
+    background: #174c3c;
+    border: 1px solid #123b30;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+    transition: all 0.25s ease;
+}
+
+
+        .nav-cta {
+            background: var(--green);
+            color: white !important;
+            padding: 10px 17px;
+            border-radius: 30px;
+        }
+
+        /* BUTTONS */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 22px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s,
+                        box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: white;
+            box-shadow: 0 7px 18px rgba(23, 76, 60, 0.18);
+        }
+
+        .btn-primary:hover {
+            background: var(--green-dark);
+        }
+
+        .btn-outline {
+            color: var(--green);
+            border-color: #c7d6c9;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--green-light);
+        }
+
+        /* HERO */
+
+        .hero {
+            padding: 76px 0 62px;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 88% 15%, #f4dfbd 0, transparent 28%),
+                linear-gradient(135deg, #fbf8f0, #eef4e9);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            align-items: center;
+            gap: 55px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            color: var(--green);
+            background: #e3eee3;
+            border-radius: 30px;
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 5vw, 62px);
+            line-height: 1.13;
+            letter-spacing: -1.8px;
+            color: var(--green-dark);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #c77b32;
+        }
+
+        .hero p {
+            max-width: 540px;
+            color: var(--muted);
+            font-size: 17px;
+            margin-bottom: 27px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 410px;
+            object-fit: cover;
+            border-radius: 32px;
+            box-shadow: var(--shadow);
+        }
+
+        .image-note {
+            position: absolute;
+            bottom: 20px;
+            left: -18px;
+            background: white;
+            padding: 15px 19px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .image-note small {
+            display: block;
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        /* TRUST STRIP */
+
+        .trust-strip {
+            background: var(--green);
+            color: white;
+            padding: 19px 0;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .trust-item {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* COMMON SECTION */
+
+        section {
+            padding: 76px 0;
+        }
+
+        .section-heading {
+            max-width: 720px;
+            text-align: center;
+            margin: 0 auto 38px;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: #b76d2c;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+
+        .section-heading h2 {
+            color: var(--green-dark);
+            font-size: clamp(29px, 4vw, 40px);
+            line-height: 1.25;
+            margin-bottom: 13px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        /* SERVICES */
+
+        .services {
+            background: var(--white);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .service-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(29, 61, 43, 0.045);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 245px;
+          object-fit: cover;
+            background: var(--green-light);
+        }
+
+        .service-content {
+            padding: 27px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .service-tag {
+            display: inline-block;
+            align-self: flex-start;
+            background: #edf3e9;
+            color: var(--green);
+            border-radius: 30px;
+            padding: 5px 12px;
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .service-content h3 {
+            font-size: 25px;
+            color: var(--green-dark);
+            margin-bottom: 10px;
+        }
+
+        .service-intro {
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        .service-content h4 {
+            color: var(--green);
+            font-size: 15px;
+            margin: 7px 0 9px;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: grid;
+            gap: 9px;
+            margin-bottom: 20px;
+        }
+
+        .feature-list li {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            font-size: 14px;
+        }
+
+        .check {
+            color: #2c8a58;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .service-note {
+            background: var(--cream);
+            border-left: 3px solid var(--orange);
+            padding: 12px 14px;
+            border-radius: 0 10px 10px 0;
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: auto;
+            margin-bottom: 22px;
+        }
+
+        .service-content .btn {
+            width: 100%;
+            margin-top: 0;
+        }
+
+        /* GUIDES */
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .guide-card {
+            background: #f0f4eb;
+            padding: 28px;
+            border-radius: var(--radius);
+            border: 1px solid #e0e9dd;
+        }
+
+        .guide-card:nth-child(2) {
+            background: #fff1df;
+            border-color: #f2e0c7;
+        }
+
+        .guide-icon {
+            font-size: 33px;
+            margin-bottom: 10px;
+        }
+
+        .guide-card h3 {
+            color: var(--green-dark);
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+
+        .guide-steps {
+            list-style: none;
+            display: grid;
+            gap: 14px;
+        }
+
+        .guide-steps li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .step-number {
+            min-width: 29px;
+            height: 29px;
+            border-radius: 50%;
+            background: var(--green);
+            color: white;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .guide-card:nth-child(2) .step-number {
+            background: #b76d2c;
+        }
+
+        /* PAYMENT */
+
+        .payment-section {
+            background: white;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .payment-card {
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fffefa;
+        }
+
+        .payment-card .icon {
+            font-size: 29px;
+            margin-bottom: 10px;
+        }
+
+        .payment-card h3 {
+            color: var(--green);
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .payment-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .important-note {
+            margin-top: 25px;
+            padding: 17px 20px;
+            background: #fff1df;
+            border-radius: 13px;
+            color: #714b25;
+            font-size: 14px;
+        }
+
+        /* WHY CHOOSE US */
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .why-card {
+            background: white;
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+        }
+
+        .why-card .icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .why-card h3 {
+            font-size: 18px;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+
+        .why-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* DEVELOPER */
+
+        .developer-section {
+            background: var(--green);
+            color: white;
+        }
+
+        .developer-grid {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 35px;
+            align-items: center;
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .developer-photo {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.22);
+            background: #dbe7da;
+        }
+
+        .developer-fallback {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #e4eee2;
+            color: var(--green);
+            font-size: 56px;
+            font-weight: 800;
+            border: 5px solid rgba(255, 255, 255, 0.22);
+        }
+
+        .developer-section .section-label {
+            color: #f4c58f;
+        }
+
+        .developer-section h2 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        .developer-role {
+            color: #f4c58f;
+            font-weight: 700;
+            margin-bottom: 17px;
+        }
+
+        .developer-section p {
+            color: #e0ebe4;
+            margin-bottom: 13px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .skill {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        /* CONTACT */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+
+        .contact-card h3 {
+            color: var(--green);
+            font-size: 23px;
+            margin-bottom: 18px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 13px;
+            margin-bottom: 19px;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            background: var(--green-light);
+            border-radius: 12px;
+            flex-shrink: 0;
+            font-size: 20px;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .contact-item p,
+        .contact-item a {
+            color: var(--muted);
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-item a:hover {
+            color: var(--green);
+            text-decoration: underline;
+        }
+
+        .map-box {
+            background: #edf2e8;
+            min-height: 100%;
+            padding: 30px;
+            border-radius: var(--radius);
+            border: 1px solid #dce6d8;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .map-box .map-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .map-box h3 {
+            color: var(--green);
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .map-box p {
+            color: var(--muted);
+            margin-bottom: 20px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            background: #102e25;
+            color: #e4eee7;
+            padding: 27px 0;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .footer p {
+            color: #bdcfc2;
+            font-size: 13px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.13);
+            padding-top: 16px;
+            margin-top: 18px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+            .nav {
+                padding: 12px 0;
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                width: 100%;
+                gap: 17px;
+                flex-wrap: wrap;
+                font-size: 13px;
+            }
+
+            .nav-cta {
+                padding: 6px 11px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .hero {
+                padding-top: 52px;
+            }
+
+            .hero-image {
+                max-width: 650px;
+            }
+
+            .hero-image img {
+                height: 340px;
+            }
+
+            .image-note {
+                left: 12px;
+            }
+
+            .payment-grid,
+            .why-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            section {
+                padding: 55px 0;
+            }
+
+            .hero {
+                padding: 45px 0;
+            }
+
+            .hero h1 {
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .hero-image img {
+                height: 260px;
+                border-radius: 22px;
+            }
+
+            .trust-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .service-grid,
+            .guide-grid,
+            .payment-grid,
+            .why-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-image {
+                height: 210px;
+            }
+
+            .service-content {
+                padding: 22px;
+            }
+
+            .developer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                justify-items: center;
+                gap: 22px;
+            }
+
+            .developer-photo,
+            .developer-fallback {
+                width: 145px;
+                height: 145px;
+            }
+
+            .developer-section h2 {
+                font-size: 28px;
+            }
+
+            .skills {
+                justify-content: center;
+            }
+
+            .contact-card,
+            .map-box {
+                padding: 23px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container nav">
+            <a class="brand" href="#home" aria-label="GharZaika Home">
+                <span class="brand-icon">🍲</span>
+                <span>GharZaika</span>
+            </a>
+
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="#home">Home</a>
+                <a href="#services">Our Services</a>
+                <a href="#guides">How It Works</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div>
+                    <span class="eyebrow">FRESH FOOD • SMART SERVICE</span>
+
+                    <h1>
+                        Welcome to <span>GharZaika!</span>
+                    </h1>
+
+                    <p>
+                        Aapke favourite food se lekar special events ki
+                        catering tak, GharZaika aapko ek simple aur
+                        organized experience dene ke liye bana hai.
+                        Apni zaroorat ke hisaab se service chuniye aur
+                        details aasani se check kijiye.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#services" class="btn btn-primary">
+                            Explore Our Services ↓
+                        </a>
+
+                        <a href="#guides" class="btn btn-outline">
+                            How It Works
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-image">
+                    <img
+                      src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1000&q=85"
+                        alt="Freshly prepared food served on a table"
+                        fetchpriority="high"
+                    >
+
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- TRUST STRIP -->
+        <div class="trust-strip">
+            <div class="container trust-grid">
+                <div class="trust-item">🍽️ Food Ordering</div>
+                <div class="trust-item">🎉 Event Catering</div>
+                <div class="trust-item">📱 Easy Digital Process</div>
+            </div>
+        </div>
+
+        <!-- TWO MAIN DASHBOARDS -->
+        <section class="services" id="services">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">OUR SERVICES</span>
+                    <h2>Choose Your Service</h2>
+                    <p>
+                        GharZaika mein do alag services hain.
+                        Neeche har service ki details padhiye aur
+                        apni zaroorat ke according dashboard kholiye.
+                    </p>
+                </div>
+
+                <div class="service-grid">
+
+                    <!-- FOOD DASHBOARD -->
+                    <article class="service-card">
+                       <img
+                       src="/static/food_image/veg_thali.jpg"
+                       alt="Homemade vegetarian thali"
+                       loading="lazy">
+                        >
+
+                        <div class="service-content">
+                            <span class="service-tag">
+                                DAILY FOOD ORDERS
+                            </span>
+
+                            <h3>🍽️ Food Ordering Dashboard</h3>
+
+                            <p class="service-intro">
+                                Agar aapko apni pasand ka food order
+                                karna hai, to Food Ordering Dashboard
+                                aapke liye hai. Yahan menu, prices,
+                                cart aur order ki details check kar sakte hain.
+                            </p>
+
+                            <h4>Is dashboard mein kya milega?</h4>
+
+                            <ul class="feature-list">
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>Food Menu:</strong>
+                                        available food items aur unki prices dekhein.
+                                    </span>
+                                </li>
+
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>Cart & Bill:</strong>
+                                        items add karein, quantity change karein
+                                        aur total amount check karein.
+                                    </span>
+                                </li>
+
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>Payment:</strong>
+                                        dashboard mein available Cash aur UPI
+                                        payment options dekhein.
+                                    </span>
+                                </li>
+
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>Track Order:</strong>
+                                        Order ID enter karke order status check karein.
+                                    </span>
+                                </li>
+
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>AI Food Assistant:</strong>
+                                        food category ke according suggestions lein.
+                                    </span>
+                                </li>
+
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>Regular Customer Discount:</strong>
+                                        eligible customers ko 5% discount,
+                                        maximum ₹50 tak, mil sakta hai.
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <div class="service-note">
+                                <strong>Order karne se pehle:</strong>
+                                menu mein current availability aur prices check karein.
+                                Discount eligibility system ke rules par depend karti hai.
+                            </div>
+
+                            <a
+                                href="/index.html"
+                                class="btn btn-primary"
+                            >
+                                Open Food Ordering Dashboard →
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- CATERING DASHBOARD -->
+                    <article class="service-card">
+                        <img
+                            class="service-image catering-image"
+                          src="/static/food_image/catering_buffet.jpg"
+                            alt="Food catering arrangement for an event"
+                            loading="lazy"
+                        >
+
+                        <div class="service-content">
+                            <span class="service-tag">
+                                EVENTS & SPECIAL OCCASIONS
+                            </span>
+
+                            <h3>🎉 Catering Booking Dashboard</h3>
+
+                            <p class="service-intro">
+                                Birthday, family function, party ya kisi
+                                special event ke liye catering chahiye?
+                                Catering Dashboard par event ki details
+                                aur available package information submit karein.
+                            </p>
+
+                            <h4>Is dashboard mein kya milega?</h4>
+
+                            <ul class="feature-list">
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>Event Details:</strong>
+                                        event type aur date enter karein.
+                                    </span>
+                                </li>
+
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>Catering Packages:</strong>
+                                        dashboard mein available packages
+                                        aur unki prices check karein.
+                                    </span>
+                                </li>
+
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>Guest Count:</strong>
+                                        kitne logon ke liye catering chahiye,
+                                        woh enter karein.
+                                    </span>
+                                </li>
+
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>Estimated Amount:</strong>
+                                        package price aur guest count ke
+                                        according estimate dekhein.
+                                    </span>
+                                </li>
+
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>Event Location:</strong>
+                                        venue address aur special requirements share karein.
+                                    </span>
+                                </li>
+
+                                <li>
+                                    <span class="check">✓</span>
+                                    <span>
+                                        <strong>Payment Choices:</strong>
+                                        available options mein 25% advance
+                                        ya 100% full payment check karein.
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <div class="service-note">
+                                <strong>Important:</strong>
+                                booking request submit karna final confirmation nahi hai.
+                                Payment aur booking status admin ki verification
+                                aur confirmation par depend karega.
+                            </div>
+
+                            <a
+                                href="/caterers.html"
+                                class="btn btn-primary"
+                            >
+                                Open Catering Booking Dashboard →
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- GUIDES: INFORMATION ONLY, NO EXTRA DASHBOARD BUTTONS -->
+        <section id="guides">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">SIMPLE PROCESS</span>
+                    <h2>Kaise Kaam Karta Hai?</h2>
+                    <p>
+                        Dono services ka process alag hai.
+                        Apni requirement ke according neeche diye gaye steps follow karein.
+                    </p>
+                </div>
+
+                <div class="guide-grid">
+
+                    <article class="guide-card">
+                        <div class="guide-icon">🛒</div>
+
+                        <h3>Food Order Karne Ka Tarika</h3>
+
+                        <ol class="guide-steps">
+                            <li>
+                                <span class="step-number">1</span>
+                                <span>
+                                    Food menu mein items aur unki prices check karein.
+                                </span>
+                            </li>
+
+                            <li>
+                                <span class="step-number">2</span>
+                                <span>
+                                    Pasand ke food items cart mein add karein
+                                    aur quantity select karein.
+                                </span>
+                            </li>
+
+                            <li>
+                                <span class="step-number">3</span>
+                                <span>
+                                    Order place karne se pehle items aur total bill
+                                    carefully check karein.
+                                </span>
+                            </li>
+
+                            <li>
+                                <span class="step-number">4</span>
+                                <span>
+                                    Available payment option choose karke
+                                    dashboard ke instructions follow karein.
+                                </span>
+                            </li>
+
+                            <li>
+                                <span class="step-number">5</span>
+                                <span>
+                                    Order ID save rakhein. Order status check
+                                    karne ke liye isi ID ka use karein.
+                                </span>
+                            </li>
+                        </ol>
+                       
+                    </article>
+
+                    <article class="guide-card">
+                        <div class="guide-icon">🎊</div>
+
+                        <h3>Catering Book Karne Ka Tarika</h3>
+
+                        <ol class="guide-steps">
+                            <li>
+                                <span class="step-number">1</span>
+                                <span>
+                                    Apne event ke according available catering
+                                    package select karein.
+                                </span>
+                            </li>
+
+                            <li>
+                                <span class="step-number">2</span>
+                                <span>
+                                    Event date, guest count, venue aur contact
+                                    details enter karein.
+                                </span>
+                            </li>
+
+                            <li>
+                                <span class="step-number">3</span>
+                                <span>
+                                    Estimated amount aur payment options ko
+                                    dhyan se check karein.
+                                </span>
+                            </li>
+
+                            <li>
+                                <span class="step-number">4</span>
+                                <span>
+                                    Booking request submit karein aur dashboard
+                                    par diye gaye payment instructions follow karein.
+                                </span>
+                            </li>
+
+                            <li>
+                                <span class="step-number">5</span>
+                                <span>
+                                    Admin ki verification aur confirmation ka
+                                    intezaar karein. Zaroorat par contact karein.
+                                </span>
+                            </li>
+                        </ol>
+                                                <div class="service-note">
+                            <strong>📢 Important Catering Delivery Notice:</strong>
+                            Regular home delivery available nahi hai.
+                            Bulk catering orders ke liye delivery sirf bahut zaroori
+                            situation mein aur availability ke according consider ki ja sakti hai.
+                            Otherwise, customer ko order khud collect karna hoga
+                            ya kisi doosre person ko collect karne ke liye bhejna hoga.
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PAYMENT INFORMATION -->
+        <section class="payment-section" id="payment">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">PAYMENT INFORMATION</span>
+                    <h2>Payment Ko Samjhein</h2>
+                    <p>
+                        Food orders aur catering bookings ke payment rules
+                        alag ho sakte hain. Payment karne se pehle apne
+                        dashboard par dikhaye gaye instructions check karein.
+                    </p>
+                </div>
+
+                <div class="payment-grid">
+
+                    <article class="payment-card">
+                        <div class="icon">💵</div>
+                        <h3>Cash Payment</h3>
+                        <p>
+                            Food order ya catering booking ke liye Cash option
+                            tabhi select karein jab woh dashboard mein available ho.
+                            Dikhaye gaye payment instructions follow karein.
+                        </p>
+                    </article>
+
+                    <article class="payment-card">
+                        <div class="icon">📲</div>
+                        <h3>UPI / QR Payment</h3>
+                        <p>
+                            Agar UPI option available ho, to dashboard mein
+                            diye gaye payment details ko carefully check karein.
+                            Payment complete hone ke baad proof sambhal kar rakhein.
+                        </p>
+                    </article>
+
+                    <article class="payment-card">
+                        <div class="icon">🧾</div>
+                        <h3>Catering Advance</h3>
+                        <p>
+                            Catering mein available plan ke according 25% advance
+                            aur baaki 75% baad mein, ya 100% full payment ka
+                            option ho sakta hai.
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="important-note">
+                    <strong>Yaad rakhein:</strong>
+                    UPI QR scan karna apne aap payment confirmation nahi hota.
+                    Payment ka status verify hone aur admin ki confirmation
+                    milne tak catering booking ko confirmed na maanein.
+                    Final amount aur payment instructions dashboard par check karein.
+                </div>
+
+            </div>
+        </section>
+
+        <!-- WHY GHARZAIKA -->
+        <section id="about">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">WHY GHARZAIKA</span>
+                    <h2>Ek Jagah, Do Useful Services</h2>
+                    <p>
+                        Food ordering aur event catering ke liye alag dashboards,
+                        clear details aur organized digital process.
+                    </p>
+                </div>
+
+                <div class="why-grid">
+
+                    <article class="why-card">
+                        <div class="icon">🍲</div>
+                        <h3>Food Information</h3>
+                        <p>
+                            Menu, food prices, cart aur order status ki
+                            information ek dashboard mein.
+                        </p>
+                    </article>
+
+                    <article class="why-card">
+                        <div class="icon">🎉</div>
+                        <h3>Event Planning</h3>
+                        <p>
+                            Catering package, guest count, event date aur
+                            venue details submit karne ki facility.
+                        </p>
+                    </article>
+
+                    <article class="why-card">
+                        <div class="icon">💻</div>
+                        <h3>Digital Management</h3>
+                        <p>
+                            Food orders aur catering requests ko digital
+                            system ke through organize karne ka approach.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- DEVELOPER PROFILE -->
+        <section class="developer-section">
+            <div class="container">
+
+                <div class="developer-grid">
+                    <div>
+                        <img
+                            class="developer-photo"
+                            src="/static/food_image/admin_sneha.jpg"
+                            alt="Sneha Kumari"
+                            loading="lazy"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+                        >
+
+                        <div class="developer-fallback" style="display:none;">
+                            SK
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="section-label">ABOUT THE DEVELOPER</span>
+
+                        <h2>Sneha Kumari</h2>
+
+                        <div class="developer-role">
+                            MCA Student · Web Developer
+                        </div>
+
+                        <p>
+                            Main modern websites, online ordering systems,
+                            admin dashboards aur database-based applications
+                            develop karne mein interest rakhti hoon.
+                        </p>
+
+                        <p>
+                            GharZaika ek aisa project hai jisme food ordering
+                            aur catering services ko ek organized digital
+                            experience mein present kiya gaya hai.
+                        </p>
+
+                        <div class="skills">
+                            <span class="skill">Web Development</span>
+                            <span class="skill">FastAPI</span>
+                            <span class="skill">PostgreSQL</span>
+                            <span class="skill">Admin Dashboards</span>
+                            <span class="skill">Database Applications</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT AND LOCATION -->
+        <section id="contact">
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">GET IN TOUCH</span>
+                    <h2>Contact & Location</h2>
+                    <p>
+                        Website development ya project-related discussion ke liye
+                        neeche diye gaye contact details use kar sakte hain.
+                    </p>
+                </div>
+
+                <div class="contact-grid">
+
+                    <div class="contact-card">
+                        <h3>Contact Details</h3>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">👩‍💻</div>
+                            <div>
+                                <strong>Name</strong>
+                                <p>Sneha Kumari</p>
+                                <p>MCA Student · Web Developer</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <strong>Phone / WhatsApp</strong>
+                                <a href="tel:+917050752309">
+                                    +91 7050752309
+                                </a>
+                                <br>
+                                <a
+                                    href="https://wa.me/917050752309"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Contact on WhatsApp ↗
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <strong>Email</strong>
+                                <a href="mailto:kumarisneha18122004@gmail.com">
+                                    kumarisneha18122004@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <strong>Address</strong>
+                                <p>
+                                    Village + P.O. Gurmiya,<br>
+                                    Near Gurmiya Chowk,<br>
+                                    Vaishali, Bihar – 844117, India
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="map-box">
+                        <div class="map-icon">🗺️</div>
+
+                        <h3>Find Our Location</h3>
+
+                        <p>
+                            Gurmiya Chowk, Gurmiya, Vaishali, Bihar ke
+                            map results dekhne ke liye neeche click karein.
+                            Map par location ko verify kar lena chahiye.
+                        </p>
+
+                        <a
+                            class="btn btn-primary"
+                            href="https://www.google.com/maps/search/?api=1&query=Gurmiya+Chowk%2C+Gurmiya%2C+Lalganj%2C+Vaishali%2C+Bihar+844117"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Open Location in Google Maps ↗
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">🍲 GharZaika</div>
+
+            <p>
+                Food Ordering & Catering Services
+            </p>
+
+            <p>
+                Fresh Food • Easy Ordering • Organized Service
+            </p>
+
+            <div class="footer-bottom">
+                <p>
+                    &copy; <span id="year">2026</span> GharZaika.
+                    All Rights Reserved.
+                </p>
+
+                <p>
+                    Designed by Sneha Kumari
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+    </script>
+
+</body>
+</html>
