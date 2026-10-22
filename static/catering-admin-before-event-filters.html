@@ -1,0 +1,1228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#651d32">
+    <title>GharZaika | Catering Admin</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8f0;
+            color: #39251f;
+        }
+
+        header {
+            background: linear-gradient(135deg, #651d32, #9d3547);
+            color: white;
+            padding: 25px 6%;
+        }
+
+        header h1 {
+            font-size: 28px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #ffe6d8;
+            line-height: 1.6;
+        }
+
+        main {
+            width: 92%;
+            max-width: 1450px;
+            margin: 30px auto;
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .top-row h2 {
+            color: #651d32;
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        button,
+        select {
+            font: inherit;
+            border-radius: 8px;
+            padding: 10px 13px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            background: #8b293e;
+            color: white;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: #641b30;
+        }
+
+        button:focus-visible,
+        select:focus-visible {
+            outline: 3px solid #e58b27;
+            outline-offset: 2px;
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.65;
+        }
+
+        .refresh-btn {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .muted {
+            color: #806b62;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 17px;
+            border: 1px solid #f0dfd5;
+            border-top: 4px solid #a43c50;
+            box-shadow: 0 4px 15px rgba(87, 37, 26, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(101, 29, 50, 0.11);
+        }
+
+        .summary-card p {
+            color: #806b62;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .summary-card h3 {
+            font-size: 28px;
+            color: #8b293e;
+            overflow-wrap: anywhere;
+        }
+
+        .category-section {
+            background: linear-gradient(135deg, #ffffff, #fff4e8);
+            border: 1px solid #f0dfd5;
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 24px rgba(101, 29, 50, 0.07);
+        }
+
+        .category-section h3 {
+            color: #651d32;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .category-section > .muted {
+            margin-bottom: 18px;
+        }
+
+        .category-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .category-btn {
+            background: #ffffff;
+            color: #7b263d;
+            border: 1px solid #e6c9ce;
+            border-radius: 30px;
+            padding: 11px 18px;
+            font-weight: 600;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: linear-gradient(135deg, #651d32, #a43c50);
+            color: #ffffff;
+            border-color: #651d32;
+            box-shadow: 0 5px 14px rgba(101, 29, 50, 0.18);
+            transform: translateY(-1px);
+        }
+
+        .panel {
+            background: white;
+            padding: 20px;
+            border-radius: 18px;
+            border: 1px solid #f0dfd5;
+            box-shadow: 0 8px 26px rgba(101, 29, 50, 0.07);
+        }
+
+        .panel h3 {
+            color: #651d32;
+            font-size: 21px;
+            margin-bottom: 16px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid #f1e5df;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1250px;
+        }
+
+        th,
+        td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #f1e5df;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #fff1e7;
+            color: #651d32;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        td {
+            font-size: 14px;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: #fff9f4;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        td strong {
+            color: #542031;
+        }
+
+        td select {
+            width: 145px;
+            max-width: 100%;
+            background: white;
+            border: 1px solid #dfc9bf;
+        }
+
+        td button {
+            white-space: nowrap;
+            font-weight: 600;
+            box-shadow: 0 3px 8px rgba(101, 29, 50, 0.12);
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #fff0cc;
+            color: #795000;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: capitalize;
+            overflow-wrap: anywhere;
+        }
+
+        .status-paid,
+        .status-completed,
+        .status-confirmed {
+            background: #e6f7e9;
+            color: #216b35;
+        }
+
+        .status-failed,
+        .status-cancelled,
+        .status-rejected {
+            background: #ffe5e5;
+            color: #a02020;
+        }
+
+        .status-pending,
+        .status-unpaid {
+            background: #fff0cc;
+            color: #795000;
+        }
+
+        .message {
+            margin: 0 0 20px;
+            padding: 13px 15px;
+            border-radius: 8px;
+            line-height: 1.6;
+            display: none;
+            overflow-wrap: anywhere;
+        }
+
+        .message.success {
+            display: block;
+            background: #e6f7e9;
+            color: #216b35;
+            border: 1px solid #b9e4c1;
+        }
+
+        .message.error {
+            display: block;
+            background: #ffe5e5;
+            color: #a02020;
+            border: 1px solid #f0bcbc;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 35px 10px;
+            color: #806b62;
+        }
+
+        .loading {
+            opacity: 0.75;
+        }
+
+        .table-note {
+            margin-top: 12px;
+        }
+
+        @media (max-width: 900px) {
+            .summary {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            main {
+                width: 94%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 22px 5%;
+            }
+
+            header h1 {
+                font-size: 23px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            .top-row h2 {
+                font-size: 23px;
+            }
+
+            .top-row > button {
+                width: 100%;
+            }
+
+            .summary {
+                gap: 12px;
+            }
+
+            .summary-card {
+                padding: 15px;
+            }
+
+            .summary-card h3 {
+                font-size: 25px;
+            }
+
+            .category-section {
+                padding: 17px;
+            }
+
+            .category-buttons {
+                gap: 9px;
+            }
+
+            .category-btn {
+                padding: 10px 13px;
+                font-size: 13px;
+            }
+
+            .panel {
+                padding: 12px;
+            }
+
+            .panel h3 {
+                font-size: 19px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .summary {
+                grid-template-columns: 1fr;
+            }
+        }
+            /* Attractive dashboard refinements */
+        body {
+            background: radial-gradient(ellipse at top left, #fff0e7 0%, transparent 42%), #fff8f0;
+        }
+
+        header {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(120deg, #4e1428 0%, #7d233b 55%, #ad4654 100%);
+            box-shadow: 0 8px 28px rgba(78, 20, 40, 0.20);
+        }
+
+        header h1 {
+            letter-spacing: 0.3px;
+        }
+
+        main {
+            margin-top: 34px;
+            margin-bottom: 48px;
+        }
+
+        .top-row h2 {
+            letter-spacing: -0.5px;
+        }
+
+        .refresh-btn {
+            padding: 12px 19px;
+            border-radius: 10px;
+            box-shadow: 0 5px 14px rgba(101, 29, 50, 0.18);
+        }
+
+        .summary-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-card:nth-child(1) { border-top-color: #8b293e; }
+        .summary-card:nth-child(2) { border-top-color: #d99522; }
+        .summary-card:nth-child(3) { border-top-color: #318454; }
+        .summary-card:nth-child(4) { border-top-color: #4678b8; }
+
+        .summary-card p {
+            font-weight: 600;
+        }
+
+        .category-section,
+        .panel {
+            box-shadow: 0 7px 22px rgba(87, 37, 26, 0.055);
+        }
+
+        .panel h3 {
+            padding-bottom: 12px;
+            border-bottom: 1px solid #f1e5df;
+        }
+
+        .table-wrap {
+            box-shadow: 0 2px 8px rgba(87, 37, 26, 0.025);
+        }
+
+        table {
+            min-width: 1320px;
+        }
+
+        th {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            letter-spacing: 0.15px;
+        }
+
+        td {
+            padding-top: 18px;
+            padding-bottom: 18px;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #fffdfa;
+        }
+
+        tbody tr:hover {
+            background: #fff1e7;
+        }
+
+        td select {
+            border-radius: 9px;
+            padding: 10px;
+            color: #542031;
+        }
+
+        td button {
+            margin-top: 8px;
+            padding: 10px 14px;
+            border-radius: 9px;
+        }
+
+        .status {
+            letter-spacing: 0.1px;
+        }
+
+        @media (max-width: 600px) {
+            main {
+                margin-top: 22px;
+            }
+
+            .summary-card {
+                border-radius: 13px;
+            }
+
+            .category-section,
+            .panel {
+                border-radius: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🍽️ GharZaika Catering Admin</h1>
+        <p>Manage event bookings, customer details and booking status.</p>
+        <a href="/admin-portal.html" style="display:inline-block; margin-top:12px; padding:10px 16px; background:#fff; color:#70243b; border-radius:8px; text-decoration:none; font-weight:bold;">
+            ← Admin Portal
+        </a>
+    </header>
+
+    <main>
+        <div class="top-row">
+            <div>
+                <h2>Catering Bookings</h2>
+                <p class="muted">Bookings received from your catering service.</p>
+            </div>
+
+            <button
+                type="button"
+                class="refresh-btn"
+                id="refreshButton"
+                onclick="loadBookings()">
+                ↻ Refresh Bookings
+            </button>
+        </div>
+
+        <div id="message" class="message" role="status" aria-live="polite"></div>
+
+        <section class="summary">
+            <div class="summary-card">
+                <p>Total Bookings</p>
+                <h3 id="totalCount">—</h3>
+            </div>
+
+            <div class="summary-card">
+                <p>Pending</p>
+                <h3 id="pendingCount">—</h3>
+            </div>
+
+            <div class="summary-card">
+                <p>Confirmed</p>
+                <h3 id="confirmedCount">—</h3>
+            </div>
+
+            <div class="summary-card">
+                <p>Completed</p>
+                <h3 id="completedCount">—</h3>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h3>Choose Catering Category</h3>
+            <p class="muted">Select an event type to view its bookings.</p>
+
+            <div class="category-buttons">
+                <button
+                    type="button"
+                    class="category-btn active"
+                    data-category="all"
+                    aria-pressed="true"
+                    onclick="filterBookings('all')">
+                    All Bookings
+                </button>
+
+                <button
+                    type="button"
+                    class="category-btn"
+                    data-category="birthday"
+                    aria-pressed="false"
+                    onclick="filterBookings('birthday')">
+                    🎂 Birthday
+                </button>
+
+                <button
+                    type="button"
+                    class="category-btn"
+                    data-category="wedding"
+                    aria-pressed="false"
+                    onclick="filterBookings('wedding')">
+                    💍 Wedding
+                </button>
+
+                <button
+                    type="button"
+                    class="category-btn"
+                    data-category="corporate"
+                    aria-pressed="false"
+                    onclick="filterBookings('corporate')">
+                    💼 Corporate
+                </button>
+
+                <button
+                    type="button"
+                    class="category-btn"
+                    data-category="other"
+                    aria-pressed="false"
+                    onclick="filterBookings('other')">
+                    🎉 Other Events
+                </button>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h3 id="tableHeading">All Bookings</h3>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Customer</th>
+                            <th>Event Details</th>
+                            <th>Location &amp; Requirements</th>
+                            <th>Total Amount</th>
+                            <th>Advance (25%)</th>
+                            <th>Balance (75%)</th>
+                            <th>Payment Status</th>
+                            <th>Payment Method</th>
+                            <th>Booking Status</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="bookingRows">
+                        <tr>
+                            <td colspan="11" class="empty">
+                                Loading bookings...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="muted table-note">
+                On smaller screens, scroll horizontally to view all booking details.
+            </p>
+        </section>
+    </main>
+
+    <script>
+        "use strict";
+
+        const API_BASE = "";
+
+        const TABLE_COLUMN_COUNT = 11;
+
+        let allBookings = [];
+        let selectedCategory = "all";
+        let messageTimeout = null;
+
+        const CATEGORY_LABELS = {
+            all: "All Bookings",
+            birthday: "Birthday Bookings",
+            wedding: "Wedding Bookings",
+            corporate: "Corporate Bookings",
+            other: "Other Event Bookings"
+        };
+
+        function escapeHTML(value) {
+            return String(value ?? "").replace(/[&<>"']/g, function (char) {
+                const entities = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                };
+
+                return entities[char];
+            });
+        }
+
+        function normalizeText(value) {
+            return String(value ?? "").trim().toLowerCase();
+        }
+
+        function getEventType(booking) {
+            return normalizeText(booking.event_type);
+        }
+
+        function matchesCategory(eventType, category) {
+            const isBirthday = eventType.includes("birthday");
+
+            const isWedding =
+                eventType.includes("wedding") ||
+                eventType.includes("marriage");
+
+            const isCorporate =
+                eventType.includes("corporate") ||
+                eventType.includes("office") ||
+                eventType.includes("business");
+
+            if (category === "all") {
+                return true;
+            }
+
+            if (category === "birthday") {
+                return isBirthday;
+            }
+
+            if (category === "wedding") {
+                return isWedding;
+            }
+
+            if (category === "corporate") {
+                return isCorporate;
+            }
+
+            if (category === "other") {
+                return !isBirthday && !isWedding && !isCorporate;
+            }
+
+            return false;
+        }
+
+        function showMessage(text, isError = false) {
+            const box = document.getElementById("message");
+
+            if (messageTimeout !== null) {
+                clearTimeout(messageTimeout);
+                messageTimeout = null;
+            }
+
+            box.textContent = text;
+            box.className = isError
+                ? "message error"
+                : "message success";
+
+            messageTimeout = setTimeout(function () {
+                box.className = "message";
+                box.textContent = "";
+                messageTimeout = null;
+            }, 6000);
+        }
+
+        function clearMessage() {
+            const box = document.getElementById("message");
+            box.className = "message";
+            box.textContent = "";
+
+            if (messageTimeout !== null) {
+                clearTimeout(messageTimeout);
+                messageTimeout = null;
+            }
+        }
+
+        function formatAmount(amount) {
+            const number = Number(amount);
+
+            if (amount === null || amount === undefined || amount === "") {
+                return "₹0";
+            }
+
+            if (!Number.isFinite(number)) {
+                return "₹0";
+            }
+
+            return "₹" + number.toLocaleString("en-IN", {
+                maximumFractionDigits: 2
+            });
+        }
+
+        function formatDate(value) {
+            if (!value) {
+                return "—";
+            }
+
+            const text = String(value);
+            const datePart = text.slice(0, 10);
+            const match = datePart.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+
+            if (match) {
+                return `${match[3]}-${match[2]}-${match[1]}`;
+            }
+
+            return text;
+        }
+
+        function displayValue(value, fallback = "—") {
+            if (value === null || value === undefined || value === "") {
+                return fallback;
+            }
+
+            return String(value);
+        }
+
+        function getStatusOptions(currentStatus) {
+            const statuses = [
+                "pending",
+                "confirmed",
+                "preparing",
+                "completed",
+                "cancelled"
+            ];
+
+            const normalizedCurrent = normalizeText(currentStatus);
+
+            return statuses.map(function (status) {
+                const selected = status === normalizedCurrent
+                    ? " selected"
+                    : "";
+
+                return `
+                    <option value="${status}"${selected}>
+                        ${status.charAt(0).toUpperCase() + status.slice(1)}
+                    </option>
+                `;
+            }).join("");
+        }
+
+        function getStatusClass(value) {
+            const status = normalizeText(value);
+
+            if (["paid", "completed", "confirmed", "success", "successful"]
+                .includes(status)) {
+                return "status status-" + status;
+            }
+
+            if (["failed", "cancelled", "rejected"].includes(status)) {
+                return "status status-" + status;
+            }
+
+            if (["pending", "unpaid"].includes(status)) {
+                return "status status-" + status;
+            }
+
+            return "status";
+        }
+
+        function makeStatusBadge(value, fallback) {
+            const label = displayValue(value, fallback);
+
+            return `
+                <span class="${getStatusClass(label)}">
+                    ${escapeHTML(label)}
+                </span>
+            `;
+        }
+
+        function renderEmptyRow(message) {
+            const tbody = document.getElementById("bookingRows");
+
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="${TABLE_COLUMN_COUNT}" class="empty">
+                        ${escapeHTML(message)}
+                    </td>
+                </tr>
+            `;
+        }
+
+        function updateSummary(bookings) {
+            document.getElementById("totalCount").textContent =
+                bookings.length;
+
+            document.getElementById("pendingCount").textContent =
+                bookings.filter(function (booking) {
+                    return normalizeText(booking.booking_status) === "pending";
+                }).length;
+
+            document.getElementById("confirmedCount").textContent =
+                bookings.filter(function (booking) {
+                    return normalizeText(booking.booking_status) === "confirmed";
+                }).length;
+
+            document.getElementById("completedCount").textContent =
+                bookings.filter(function (booking) {
+                    return normalizeText(booking.booking_status) === "completed";
+                }).length;
+        }
+
+        function renderBookings(bookings) {
+            const tbody = document.getElementById("bookingRows");
+
+            if (!bookings.length) {
+                renderEmptyRow("No catering bookings found yet.");
+                updateTableHeading();
+                return;
+            }
+
+            tbody.innerHTML = bookings.map(function (booking) {
+                const bookingId = Number(booking.id);
+                const validId = Number.isSafeInteger(bookingId) &&
+                    bookingId > 0;
+
+                const eventType = getEventType(booking);
+                const fullName = displayValue(booking.full_name, "Customer");
+                const mobile = displayValue(booking.mobile);
+                const packageName = displayValue(booking.package_name);
+                const guestCount = displayValue(booking.guest_count);
+                const eventDate = formatDate(booking.event_date);
+                const location = displayValue(booking.event_location);
+                const requirements = displayValue(
+                    booking.requirements,
+                    "No extra requirements"
+                );
+
+                const totalAmount = formatAmount(booking.estimated_amount);
+                const advanceAmount = formatAmount(booking.advance_amount);
+                const balanceAmount = formatAmount(booking.balance_amount);
+
+                const paymentStatus = displayValue(
+                    booking.payment_status,
+                    "Not available"
+                );
+
+                const paymentMethod = displayValue(
+                    booking.payment_method,
+                    "Not selected"
+                );
+
+                const bookingStatus = normalizeText(booking.booking_status) ||
+                    "pending";
+
+                const statusControl = validId
+                    ? `
+                        <select
+                            id="status-${bookingId}"
+                            aria-label="Status for booking ${bookingId}">
+                            ${getStatusOptions(bookingStatus)}
+                        </select>
+                        <br><br>
+                        <button
+                            type="button"
+                            id="save-${bookingId}"
+                            onclick="updateStatus(${bookingId})">
+                            Save Status
+                        </button>
+                    `
+                    : "Invalid booking ID";
+
+                return `
+                    <tr data-event-type="${escapeHTML(eventType)}">
+                        <td>#${escapeHTML(displayValue(booking.id))}</td>
+
+                        <td>
+                            <strong>${escapeHTML(fullName)}</strong><br>
+                            ${escapeHTML(mobile)}
+                        </td>
+
+                        <td>
+                            <strong>${escapeHTML(displayValue(booking.event_type))}</strong><br>
+                            ${escapeHTML(packageName)}<br>
+                            Guests: ${escapeHTML(guestCount)}<br>
+                            Date: ${escapeHTML(eventDate)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(location)}<br>
+                            <span class="muted">
+                                ${escapeHTML(requirements)}
+                            </span>
+                        </td>
+
+                        <td>${escapeHTML(totalAmount)}</td>
+                        <td>${escapeHTML(advanceAmount)}</td>
+                        <td>${escapeHTML(balanceAmount)}</td>
+
+                        <td>${makeStatusBadge(paymentStatus, "Not available")}</td>
+
+                        <td>${makeStatusBadge(paymentMethod, "Not selected")}</td>
+
+                        <td>${makeStatusBadge(bookingStatus, "pending")}</td>
+
+                        <td>${statusControl}</td>
+                    </tr>
+                `;
+            }).join("");
+
+            filterBookings(selectedCategory);
+        }
+
+        function updateTableHeading() {
+            document.getElementById("tableHeading").textContent =
+                CATEGORY_LABELS[selectedCategory] || "Catering Bookings";
+        }
+
+        function filterBookings(category) {
+            const allowedCategories = [
+                "all",
+                "birthday",
+                "wedding",
+                "corporate",
+                "other"
+            ];
+
+            if (!allowedCategories.includes(category)) {
+                category = "all";
+            }
+
+            selectedCategory = category;
+
+            document.querySelectorAll(".category-btn").forEach(function (button) {
+                const isActive = button.dataset.category === category;
+
+                button.classList.toggle("active", isActive);
+                button.setAttribute("aria-pressed", String(isActive));
+            });
+
+            updateTableHeading();
+
+            const tbody = document.getElementById("bookingRows");
+
+            tbody.querySelectorAll("#categoryEmptyRow").forEach(function (row) {
+                row.remove();
+            });
+
+            const rows = Array.from(
+                tbody.querySelectorAll("tr[data-event-type]")
+            );
+
+            let visibleCount = 0;
+
+            rows.forEach(function (row) {
+                const eventType = normalizeText(row.dataset.eventType);
+                const matches = matchesCategory(eventType, category);
+
+                row.style.display = matches ? "" : "none";
+
+                if (matches) {
+                    visibleCount++;
+                }
+            });
+
+            if (rows.length > 0 && visibleCount === 0) {
+                const row = document.createElement("tr");
+                row.id = "categoryEmptyRow";
+
+                const cell = document.createElement("td");
+                cell.colSpan = TABLE_COLUMN_COUNT;
+                cell.className = "empty";
+                cell.textContent =
+                    "No bookings found in this category yet.";
+
+                row.appendChild(cell);
+                tbody.appendChild(row);
+            }
+        }
+
+        async function loadBookings() {
+            const tbody = document.getElementById("bookingRows");
+            const refreshButton = document.getElementById("refreshButton");
+
+            clearMessage();
+
+            refreshButton.disabled = true;
+            refreshButton.textContent = "Loading...";
+            tbody.classList.add("loading");
+
+            renderEmptyRow("Loading bookings...");
+
+            try {
+                const response = await fetch(
+                    `${API_BASE}/api/admin/catering/bookings`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Accept": "application/json"
+                        },
+                        cache: "no-store"
+                    }
+                );
+
+                if (!response.ok) {
+                    let errorMessage =
+                        "Could not load bookings. HTTP " + response.status;
+
+                    try {
+                        const errorData = await response.json();
+
+                        if (errorData.detail) {
+                            errorMessage = typeof errorData.detail === "string"
+                                ? errorData.detail
+                                : JSON.stringify(errorData.detail);
+                        }
+                    } catch (_) {
+                        // Keep the HTTP error message if no JSON error exists.
+                    }
+
+                    throw new Error(errorMessage);
+                }
+
+                const result = await response.json();
+
+                let bookings;
+
+                if (Array.isArray(result)) {
+                    bookings = result;
+                } else if (result && Array.isArray(result.bookings)) {
+                    bookings = result.bookings;
+                } else if (result && Array.isArray(result.data)) {
+                    bookings = result.data;
+                } else {
+                    throw new Error(
+                        "Unexpected API response. Please check the bookings API response format."
+                    );
+                }
+
+                allBookings = bookings;
+
+                updateSummary(allBookings);
+                renderBookings(allBookings);
+
+            } catch (error) {
+                console.error("Catering bookings error:", error);
+
+                allBookings = [];
+
+                document.getElementById("totalCount").textContent = "—";
+                document.getElementById("pendingCount").textContent = "—";
+                document.getElementById("confirmedCount").textContent = "—";
+                document.getElementById("completedCount").textContent = "—";
+
+                renderEmptyRow(
+                    "Could not load bookings. Check that the local API is running and the API endpoint is available."
+                );
+
+                showMessage(
+                    error.message || "An unexpected error occurred while loading bookings.",
+                    true
+                );
+            } finally {
+                refreshButton.disabled = false;
+                refreshButton.textContent = "↻ Refresh Bookings";
+                tbody.classList.remove("loading");
+            }
+        }
+
+        async function updateStatus(bookingId) {
+            const select = document.getElementById(`status-${bookingId}`);
+            const saveButton = document.getElementById(`save-${bookingId}`);
+
+            if (!select || !saveButton) {
+                showMessage(
+                    "Booking status controls could not be found. Refresh the bookings.",
+                    true
+                );
+                return;
+            }
+
+            const bookingStatus = normalizeText(select.value);
+
+            const allowedStatuses = [
+                "pending",
+                "confirmed",
+                "preparing",
+                "completed",
+                "cancelled"
+            ];
+
+            if (!allowedStatuses.includes(bookingStatus)) {
+                showMessage("Please select a valid booking status.", true);
+                return;
+            }
+
+            saveButton.disabled = true;
+            saveButton.textContent = "Saving...";
+
+            try {
+                const response = await fetch(
+                    `${API_BASE}/api/admin/catering/bookings/${bookingId}/status`,
+                    {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        },
+                        body: JSON.stringify({
+                            booking_status: bookingStatus
+                        })
+                    }
+                );
+
+                let result = {};
+
+                try {
+                    result = await response.json();
+                } catch (_) {
+                    // Some successful API responses may have an empty body.
+                }
+
+                if (!response.ok) {
+                    const detail = result.detail;
+
+                    throw new Error(
+                        typeof detail === "string"
+                            ? detail
+                            : "Status update failed. HTTP " + response.status
+                    );
+                }
+
+                showMessage(
+                    `Booking #${bookingId} updated to ${bookingStatus}.`
+                );
+
+                await loadBookings();
+
+            } catch (error) {
+                console.error("Catering status update error:", error);
+
+                showMessage(
+                    error.message || "Could not update the booking status.",
+                    true
+                );
+            } finally {
+                const currentButton =
+                    document.getElementById(`save-${bookingId}`);
+
+                if (currentButton) {
+                    currentButton.disabled = false;
+                    currentButton.textContent = "Save Status";
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            loadBookings();
+        });
+    </script>
+</body>
+</html>

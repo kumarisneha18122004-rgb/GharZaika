@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GharZaika | Homemade Food & Catering</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8f0;
+            color: #44251d;
+            line-height: 1.7;
+        }
+
+        header {
+            background: linear-gradient(135deg, #7b1e24, #b84324);
+            color: white;
+            padding: 24px 6%;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 16px;
+        }
+
+        nav {
+            background: #5c171c;
+            padding: 13px 10px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffd27d;
+        }
+
+        .hero {
+            padding: 55px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffe3b3, #fff2df);
+        }
+
+        .hero h2 {
+            color: #8b2525;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            max-width: 760px;
+            margin: 0 auto 22px;
+            font-size: 17px;
+        }
+
+        .section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 42px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #8b2525;
+            font-size: 27px;
+            margin-bottom: 25px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 5px 18px rgba(95, 43, 22, 0.12);
+            border-top: 5px solid #e58b27;
+        }
+
+        .service-icon {
+            font-size: 55px;
+            margin-bottom: 8px;
+        }
+
+        .service-card h3 {
+            color: #8b2525;
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            background: #9b2929;
+            color: white;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 9px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: #6e171d;
+            transform: translateY(-2px);
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .guide-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #f0d8bf;
+        }
+
+        .guide-card h3 {
+            color: #9b2929;
+            margin-bottom: 12px;
+        }
+
+        .guide-card ol {
+            padding-left: 23px;
+        }
+
+        .guide-card li {
+            margin-bottom: 9px;
+        }
+
+        .notice {
+            margin-top: 18px;
+            background: #fff0ce;
+            padding: 14px;
+            border-left: 4px solid #e58b27;
+            border-radius: 6px;
+        }
+
+        .contact-box {
+            background: #fff;
+            padding: 28px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(95, 43, 22, 0.1);
+            text-align: center;
+        }
+
+        .contact-box p {
+            margin: 8px 0;
+        }
+
+        .contact-box a {
+            color: #922626;
+            overflow-wrap: anywhere;
+        }
+
+        footer {
+            margin-top: 20px;
+            background: #5c171c;
+            color: white;
+            text-align: center;
+            padding: 22px 15px;
+        }
+
+        footer p {
+            margin: 4px 0;
+        }
+
+        @media (max-width: 700px) {
+            header h1 {
+                font-size: 29px;
+            }
+
+            .hero h2 {
+                font-size: 26px;
+            }
+
+            .service-grid,
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                gap: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="home">
+        <h1>🍲 GharZaika</h1>
+        <p>Homemade Food &amp; Catering Services</p>
+        <p>Fresh • Homemade • Hygienic</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#services">Our Services</a>
+        <a href="#food-guide">Food Order Guide</a>
+        <a href="#catering-guide">Catering Guide</a>
+        <a href="#contact">Location &amp; Contact</a>
+    </nav>
+
+    <section class="hero">
+        <h2>Welcome to GharZaika!</h2>
+        <p>
+            GharZaika ek online home kitchen project hai jahan aap ghar jaisa
+            tasty food order kar sakte hain aur birthday parties, family
+            functions aur chhote events ke liye catering booking kar sakte hain.
+        </p>
+        <p>
+            Apni zaroorat ke hisaab se neeche di gayi service choose kijiye.
+        </p>
+        <a class="button" href="#services">Get Started</a>
+    </section>
+
+    <section class="section" id="services">
+        <h2 class="section-title">🍽️ Choose Your Service</h2>
+
+        <div class="service-grid">
+
+            <div class="service-card">
+                <div class="service-icon">🍛</div>
+                <h3>Food Ordering</h3>
+                <p>
+                    Menu dekhiye, apne favourite dishes choose kijiye,
+                    quantity select kijiye aur apna food order place kijiye.
+                </p>
+                <a class="button" href="/index.html">
+                    Open Food Dashboard →
+                </a>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎉</div>
+                <h3>Catering &amp; Events</h3>
+                <p>
+                    Birthday parties, weddings, family functions aur doosre
+                    events ke liye catering booking ki details submit kijiye.
+                </p>
+                <a class="button" href="/caterers.html">
+                    Open Catering Dashboard →
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section" id="food-guide">
+        <h2 class="section-title">🍴 Food Order Kaise Karein?</h2>
+
+        <div class="guide-grid">
+            <div class="guide-card">
+                <h3>Normal Food Ordering — Step by Step</h3>
+                <ol>
+                    <li><strong>Food Dashboard</strong> button par click kijiye.</li>
+                    <li>Menu mein dishes, pictures aur prices dekhiye.</li>
+                    <li>Apni pasand ki dishes cart mein add kijiye.</li>
+                    <li>Quantity aur order details check kijiye.</li>
+                    <li>Apna naam, phone number aur maangi gayi details bhariye.</li>
+                    <li>Available payment option, jaise Cash ya UPI, choose kijiye.</li>
+                    <li>Order submit karke order ID aur status note kar lijiye.</li>
+                    <li>Order ready hone par pickup instructions follow kijiye.</li>
+                </ol>
+            </div>
+
+            <div class="guide-card">
+                <h3>📌 Food Order Ke Liye Zaroori Baatein</h3>
+                <ul>
+                    <li>Order place karne se pehle prices aur quantity check karein.</li>
+                    <li>Phone number sahi bharein, taaki order ke baare mein contact ho sake.</li>
+                    <li>Payment ke liye dashboard par dikhaye gaye instructions follow karein.</li>
+                    <li>Order ID ko sambhal kar rakhein.</li>
+                </ul>
+
+                <div class="notice">
+                    <strong>Pickup Only:</strong> GharZaika ke is demo project mein
+                    home delivery available nahi hai. Food ko pickup karna hoga
+                    ya apni taraf se kisi ko collect karne bhejna hoga.
+                    Pickup se pehle location aur timing confirm karein.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="catering-guide">
+        <h2 class="section-title">🎉 Bulk Catering Booking Kaise Karein?</h2>
+
+        <div class="guide-grid">
+            <div class="guide-card">
+                <h3>Bulk Booking — Step by Step</h3>
+                <ol>
+                    <li><strong>Catering Dashboard</strong> open kijiye.</li>
+                    <li>Available catering packages aur unki prices dekhiye.</li>
+                    <li>Event type aur guests ki sankhya select kijiye.</li>
+                    <li>Event date aur event location bhariye.</li>
+                    <li>Apni special food requirements likhiye.</li>
+                    <li>Submit karne se pehle saari details check kijiye.</li>
+                    <li>Booking submit hone par booking ID aur status note kijiye.</li>
+                    <li>Payment ke liye sirf dashboard ya business ke verified instructions follow kijiye.</li>
+                </ol>
+            </div>
+
+            <div class="guide-card">
+                <h3>💰 Catering Payment Information</h3>
+                <p>
+                    Project ke proposed payment plan mein:
+                </p>
+                <ul>
+                    <li><strong>25% advance:</strong> Total estimated amount ka 25%.</li>
+                    <li><strong>75% balance:</strong> Baaki 75% amount.</li>
+                </ul>
+
+                <p>
+                    Example: Agar total amount ₹2,000 hai, toh proposed advance
+                    ₹500 aur remaining balance ₹1,500 hoga.
+                </p>
+
+                <div class="notice">
+                    <strong>Important:</strong> Ye payment calculation ka demo hai.
+                    Online payment gateway aur payment verification alag se
+                    integrate karna zaroori hai. Sirf booking submit hone ka
+                    matlab advance payment successfully verify hona nahi hai.
+                    Booking status ko dashboard par check karein.
+                </div>
+
+                <p style="margin-top: 15px;">
+                    Note: Dish-wise bulk selection tabhi booking mein count hogi
+                    jab Catering Dashboard mein ye feature available aur connected ho.
+                    Food Dashboard ka normal order catering booking se alag hai.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <h2 class="section-title">📍 Location &amp; Contact</h2>
+
+        <div class="contact-box">
+            <h3>GharZaika Home Kitchen</h3>
+            <p><strong>Address:</strong> Demo Address, Bhopal, Madhya Pradesh, India</p>
+            <p><strong>Phone:</strong> +91-XXXXXXXXXX (demo placeholder)</p>
+            <p>
+                <strong>Email:</strong>
+                <a href="mailto:gharzaika@example.com">gharzaika@example.com</a>
+                (demo placeholder)
+            </p>
+
+            <div class="notice">
+                Ye college project ke liye demo contact information hai.
+                Actual pickup address, phone number aur map location final hone
+                ke baad update karein. Pickup par jaane se pehle address confirm karein.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 GharZaika | Homemade Food &amp; Catering Services</p>
+        <p>Made with ❤️ for every occasion</p>
+        <p>College Project Demo</p>
+    </footer>
+
+</body>
+</html>

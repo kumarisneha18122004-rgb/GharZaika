@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GharZaika | Catering & Events</title>
+
+    <style>
+        :root {
+            --maroon: #651b32;
+            --deep: #401020;
+            --gold: #d9ad55;
+            --cream: #fff9ef;
+            --text: #34252a;
+            --muted: #786c6c;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--deep);
+            color: white;
+            padding: 17px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: var(--gold);
+        }
+
+        .logo span {
+            display: block;
+            color: white;
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: normal;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+       nav a {
+    color: #fff9ef;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 17px;
+    border: 1px solid rgba(217, 173, 85, 0.75);
+    border-radius: 25px;
+    display: inline-block;
+    transition: all 0.25s ease;
+}
+
+nav a:hover {
+    color: #401020;
+    background: #f3d48e;
+    border-color: #f3d48e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(217, 173, 85, 0.25);
+}
+
+        nav a:hover {
+            color: var(--gold);
+        }
+
+        .hero {
+            min-height: 430px;
+            padding: 65px 7%;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(90deg, rgba(45, 10, 23, .94), rgba(45, 10, 23, .48)),
+                url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1800&q=85")
+                center/cover;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(36px, 5vw, 60px);
+            line-height: 1.15;
+            margin: 16px 0;
+        }
+
+        .hero p {
+            max-width: 550px;
+            color: #f4e9e8;
+            margin-bottom: 25px;
+        }
+
+        .button {
+            display: inline-block;
+            border: none;
+            border-radius: 5px;
+            background: var(--gold);
+            color: var(--deep);
+            padding: 13px 22px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #f0cb7c;
+        }
+
+        section {
+            padding: 55px 7%;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-heading h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--maroon);
+            font-size: clamp(27px, 4vw, 38px);
+            margin-bottom: 8px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+        }
+
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 23px;
+        }
+
+        .package {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 7px 25px rgba(65, 25, 35, .09);
+            border: 1px solid #f0e3d5;
+            transition: transform .2s;
+        }
+
+        .package:hover {
+            transform: translateY(-5px);
+        }
+
+        .package img {
+            width: 100%;
+            height: 195px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .package-content {
+            padding: 20px;
+        }
+
+        .package h3 {
+            color: var(--maroon);
+            font-size: 21px;
+            margin-bottom: 7px;
+        }
+
+        .package p {
+            color: var(--muted);
+            font-size: 14px;
+            min-height: 45px;
+        }
+
+        .package-bottom {
+            margin-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--maroon);
+        }
+
+        .price small {
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        .package .button {
+            padding: 10px 13px;
+            font-size: 13px;
+        }
+
+        .booking-section {
+            background: #f2e7dc;
+        }
+
+        .booking-card {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(65, 25, 35, .08);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddcfca;
+            border-radius: 6px;
+            font: inherit;
+            background: #fffdfb;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 2px solid var(--gold);
+            border-color: var(--gold);
+        }
+
+        .estimate {
+            margin: 23px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background: var(--deep);
+            color: white;
+        }
+
+        .estimate small {
+            color: #ead9d8;
+        }
+
+        .estimate strong {
+            display: block;
+            color: var(--gold);
+            font-size: 30px;
+            margin-top: 4px;
+        }
+
+        .note {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 14px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .feature {
+            background: white;
+            border: 1px solid #f0e3d5;
+            padding: 25px 15px;
+            border-radius: 10px;
+        }
+
+        .feature .symbol {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .feature h3 {
+            color: var(--maroon);
+            margin-bottom: 5px;
+        }
+
+        .feature p {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        footer {
+            background: var(--deep);
+            color: white;
+            text-align: center;
+            padding: 25px 7%;
+        }
+
+        footer p {
+            color: #e7d7d9;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 800px) {
+            .packages {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 17px 5%;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .packages, .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            section {
+                padding: 40px 5%;
+            }
+
+            .hero {
+                padding: 55px 5%;
+            }
+
+            .booking-card {
+                padding: 20px;
+            }
+
+            nav {
+                gap: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            GharZaika
+            <span>CATERING & EVENTS</span>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#packages">Packages</a>
+            <a href="#services">Services</a>
+            <a href="#booking">Book Catering</a>
+            <a href="/index.html">Food Menu</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <div class="eyebrow">Make Every Celebration Special</div>
+                <h1>Beautiful Events.<br>Delicious Food.</h1>
+                <p>
+                    Make your weddings, birthdays and special occasions memorable
+                    with delicious homemade food and thoughtfully planned catering.
+                </p>
+                <a href="#packages" class="button">Explore Packages →</a>
+            </div>
+        </section>
+
+        <section id="packages">
+            <div class="section-heading">
+                <div class="eyebrow">Our Catering Collection</div>
+                <h2>Packages for Every Celebration</h2>
+                <p>Choose a package to start planning your special event.</p>
+            </div>
+
+            <div class="packages">
+                <article class="package">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=800&q=80"
+                         alt="Birthday party decoration" loading="lazy">
+                    <div class="package-content">
+                        <h3>Birthday Celebration</h3>
+                        <p>A delicious food spread for birthdays and family celebrations.</p>
+                        <div class="package-bottom">
+                            <span class="price">₹199 <small>/ plate (sample)</small></span>
+                            <button class="button" onclick="selectPackage('Birthday Celebration', 199)">Select</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="package">
+                    <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80"
+                         alt="Elegant wedding event setup" loading="lazy">
+                    <div class="package-content">
+                        <h3>Wedding Celebration</h3>
+                        <p>A special catering option for weddings and grand family events.</p>
+                        <div class="package-bottom">
+                            <span class="price">₹299 <small>/ plate (sample)</small></span>
+                            <button class="button" onclick="selectPackage('Wedding Celebration', 299)">Select</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="package">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80"
+                         alt="Formal event dining setup" loading="lazy">
+                    <div class="package-content">
+                        <h3>Corporate Events</h3>
+                        <p>Food arrangements for meetings, office lunches and team events.</p>
+                        <div class="package-bottom">
+                            <span class="price">₹249 <small>/ plate (sample)</small></span>
+                            <button class="button" onclick="selectPackage('Corporate Events', 249)">Select</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <p class="note" style="text-align:center">
+                Note: Displayed prices are sample estimates, not confirmed GharZaika rates.
+            </p>
+        </section>
+
+        <section id="services">
+            <div class="section-heading">
+                <div class="eyebrow">A Thoughtful Catering Experience</div>
+                <h2>Made for Your Special Day</h2>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="symbol">🍽️</div>
+                    <h3>Custom Menu</h3>
+                    <p>Plan your menu based on your event and guests.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="symbol">🎉</div>
+                    <h3>Every Occasion</h3>
+                    <p>Birthday parties, weddings and corporate gatherings.</p>
+                </div>
+
+                <div class="feature">
+                    <div class="symbol">📋</div>
+                    <h3>Easy Booking</h3>
+                    <p>Send your event details for the admin to review.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="booking-section" id="booking">
+            <div class="section-heading">
+                <div class="eyebrow">Plan Your Event</div>
+                <h2>Request a Catering Booking</h2>
+                <p>Share your requirements to begin planning your event.</p>
+            </div>
+
+            <div class="booking-card">
+                <form id="bookingForm">
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="customerName">Full Name *</label>
+                            <input id="customerName" name="customerName" required
+                                   placeholder="Enter your name">
+                        </div>
+
+                        <div class="field">
+                            <label for="phone">Mobile Number *</label>
+                            <input id="phone" name="phone" type="tel" required
+                                   pattern="[0-9+\-\s]{10,15}"
+                                   placeholder="Enter mobile number">
+                        </div>
+
+                        <div class="field">
+                            <label for="eventType">Event Type *</label>
+                            <select id="eventType" required>
+                                <option value="">Select event</option>
+                                <option>Birthday</option>
+                                <option>Wedding</option>
+                                <option>Anniversary</option>
+                                <option>Corporate Event</option>
+                                <option>Family Function</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="package">Catering Package *</label>
+                            <select id="package" required>
+                                <option value="">Choose package</option>
+                                <option value="199">Birthday Celebration — ₹199/plate (sample)</option>
+                                <option value="299">Wedding Celebration — ₹299/plate (sample)</option>
+                                <option value="249">Corporate Events — ₹249/plate (sample)</option>
+                                <option value="0">Custom Package — price to be discussed</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="guests">Number of Guests *</label>
+                            <input id="guests" type="number" min="1" max="10000"
+                                   required placeholder="e.g. 100">
+                        </div>
+
+                        <div class="field">
+                            <label for="eventDate">Event Date *</label>
+                            <input id="eventDate" type="date" required>
+                        </div>
+
+                        <div class="field full">
+                            <label for="eventLocation">Event Location / Address *</label>
+                            <input id="eventLocation" required
+                                   placeholder="Enter your event location">
+                        </div>
+
+                        <div class="field full">
+                            <label for="requirements">Additional Requirements</label>
+                            <textarea id="requirements" rows="3"
+                                      placeholder="Food preferences, menu choices or other requirements"></textarea>
+                        </div>
+                        <div class="field full">
+    <label for="requirements">Additional Requirements</label>
+    <textarea id="requirements" rows="3"
+              placeholder="Food preferences, menu choices or other requirements"></textarea>
+</div>
+
+<!-- Cash / UPI Payment Method -->
+<div class="field full">
+    <label>Payment Method *</label>
+
+    <label>
+        <input type="radio" name="paymentMethod" value="Cash" checked required>
+        Cash
+    </label>
+
+    <label>
+        <input type="radio" name="paymentMethod" value="UPI" required>
+        UPI
+    </label>
+
+    <small>Payment method selection only. Abhi real payment process nahi hota.</small>
+</div>
+
+<!-- Catering UPI QR Payment -->
+<div id="cateringUpiBox" class="field full" style="display:none; text-align:center; padding:18px; border:1px solid #ddd; border-radius:12px; margin-top:12px;">
+    <h3>UPI Advance Payment</h3>
+
+    <p>Booking confirm karne ke liye 25% advance online pay karein.</p>
+
+    <label for="cateringPaymentAmount">Payment Option</label>
+    <select id="cateringPaymentAmount">
+        <option value="25">Pay 25% Advance</option>
+        <option value="100">Pay 100% Full Amount</option>
+    </select>
+
+    <p id="cateringQrAmount">Select package and guest count first.</p>
+
+    <img
+        id="cateringUpiQR"
+        src=""
+        alt="GharZaika Catering UPI QR Code"
+        style="width:220px;height:220px;object-fit:contain;background:white;"
+    >
+
+    <p>UPI ID: 7050752309@ybl</p>
+
+    <small>Payment verify hone ke baad hi online booking confirm hogi. Sirf QR scan karne se payment confirm nahi hota.</small>
+</div>
+
+</div>
+                    </div>
+
+                    <div class="estimate">
+                        <small>Estimated Catering Cost</small>
+                        <strong id="estimatedCost">₹0</strong>
+                        <small id="estimateNote">Select a package and enter guest count.</small>
+                    </div>
+
+                    <button type="submit" class="button">Submit Booking Request →</button>
+
+                   
+<p class="note">
+    Your catering booking request is saved successfully in the GharZaika database.
+    The system calculates a 25% advance amount and 75% remaining balance for the
+    college project demo. No real payment has been made. Final price, availability,
+    booking status and event arrangements are subject to admin confirmation.
+</p>
+
+
+                    <p id="formMessage" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="logo">GharZaika</div>
+        <p>Catering & Events · Made for Your Special Moments</p>
+        <p>Event bookings are subject to admin confirmation.</p>
+    </footer>
+
+    <script>
+        const packageSelect = document.getElementById("package");
+        const guestsInput = document.getElementById("guests");
+        const estimatedCost = document.getElementById("estimatedCost");
+        const estimateNote = document.getElementById("estimateNote");
+        const eventDate = document.getElementById("eventDate");
+
+        // Do not allow selecting a past event date.
+        const today = new Date();
+        const localToday = new Date(
+            today.getTime() - today.getTimezoneOffset() * 60000
+        ).toISOString().split("T")[0];
+
+        eventDate.min = localToday;
+
+        function updateEstimate() {
+            const price = Number(packageSelect.value);
+            const guests = Number(guestsInput.value);
+
+            if (packageSelect.value === "0") {
+                estimatedCost.textContent = "To be discussed";
+                estimateNote.textContent = "Custom package price requires admin confirmation.";
+            } else if (price > 0 && guests > 0) {
+                estimatedCost.textContent = "₹" + (price * guests).toLocaleString("en-IN");
+                estimateNote.textContent = "Sample estimate only; final price requires confirmation.";
+            } else {
+                estimatedCost.textContent = "₹0";
+                estimateNote.textContent = "Select a package and enter guest count.";
+            }
+        }
+
+        function selectPackage(packageName, price) {
+            packageSelect.value = String(price);
+            updateEstimate();
+            document.getElementById("booking").scrollIntoView({ behavior: "smooth" });
+        }
+
+        packageSelect.addEventListener("change", updateEstimate);
+        guestsInput.addEventListener("input", updateEstimate);
+        
+const cateringPaymentMethodInputs = document.querySelectorAll(
+    'input[name="paymentMethod"]'
+);
+
+const cateringUpiBox = document.getElementById("cateringUpiBox");
+
+cateringPaymentMethodInputs.forEach(function(input) {
+    input.addEventListener("change", function() {
+        if (cateringUpiBox) {
+            cateringUpiBox.style.display =
+                this.value === "UPI" ? "block" : "none";
+        }
+    });
+});
+
+function updateCateringQr() {
+    const qrImage = document.getElementById("cateringUpiQR");
+    const qrAmountText = document.getElementById("cateringQrAmount");
+    const paymentOption = document.getElementById("cateringPaymentAmount");
+
+    if (!qrImage || !qrAmountText || !paymentOption) return;
+
+    const selectedMethod = document.querySelector(
+        'input[name="paymentMethod"]:checked'
+    );
+
+    if (!selectedMethod || selectedMethod.value !== "UPI") {
+        qrImage.src = "";
+        return;
+    }
+
+    const price = Number(packageSelect.value);
+    const guests = Number(guestsInput.value);
+    const total = price * guests;
+
+    if (price <= 0 || guests <= 0 || !Number.isFinite(total)) {
+        qrImage.src = "";
+        qrAmountText.textContent =
+            "Pehle catering package aur guests ki sankhya select karein.";
+        return;
+    }
+
+    const percentage = Number(paymentOption.value);
+    const amount = Math.round(total * percentage) / 100;
+
+    qrAmountText.textContent =
+        (percentage === 25 ? "25% Advance: ₹" : "100% Full Payment: ₹") +
+        amount.toFixed(2);
+
+    const upiLink =
+        "upi://pay?pa=" + encodeURIComponent("7050752309@ybl") +
+        "&pn=" + encodeURIComponent("GharZaika") +
+        "&am=" + encodeURIComponent(amount.toFixed(2)) +
+        "&cu=INR";
+
+    qrImage.src =
+        "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
+        encodeURIComponent(upiLink);
+}
+
+document.getElementById("cateringPaymentAmount")
+    .addEventListener("change", updateCateringQr);
+
+packageSelect.addEventListener("change", updateCateringQr);
+guestsInput.addEventListener("input", updateCateringQr);
+
+cateringPaymentMethodInputs.forEach(function(input) {
+    input.addEventListener("change", updateCateringQr);
+});
+
+
+
+        
+document.getElementById("bookingForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const packageSelect = document.getElementById("package");
+    const guests = Number(document.getElementById("guests").value);
+    const selectedOption =
+        packageSelect.options[packageSelect.selectedIndex];
+
+    const pricePerPlate = Number(packageSelect.value);
+
+    const bookingData = {
+        full_name: document.getElementById("customerName").value.trim(),
+        mobile: document.getElementById("phone").value.trim(),
+        event_type: document.getElementById("eventType").value,
+        package_name: selectedOption.text.split(" — ")[0].trim(),
+        guest_count: guests,
+        event_date: document.getElementById("eventDate").value,
+        event_location: document.getElementById("eventLocation").value.trim(),
+        requirements: document.getElementById("requirements")?.value.trim() || "",
+        payment_method: document.querySelector('input[name="paymentMethod"]:checked').value,
+        estimated_amount: pricePerPlate * guests
+    };
+
+    const message = document.getElementById("formMessage");
+    message.textContent = "Booking submit ho rahi hai...";
+
+    try {
+        const response = await fetch("/api/catering/bookings", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(bookingData)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                typeof result.detail === "string"
+                    ? result.detail
+                    : "Booking submit nahi ho saki."
+            );
+        }
+
+       
+const totalAmount = Number(bookingData.estimated_amount);
+const advanceAmount = Math.round(totalAmount * 25) / 100;
+const balanceAmount = totalAmount - advanceAmount;
+
+message.innerHTML =
+    "Booking successfully submit ho gayi!<br>" +
+    "Booking ID: #" + result.booking_id + "<br><br>" +
+    "Total Amount: ₹" + totalAmount.toFixed(2) + "<br>" +
+    "Advance (25%): ₹" + advanceAmount.toFixed(2) + "<br>" +
+    "Remaining Balance (75%): ₹" + balanceAmount.toFixed(2) + "<br><br>" +
+    "Payment Status: Advance Pending<br>" +
+    "College Demo: Abhi koi real payment nahi hua hai.";
+
+message.style.color = "green";
+
+        message.style.color = "green";
+        this.reset();
+
+        document.getElementById("estimatedCost").textContent = "₹0";
+        document.getElementById("estimateNote").textContent =
+            "Select a package and enter guest count.";
+
+    } catch (error) {
+        message.textContent = "Error: " + error.message;
+        message.style.color = "red";
+    }
+});
+
+    </script>
+</body>
+</html>

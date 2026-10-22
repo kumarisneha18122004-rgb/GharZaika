@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GharZaika | Catering Admin</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8f0;
+            color: #39251f;
+        }
+
+        header {
+            background: linear-gradient(135deg, #651d32, #9d3547);
+            color: white;
+            padding: 25px 6%;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #ffe6d8;
+        }
+
+        main {
+            width: 92%;
+            max-width: 1250px;
+            margin: 30px auto;
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+
+        .top-row h2 {
+            color: #651d32;
+            margin-bottom: 6px;
+        }
+
+        button, select {
+            font: inherit;
+            border-radius: 8px;
+            padding: 10px 13px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            background: #8b293e;
+            color: white;
+        }
+
+        button:hover {
+            background: #641b30;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid #f0dfd5;
+            box-shadow: 0 4px 15px #57251a0d;
+        }
+
+        .summary-card p {
+            color: #806b62;
+            margin-bottom: 12px;
+        }
+
+        .summary-card h3 {
+            font-size: 28px;
+            color: #8b293e;
+        }
+
+        .panel {
+            background: white;
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid #f0dfd5;
+        }
+
+        .panel h3 {
+            color: #651d32;
+            margin-bottom: 16px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 950px;
+        }
+
+        th, td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #f1e5df;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: #fff1e7;
+            color: #651d32;
+            font-size: 13px;
+        }
+
+        td {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        select {
+            background: white;
+            border: 1px solid #dfc9bf;
+            max-width: 155px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 20px;
+            background: #fff0cc;
+            color: #795000;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        .message {
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 35px 10px;
+            color: #806b62;
+        }
+
+        .muted {
+            color: #806b62;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 23px;
+            }
+
+            main {
+                width: 94%;
+                margin-top: 20px;
+            }
+
+            .panel {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🍽️ GharZaika Catering Admin</h1>
+        <p>Manage event bookings, customer details and booking status.</p>
+    </header>
+
+    <main>
+        <div class="top-row">
+            <div>
+                <h2>Catering Bookings</h2>
+                <p class="muted">Bookings received from your catering service.</p>
+            </div>
+
+            <button onclick="loadBookings()">↻ Refresh Bookings</button>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <section class="summary">
+            <div class="summary-card">
+                <p>Total Bookings</p>
+                <h3 id="totalCount">—</h3>
+            </div>
+
+            <div class="summary-card">
+                <p>Pending</p>
+                <h3 id="pendingCount">—</h3>
+            </div>
+
+            <div class="summary-card">
+                <p>Confirmed</p>
+                <h3 id="confirmedCount">—</h3>
+            </div>
+
+            <div class="summary-card">
+                <p>Completed</p>
+                <h3 id="completedCount">—</h3>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h3>All Bookings</h3>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                           
+<th>ID</th>
+<th>Customer</th>
+<th>Event Details</th>
+<th>Location & Requirements</th>
+<th>Total Amount</th>
+<th>Advance (25%)</th>
+<th>Balance (75%)</th>
+<th>Payment Status</th>
+<th>Payment Method</th>
+<th>Booking Status</th>
+<th>Update</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody id="bookingRows">
+                        <tr>
+                            <td colspan="7" class="empty">
+                                Loading bookings...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const API_BASE = "";
+
+        function escapeHTML(value) {
+            return String(value ?? "").replace(/[&<>"']/g, function (char) {
+                return {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                }[char];
+            });
+        }
+
+        function showMessage(text, isError = false) {
+            const box = document.getElementById("message");
+            box.textContent = text;
+            box.style.display = "block";
+            box.style.background = isError ? "#ffe5e5" : "#e6f7e9";
+            box.style.color = isError ? "#a02020" : "#216b35";
+        }
+
+        function formatAmount(amount) {
+            return "₹" + Number(amount || 0).toLocaleString("en-IN");
+        }
+
+        function formatDate(value) {
+            if (!value) return "—";
+            const parts = value.split("-");
+            return parts.length === 3
+                ? `${parts[2]}-${parts[1]}-${parts[0]}`
+                : value;
+        }
+
+        function getStatusOptions(currentStatus) {
+            const statuses = [
+                "pending",
+                "confirmed",
+                "preparing",
+                "completed",
+                "cancelled"
+            ];
+
+            return statuses.map(status => `
+                <option value="${status}"
+                    ${status === currentStatus ? "selected" : ""}>
+                    ${status.charAt(0).toUpperCase() + status.slice(1)}
+                </option>
+            `).join("");
+        }
+
+        async function loadBookings() {
+            const tbody = document.getElementById("bookingRows");
+            tbody.innerHTML = `
+                <tr><td colspan="7" class="empty">Loading bookings...</td></tr>
+            `;
+
+            try {
+                const response = await fetch(
+                    `${API_BASE}/api/admin/catering/bookings`
+                );
+
+                if (!response.ok) {
+                    throw new Error("Could not load bookings. HTTP " + response.status);
+                }
+
+                const result = await response.json();
+                const bookings = result.bookings || [];
+
+                document.getElementById("totalCount").textContent = bookings.length;
+                document.getElementById("pendingCount").textContent =
+                    bookings.filter(b => b.booking_status === "pending").length;
+                document.getElementById("confirmedCount").textContent =
+                    bookings.filter(b => b.booking_status === "confirmed").length;
+                document.getElementById("completedCount").textContent =
+                    bookings.filter(b => b.booking_status === "completed").length;
+
+                if (bookings.length === 0) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="7" class="empty">
+                                No catering bookings found yet.
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                tbody.innerHTML = bookings.map(booking => `
+                    <tr>
+                        <td>#${escapeHTML(booking.id)}</td>
+
+                        <td>
+                            <strong>${escapeHTML(booking.full_name)}</strong><br>
+                            ${escapeHTML(booking.mobile)}
+                        </td>
+
+                        <td>
+                            <strong>${escapeHTML(booking.event_type)}</strong><br>
+                            ${escapeHTML(booking.package_name)}<br>
+                            Guests: ${escapeHTML(booking.guest_count)}<br>
+                            Date: ${escapeHTML(formatDate(booking.event_date))}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(booking.event_location)}<br>
+                            <span class="muted">
+                                ${escapeHTML(booking.requirements || "No extra requirements")}
+                            </span>
+                        </td>
+
+                        
+<td>${formatAmount(booking.estimated_amount)}</td>
+
+<td>${formatAmount(booking.advance_amount)}</td>
+
+<td>${formatAmount(booking.balance_amount)}</td>
+
+<td>
+    <span class="status">
+        ${escapeHTML(booking.payment_status)}
+    </span>
+</td>
+
+<td>
+    <span class="status">
+        ${escapeHTML(booking.payment_method || "Not selected")}
+    </span>
+</td>
+<td>
+    <span class="status">
+        ${escapeHTML(booking.booking_status)}
+    </span>
+</td>
+
+
+                        <td>
+                            <select id="status-${Number(booking.id)}"
+                                aria-label="Booking status">
+                                ${getStatusOptions(booking.booking_status)}
+                            </select>
+                            <br><br>
+                            <button onclick="updateStatus(${Number(booking.id)})">
+                                Save Status
+                            </button>
+                        </td>
+                    </tr>
+                `).join("");
+
+            } catch (error) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="empty">
+                            Could not load bookings. Make sure the local API is running.
+                        </td>
+                    </tr>
+                `;
+                showMessage(error.message, true);
+            }
+        }
+
+        async function updateStatus(bookingId) {
+            const select = document.getElementById(`status-${bookingId}`);
+            const bookingStatus = select.value;
+
+            try {
+                const response = await fetch(
+                    `${API_BASE}/api/admin/catering/bookings/${bookingId}/status`,
+                    {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            booking_status: bookingStatus
+                        })
+                    }
+                );
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.detail || "Status update failed.");
+                }
+
+                showMessage(`Booking #${bookingId} updated to ${bookingStatus}.`);
+                await loadBookings();
+
+            } catch (error) {
+                showMessage(error.message, true);
+            }
+        }
+
+        loadBookings();
+    </script>
+</body>
+</html>

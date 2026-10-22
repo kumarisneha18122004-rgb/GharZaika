@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GharZaika | Welcome</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            color: #3b2118;
+            background: linear-gradient(135deg, #fff5e8, #ffe0bd);
+        }
+
+        header {
+            background: #6d241c;
+            color: white;
+            padding: 22px 7%;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin-top: 7px;
+            color: #ffe3bd;
+        }
+
+        nav {
+            background: #4c1b17;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #ffd39b;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 55px 20px 30px;
+        }
+
+        .hero h2 {
+            font-size: clamp(28px, 5vw, 42px);
+            color: #762c20;
+            margin-bottom: 14px;
+        }
+
+        .hero p {
+            font-size: 17px;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: auto;
+            color: #6b5145;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto 45px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 28px #71301b20;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 32px #71301b30;
+        }
+
+        .card-banner {
+            padding: 30px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .food-banner {
+            background: linear-gradient(135deg, #e98b35, #bd4e22);
+        }
+
+        .catering-banner {
+            background: linear-gradient(135deg, #8f3040, #571c35);
+        }
+
+        .card-banner .emoji {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .card-banner h3 {
+            font-size: 25px;
+        }
+
+        .card-content {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .card-content p {
+            color: #715c51;
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #6d241c;
+            color: white;
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #9a3c26;
+        }
+
+        .info-section {
+            max-width: 1000px;
+            margin: 0 auto 35px;
+            padding: 0 20px;
+            scroll-margin-top: 20px;
+        }
+
+        .info-box {
+            background: white;
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 22px #71301b16;
+        }
+
+        .info-box h2 {
+            color: #762c20;
+            margin-bottom: 15px;
+            font-size: 25px;
+        }
+
+        .info-box h3 {
+            color: #8a3824;
+            margin: 18px 0 8px;
+        }
+
+        .info-box p {
+            color: #715c51;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .info-box ol,
+        .info-box ul {
+            padding-left: 23px;
+            color: #715c51;
+            line-height: 1.9;
+        }
+
+        .notice {
+            background: #fff0dc;
+            border-left: 5px solid #bd6b2c;
+            padding: 15px;
+            border-radius: 8px;
+            line-height: 1.7;
+            color: #69402c;
+            margin-top: 15px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .contact-item {
+            background: #fff7ed;
+            border-radius: 12px;
+            padding: 17px;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: #762c20;
+            margin-bottom: 5px;
+        }
+
+        .contact-item a {
+            color: #8a3824;
+        }
+
+        footer {
+            text-align: center;
+            padding: 22px 15px;
+            background: #4c1b17;
+            color: #ffe5d0;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 650px) {
+            .container,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                max-width: 480px;
+            }
+
+            .hero {
+                padding-top: 38px;
+            }
+
+            header h1 {
+                font-size: 27px;
+            }
+
+            .info-box {
+                padding: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🍲 GharZaika</h1>
+        <p>Homemade Food & Catering Services</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#food-order-guide">Food Order Guide</a>
+        <a href="#bulk-order-guide">Bulk Catering Guide</a>
+        <a href="#location-contact">Location & Contact</a>
+    </nav>
+
+    <section class="hero" id="home">
+        <h2>Welcome to GharZaika!</h2>
+        <p>
+            GharZaika ek online home kitchen project hai jahan aap
+            available food menu dekh sakte hain, normal food order kar
+            sakte hain aur birthday parties, family functions aur
+            chhote events ke liye catering booking kar sakte hain.
+        </p>
+    </section>
+
+    <main class="container">
+        <section class="card">
+            <div class="card-banner food-banner">
+                <div class="emoji">🍽️</div>
+                <h3>Food Ordering</h3>
+            </div>
+
+            <div class="card-content">
+                <p>
+                    Food menu, photos aur prices dekhein. Apni pasand
+                    ke dishes select karein aur normal food order karein.
+                </p>
+                <a class="btn" href="/index.html">
+                    Open Food Dashboard →
+                </a>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-banner catering-banner">
+                <div class="emoji">🎉</div>
+                <h3>Catering & Events</h3>
+            </div>
+
+            <div class="card-content">
+                <p>
+                    Birthday party, family get-together, pooja aur
+                    chhote events ke liye catering booking karein.
+                </p>
+                <a class="btn" href="/caterers.html">
+                    Open Catering Dashboard →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <section class="info-section" id="food-order-guide">
+        <div class="info-box">
+            <h2>1. Normal Food Order Kaise Karein?</h2>
+            <p>
+                Roz ke khane, snacks ya individual food items ke liye
+                Food Ordering option choose karein.
+            </p>
+            <ol>
+                <li>Open Food Dashboard par click karein.</li>
+                <li>Available food menu, photos aur prices dekhein.</li>
+                <li>Apni pasand ke items cart mein add karein.</li>
+                <li>Quantity aur total amount check karein.</li>
+                <li>Naam, mobile number aur required details bharein.</li>
+                <li>Website par available payment option choose karein.</li>
+                <li>Order place karein aur order ID/status note karein.</li>
+                <li>Order Ready hone par pickup location se food collect karein.</li>
+            </ol>
+            <div class="notice">
+                <strong>Pickup Only:</strong> Is project mein home
+                delivery available nahi hai. Customer khud food le
+                sakta hai ya kisi doosre vyakti ko bhej sakta hai.
+                Pickup ka time aur address order se pehle confirm karein.
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section" id="bulk-order-guide">
+        <div class="info-box">
+            <h2>2. Bulk Food / Catering Order Kaise Karein?</h2>
+            <p>
+                Birthday party, family get-together, pooja, kitty party
+                aur chhote office events ke liye Catering & Events choose karein.
+            </p>
+            <ol>
+                <li>Open Catering Dashboard par click karein.</li>
+                <li>Available menu aur catering packages dekhein.</li>
+                <li>Apni pasand ki dishes select karein, agar menu selection available ho.</li>
+                <li>Guests ki sankhya, event type, date aur location bharein.</li>
+                <li>Estimated total amount aur booking details check karein.</li>
+                <li>Booking request submit karein.</li>
+                <li>25% advance payment ke instructions follow karein, jab payment feature enabled ho.</li>
+                <li>Payment successful verify hone ke baad booking Confirmed hogi.</li>
+                <li>Booking ID aur status save karein aur pickup/event arrangements confirm karein.</li>
+            </ol>
+            <div class="notice">
+                <strong>Payment Note:</strong> Booking request submit karna
+                aur booking confirm hona alag steps hain. Payment pending
+                hone par booking ko paid ya confirmed nahi maana jayega.
+                Final price menu, guest count aur agreed services par depend karega.
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section" id="location-contact">
+        <div class="info-box">
+            <h2>3. Our Location & Contact</h2>
+            <p>
+                Neeche di gayi details college project ke liye demo details hain.
+                Real business start hone par inhe update kiya jayega.
+            </p>
+
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <strong>📍 Demo Pickup Address</strong>
+                    GharZaika Home Kitchen<br>
+                    Sample Address, Bhopal,<br>
+                    Madhya Pradesh, India
+                </div>
+
+                <div class="contact-item">
+                    <strong>🗺️ Map & Directions</strong>
+                    Demo location abhi final nahi hai.
+                    Sahi map link address final hone ke baad add kiya jayega.
+                </div>
+
+                <div class="contact-item">
+                    <strong>📞 Demo Contact Number</strong>
+                    +91-XXXXXXXXXX<br>
+                    <small>Placeholder — real number nahi hai.</small>
+                </div>
+
+                <div class="contact-item">
+                    <strong>✉️ Demo Email</strong>
+                    gharzaika@example.com<br>
+                    <small>Placeholder — real business email nahi hai.</small>
+                </div>
+            </div>
+
+            <div class="notice">
+                <strong>Pickup Instructions:</strong> Food collect karne
+                se pehle order status aur pickup timing check karein.
+                Exact pickup address aur working hours ko real business
+                details milne ke baad update kiya jayega.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 GharZaika | Homemade Food & Catering Services<br>
+        College Project Demo — Address and contact details are placeholders.
+    </footer>
+</body>
+</html>

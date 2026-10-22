@@ -1,0 +1,10 @@
+[33m56a30ec[m GharZaika
+ gharzaika_backup.sql                     |  329 [32m+++[m
+ main copy.py                             |  673 [32m++++++[m
+ static/admin - copy . html.html          | 1114 [32m++++++++++[m
+ static/admin-backup.html                 | 3375 [32m++++++++++++++++++++++++++++++[m
+ static/index - copy . html.html          | 1580 [32m++++++++++++++[m
+ static/index-backup-before-menu-fix.html | 1862 [32m++++++++++++++++[m
+ static/index-working-backup.html         | 1580 [32m++++++++++++++[m
+ test_db.py                               |   18 [32m+[m
+ 8 files changed, 10531 insertions(+)

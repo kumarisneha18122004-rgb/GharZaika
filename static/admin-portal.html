@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GharZaika | Admin Portal</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --wine: #70243b;
+            --wine-dark: #481629;
+            --cream: #fff8f1;
+            --text: #35232a;
+            --muted: #76666b;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse at top left, #f7e0d7 0, transparent 38%),
+                var(--cream);
+        }
+
+        header {
+            padding: 25px 7%;
+            color: white;
+            background: linear-gradient(120deg, #481629, #70243b 65%, #a44454);
+            box-shadow: 0 8px 25px #48162920;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .brand-icon {
+            display: grid;
+            place-items: center;
+            width: 54px;
+            height: 54px;
+            flex-shrink: 0;
+            border-radius: 16px;
+            background: #ffffff20;
+            font-size: 29px;
+        }
+
+        h1 { font-size: clamp(23px, 4vw, 32px); }
+        header p { margin-top: 5px; color: #f4dce3; font-size: 14px; }
+
+        main {
+            width: min(1080px, 90%);
+            margin: 0 auto;
+            padding: 54px 0 45px;
+        }
+
+        .intro { text-align: center; margin-bottom: 35px; }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 7px 13px;
+            border-radius: 30px;
+            background: #f3e1e6;
+            color: var(--wine);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 17px 0 10px;
+            color: var(--wine-dark);
+            font-size: clamp(27px, 4vw, 38px);
+        }
+
+        .intro p {
+            max-width: 580px;
+            margin: auto;
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            overflow: hidden;
+            background: white;
+            border: 1px solid #eee2e3;
+            border-radius: 22px;
+            box-shadow: 0 12px 35px #4816290d;
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 38px #48162919;
+        }
+
+        .card-top {
+            min-height: 155px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 28px;
+            color: white;
+        }
+
+        .food .card-top {
+            background: linear-gradient(135deg, #c7792c, #963c27);
+        }
+
+        .catering .card-top {
+            background: linear-gradient(135deg, #8d3652, #501b38);
+        }
+
+        .card-icon {
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            width: 72px;
+            height: 72px;
+            border: 1px solid #ffffff55;
+            border-radius: 20px;
+            background: #ffffff20;
+            font-size: 38px;
+        }
+
+        .card-top h3 { font-size: 24px; margin-bottom: 7px; }
+        .card-top p { color: #fff0e9; font-size: 13px; line-height: 1.6; }
+
+        .card-body { padding: 27px; }
+
+        .card-body > p {
+            min-height: 54px;
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .features {
+            display: grid;
+            gap: 12px;
+            margin: 21px 0 25px;
+            list-style: none;
+        }
+
+        .features li {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: 14px;
+            color: #514148;
+        }
+
+        .check {
+            display: grid;
+            place-items: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #f5e8ec;
+            color: var(--wine);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            min-height: 49px;
+            padding: 13px 18px;
+            border-radius: 12px;
+            background: var(--wine);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: background .2s;
+        }
+
+        .btn:hover { background: var(--wine-dark); }
+        .arrow { font-size: 19px; }
+
+        .note {
+            margin-top: 28px;
+            padding: 16px 19px;
+            border: 1px solid #ead9ce;
+            border-radius: 13px;
+            background: #fffdf9;
+            color: #725b50;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        footer {
+            padding: 23px 15px;
+            border-top: 1px solid #eadfda;
+            color: #87757b;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        @media (max-width: 700px) {
+            main { padding-top: 35px; }
+            .cards { grid-template-columns: 1fr; }
+            .card-body > p { min-height: auto; }
+            .card-top { min-height: 130px; padding: 23px; }
+        }
+
+        @media (max-width: 400px) {
+            .brand-icon { width: 45px; height: 45px; }
+            .card-top { gap: 14px; }
+            .card-icon { width: 58px; height: 58px; font-size: 30px; }
+            .card-top h3 { font-size: 20px; }
+            .card-body { padding: 22px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <div class="brand-icon">🍲</div>
+            <div>
+                <h1>GharZaika</h1>
+                <p>Administration Portal · Food & Catering</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <span class="eyebrow">Management Centre</span>
+            <h2>Welcome, Admin!</h2>
+            <p>
+                Apna dashboard select karein. Food orders aur catering
+                bookings ko unke respective dashboard se manage karein.
+            </p>
+        </section>
+
+        <section class="cards">
+            <article class="card food">
+                <div class="card-top">
+                    <div class="card-icon">🍽️</div>
+                    <div>
+                        <h3>Food Admin</h3>
+                        <p>Daily food orders & menu management</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>Food ordering service ke existing admin dashboard ko open karein.</p>
+                    <ul class="features">
+                        <li><span class="check">✓</span> Food items and availability</li>
+                        <li><span class="check">✓</span> Customer food orders</li>
+                        <li><span class="check">✓</span> Order status management</li>
+                    </ul>
+                    <a class="btn" href="/admin.html">
+                        Open Food Admin <span class="arrow">→</span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="card catering">
+                <div class="card-top">
+                    <div class="card-icon">🎉</div>
+                    <div>
+                        <h3>Catering Admin</h3>
+                        <p>Event bookings & catering management</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>Events aur catering booking requests ke admin dashboard ko open karein.</p>
+                    <ul class="features">
+                        <li><span class="check">✓</span> Catering booking requests</li>
+                        <li><span class="check">✓</span> Booking status updates</li>
+                        <li><span class="check">✓</span> Event and payment details</li>
+                    </ul>
+                    <a class="btn" href="/catering-admin.html">
+                        Open Catering Admin <span class="arrow">→</span>
+                    </a>
+                </div>
+            </article>
+        </section>
+
+        <div class="note">
+            <strong>Note:</strong> Dono dashboards alag hain. Ye common portal
+            sirf unhe ek jagah se open karne ke liye hai; existing dashboard
+            functionality ko replace nahi karta.
+        </div>
+    </main>
+
+    <footer>
+        © GharZaika · Admin Portal
+    </footer>
+</body>
+</html>
