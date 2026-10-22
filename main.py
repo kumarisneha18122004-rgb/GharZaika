@@ -1,4 +1,5 @@
 import os
+import logging
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
@@ -1486,7 +1487,7 @@ def create_catering_booking(booking: CateringBookingRequest):
     except Exception as e:
         if conn:
             conn.rollback()
-
+        logging.exception("Catering booking database error")
         raise HTTPException(
             status_code=500,
             detail="Unable to save catering booking. Please try again."
